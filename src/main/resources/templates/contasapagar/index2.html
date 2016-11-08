@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title></title>
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" th:href="@{/css/index.css}"/>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#menu">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a href="index.html" class="navbar-brand logotipo"> <img th:src="@{/img/AppLogo.jpg}" alt="logo">
+				</a>
+			</div>
+
+
+			<div class="collapse navbar-collapse" id="menu">
+				<ul class="nav navbar-nav">
+					<li><a href="">Cadastros</a></li>
+					<li><a href="">Operações</a></li>
+					<li><a href="">Relatórios</a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<button type="button" class="btn btn-default navbar-btn">
+							<span class="glyphicon glyphicon-lock"></span> Logout
+						</button>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+	</nav>
+
+	<div class="container">
+		<ol class="breadcrumb">
+			<li><a href="">Dashboard</a></li>
+			<li><a href="">Lançamento de Contas a Pagar</a></li>
+		</ol>
+
+		<div class="row cabecalho">
+			<div class="col-xs-12 col-md-12">
+				<h1>Contas a Pagar</h1>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 col-md-2 busca">
+				<div class="input-group">
+					<input type="text" name="busca" class="form-control"
+						placeholder="Vcto"> <span
+						class="input-group-btn">
+						<button type="button" class="btn btn-default">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</div>
+			</div>
+			
+			<div class="col-xs-12 col-md-2 busca">
+				<div class="input-group">
+					<input type="text" name="busca" class="form-control"
+						placeholder="Fornecedor"> <span
+						class="input-group-btn">
+						<button type="button" class="btn btn-default">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</div>
+			</div>
+
+			<div class="col-xs-12 col-md-5 busca">
+				<div class="input-group">
+					<input type="text" name="busca" class="form-control"
+						placeholder="Histórico"> <span
+						class="input-group-btn">
+						<button type="button" class="btn btn-default">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</div>
+			</div>
+			
+			<div class="col-xs-12 col-md-3 busca">
+				<div class="input-group">
+					<input type="text" name="busca" class="form-control"
+						placeholder="Situação"> <span
+						class="input-group-btn">
+						<button type="button" class="btn btn-default">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="table-responsive  bw-tabela-simples">
+			<table
+				class="dados-os table table-striped table-bordered table-hover">
+
+				<thead>
+					<tr>
+						<th>Vcto</th>
+						<th>Histórico</th>
+						<th class="text-center">Quitado</th>
+						<th class="text-center">Operações</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td>10/10/2016</td>
+						<td>Alinhamento e balanceamento do GOL</td>
+
+						<td class="text-center"><a class="btn  btn-link  btn-xs"
+							title="Quitado"> <i class="glyphicon glyphicon-ok text-success"></i>
+						</a></td>
+
+						<td class="text-center"><a class="btn  btn-link  btn-xs"
+							title="Editar"> <i class="glyphicon glyphicon-pencil"></i>
+						</a> <a class="btn  btn-link  btn-xs" title="Excluir"> <i
+								class="glyphicon glyphicon-remove"></i>
+						</a></td>
+					</tr>
+
+
+					<tr>
+						<td>05/11/2016</td>
+						<td>Folha de pagamento</td>
+
+						<td class="text-center"><a class="btn  btn-link  btn-xs"
+							title="Quitado"> <i class="glyphicon glyphicon-ok text-success"></i>
+						</a></td>
+
+						<td class="text-center"><a class="btn  btn-link  btn-xs"
+							title="Editar"> <i class="glyphicon glyphicon-pencil"></i>
+						</a> <a class="btn  btn-link  btn-xs" title="Excluir"> <i
+								class="glyphicon glyphicon-remove"></i>
+						</a></td>
+					</tr>
+
+					<tr>
+						<td>05/12/2016</td>
+						<td>Compras para o Natal</td>
+
+						<td class="text-center"><a class="btn  btn-link  btn-xs"
+							title="Quitado"> <i class="glyphicon glyphicon-ok text-success"></i>
+						</a></td>
+
+						<td class="text-center"><a class="btn  btn-link  btn-xs"
+							title="Editar"> <i class="glyphicon glyphicon-pencil"></i>
+						</a> <a class="btn  btn-link  btn-xs" title="Excluir"> <i
+								class="glyphicon glyphicon-remove"></i>
+						</a></td>
+					</tr>
+				
+<!-- 				
+					<tr th:each="pagamento : ${pagamentos}">
+						<td th:text="${pagamento.idPagamento}"></td>
+						<td th:text="${pagamento.historico}"></td>
+
+						<td class="text-center"><a class="btn  btn-link  btn-xs"
+							title="Quitado"> <i class="glyphicon glyphicon-ok text-success"></i>
+						</a></td>
+
+						<td class="text-center"><a class="btn  btn-link  btn-xs"
+							title="Editar"> <i class="glyphicon glyphicon-pencil"></i>
+						</a> <a class="btn  btn-link  btn-xs" title="Excluir"> <i
+								class="glyphicon glyphicon-remove"></i>
+						</a></td>
+					</tr>
+ --> 					
+ 					 
+<!--  					<tr th:if="${pagina.vazia}"> -->
+<!-- 						<td colspan="4">Nenhum pagamento encontrado</td> -->
+<!-- 					</tr> -->
+					
+					
+				</tbody>
+			</table>
+		</div>
+
+
+		<footer class="row">
+			<div class="col-sm-6">
+				<button class="btn btn-primary" data-toggle="modal" data-target="#novo">Novo Agendamento</button>
+			</div>
+			<div class="col-sm-6 paginacao text-right">
+				<ul class="pagination">
+					<li class="disabled"><a href=""><span>«</span></a></li>
+					<li class="active"><a href="">1</a></li>
+					<li><a href="">2</a></li>
+					<li><a href="">3</a></li>
+					<li><a href="">4</a></li>
+					<li><a href="">5</a></li>
+					<li><a href=""><span>»</span></a></li>
+				</ul>
+			</div>
+		</footer>
+	</div>
+
+
+	<div class="modal fade" id="novo">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Novo Setor</h4>
+				</div>
+				<form>
+					<div class="modal-body">
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label for="descricao">Descricao:</label>
+								<input type="text" id="descricao" name="descricao" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script th:src="@{/js/jquery-2.2.4.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+ 	
+</body>
+</html>
