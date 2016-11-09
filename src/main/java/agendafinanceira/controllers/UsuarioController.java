@@ -61,7 +61,7 @@ public class UsuarioController {
 	public ModelAndView pesquisar(UsuarioFilter usuarioFilter, BindingResult result
 			, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
 
-		ModelAndView mv = new ModelAndView("usuario/index");
+		ModelAndView mv = new ModelAndView("usuario/usuario");
 		mv.addObject("usuarios", usuarioRepository.findAll());
 		
 //		PageWrapper<UsuarioModel> paginaWrapper = 

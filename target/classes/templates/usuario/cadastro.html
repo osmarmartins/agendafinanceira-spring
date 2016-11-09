@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Cadastro - Usuário</title>
-</head>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/padrao'">
+	
+<head></head>
+
 <body>
+
+<section layout:fragment="corpo">
+
+	<div class="container">
+
+		<ol class="breadcrumb">
+			<li><a href="">Dashboard</a></li>
+			<li><a href="">Cadastro de Usuário</a></li>
+			<li><a href="">Manutenção Usuário</a></li>
+		</ol>
+
+		<div class="row cabecalho">
+			<div class="col-xs-12 col-md-6">
+				<h1>Cadastro de Usuário</h1>
+			</div>
+		</div>
+		
+		<div class="well">
+			<form class="form-vertical" method="post" th:object="${usuarioModel}">
+				<div class="row">
+					<div class="form-group col-sm-2">
+						<label for="id">ID:</label>
+						<input type="text" id="id" name="descricao" class="form-control">
+					</div>
+				</div>
+	
+				<div class="row">
+					<div class="form-group col-sm-12">
+						<label for="nome">Nome:</label>
+						<input type="text" id="nome" name="descricao" class="form-control">
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-sm-2">
+						<label for="ativo">Ativo</label>
+						<input type="text" id="descricao" name="descricao" class="form-control">
+					</div>
+				</div>
+	
+				<div class="row">
+					<div class="form-group col-sm-12">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+						<button class="btn btn-default">Voltar</button>
+					</div>
+				</div>					
+			</form>
+		</div>
+				
+	</div>
+
+	
+</section>
 
 </body>
 </html>
