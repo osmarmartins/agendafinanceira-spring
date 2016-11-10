@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/padrao'">
+	
+<head>
+	<title>Cadastro de Usuário</title>
+	<link rel="stylesheet" th:href="@{/css/bootstrap-switch.min.css}"/>
+</head>
+
+<body>
+
+<section layout:fragment="corpo">
+
+	<div class="container">
+
+		<ol class="breadcrumb">
+			<li><a href="">Dashboard</a></li>
+			<li><a href="">Usuário</a></li>
+			<li><a href="">Cadastro</a></li>
+		</ol>
+
+		<div class="row cabecalho">
+			<div class="col-xs-12 col-md-6">
+				<h1>Cadastro de Usuário</h1>
+			</div>
+		</div>
+		
+		<div class="alert alert-danger alert-dismissible" role="alert">
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  			<strong>Erro!</strong> Dados não Salvos.
+		</div>	
+		
+		
+		<form class="form-vertical" method="POST" th:object="${usuarioModel}">
+		
+			<div class="well">
+			
+				<div class="row">
+					<div class="form-group col-sm-2">
+						<label for="id">ID:</label>
+						<input type="text" readonly id="id" name="id" class="form-control" th:field="*{idUsuario}">
+					</div>
+				</div>
+	
+				<div class="row">
+					<div class="form-group col-sm-10">
+						<label for="nome">Nome:</label>
+						<input type="text" id="nome" name="nome" class="form-control" th:field="*{nome}">
+					</div>
+						
+					<div class="form-group col-sm-2">
+						<label for="tipo">Credencial:</label>
+						<select class="form-control" th:field="*{administrador}">
+							<option value="">Selecione...</option>
+							<option th:each="credencial : ${credenciais}" th:value="${credencial}" th:text="${credencial.descricaoUsuario}"></option>
+						</select>
+		            </div>		
+				</div>
+
+				
+				<div class="row">
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-sm-6">
+						<label for="ativo">Ativo:</label>
+						<input type="checkbox" id="ativo" data-on-text="SIM" data-on-color="success" 
+							data-off-text="NÃO" data-off-color="danger" 
+							on-label="ATIVO" off-label="INATIVO"
+							name="ativo" checked class="form-control js-ativo">
+		            </div>				
+				</div>
+				
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-12">
+					<button type="submit" class="btn btn-primary">Salvar</button>
+					<button class="btn btn-default">Voltar</button>
+				</div>
+			</div>					
+		</form>
+				
+	</div>
+
+	
+</section>
+
+<th:block layout:fragment="javaScript-extra">
+	<script th:src="@{/js/bootstrap-switch.min.js}"></script>
+	<script>
+		$('.js-ativo').bootstrapSwitch();
+	</script>
+</th:block>
+
+</body>
+</html>

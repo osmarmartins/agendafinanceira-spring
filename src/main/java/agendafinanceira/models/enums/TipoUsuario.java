@@ -2,17 +2,23 @@ package agendafinanceira.models.enums;
 
 public enum TipoUsuario {
 	
-	USUARIO(0),
-	ADMINISTRADOR(1);
+	USUARIO(0, "Usuário"),
+	ADMINISTRADOR(1, "Administrador");
 	
 	private int tipoUsuario;
+	private String descricaoUsuario;
 	
-	private TipoUsuario(int tipoUsuario) {
+	private TipoUsuario(int tipoUsuario, String descricaoUsuario) {
 		this.tipoUsuario = tipoUsuario;
+		this.descricaoUsuario = descricaoUsuario;
 	}
 
 	public int getTipoUsuario() {
 		return tipoUsuario;
+	}
+	
+	public String getDescricaoUsuario() {
+		return descricaoUsuario;
 	}
 		
 }

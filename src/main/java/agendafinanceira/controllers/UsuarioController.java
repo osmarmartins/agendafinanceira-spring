@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agendafinanceira.models.UsuarioModel;
+import agendafinanceira.models.enums.TipoUsuario;
 import agendafinanceira.repositories.UsuarioRepository;
 import agendafinanceira.repositories.filters.UsuarioFilter;
 import agendafinanceira.services.UsuarioService;
@@ -37,23 +38,25 @@ public class UsuarioController {
 		return "usuario/login";
 	}
 
-	@RequestMapping("usuario/novo")
+	@RequestMapping("usuario/cadastro")
 	public ModelAndView cadastroUsuario(UsuarioModel usuarioModel){
-		ModelAndView mv = new ModelAndView("usuario/cadastro");
+		ModelAndView mv = new ModelAndView("usuario/cadastroUsuario");
+		mv.addObject("credenciais", TipoUsuario.values());
 		return mv;
 	}
 	
 	
-	@RequestMapping(value = "usuario/novo", method = RequestMethod.POST)
+	@RequestMapping(value = "usuario/casdastro", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid UsuarioModel usuarioModel, BindingResult result, 
 			Model model, RedirectAttributes attributes) {
+		
 		if (result.hasErrors()) {
 			return cadastroUsuario(usuarioModel);
 		}
 		
 		usuarioService.salvar(usuarioModel);
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
-		return new ModelAndView("redirect:/usuario/novo");
+		return new ModelAndView("redirect:/usuario/cadastro");
 	}
 	
 	
@@ -61,7 +64,7 @@ public class UsuarioController {
 	public ModelAndView pesquisar(UsuarioFilter usuarioFilter, BindingResult result
 			, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
 
-		ModelAndView mv = new ModelAndView("usuario/usuario");
+		ModelAndView mv = new ModelAndView("usuario/pesquisaUsuario");
 		mv.addObject("usuarios", usuarioRepository.findAll());
 		
 //		PageWrapper<UsuarioModel> paginaWrapper = 

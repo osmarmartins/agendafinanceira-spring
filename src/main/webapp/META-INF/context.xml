@@ -7,7 +7,7 @@
             driverClass="com.mysql.jdbc.Driver"
             jdbcUrl="jdbc:mysql://localhost/webfinancas?useSSL=false"
             user="root"
-            password="" 
+            password="prisma" 
             initialPoolSize="5" 
             minPoolSize="5"
             maxPoolSize="5" 
