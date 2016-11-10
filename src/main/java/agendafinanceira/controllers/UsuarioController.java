@@ -51,6 +51,7 @@ public class UsuarioController {
 			Model model, RedirectAttributes attributes) {
 		
 		if (result.hasErrors()) {
+			model.addAttribute("mensagem", "Dados inválidos!");
 			return cadastroUsuario(usuarioModel);
 		}
 		
