@@ -30,30 +30,38 @@
 		<div class="alert alert-danger alert-dismissible" role="alert">
   			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   			<strong>Erro!</strong>
-  			<span th:text="${mensagem}"></span> 
+  			<th:block th:each="erro : ${#fields.detailedErrors('${usuarioModel.*}')}">
+	  			<span th:text="${erro.message}"></span> 
+  			</th:block>
 		</div>	
 		
 		
 		<form class="form-vertical" method="POST" th:object="${usuarioModel}">
+		
+			<div class="alert alert-success alert-dismissible" role="alert">
+	  			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  			<strong>Sucesso!</strong> <span th:text="${mensagem}"></span> 
+			</div>	
+			
 		
 			<div class="well">
 			
 				<div class="row">
 					<div class="form-group col-sm-2">
 						<label for="id">ID:</label>
-						<input type="text" readonly id="id" name="id" class="form-control" th:field="*{idUsuario}">
+						<input type="text" readonly id="id" class="form-control" th:field="*{idUsuario}">
 					</div>
 				</div>
 	
 				<div class="row">
 					<div class="form-group col-sm-10">
 						<label for="nome">Nome:</label>
-						<input type="text" id="nome" name="nome" class="form-control" th:field="*{nome}">
+						<input type="text" id="nome" class="form-control" th:field="*{nome}">
 					</div>
 						
 					<div class="form-group col-sm-2">
 						<label for="tipo">Credencial:</label>
-						<select class="form-control" th:field="*{administrador}">
+						<select id="tipo" class="form-control" th:field="*{administrador}">
 							<option value="">Selecione...</option>
 							<option th:each="credencial : ${credenciais}" th:value="${credencial}" th:text="${credencial.descricaoUsuario}"></option>
 						</select>
@@ -64,15 +72,15 @@
 				<div class="row">
 				</div>
 				
-				<div class="row">
-					<div class="form-group col-sm-6">
-						<label for="ativo">Ativo:</label>
-						<input type="checkbox" id="ativo" data-on-text="SIM" data-on-color="success" 
-							data-off-text="NÃO" data-off-color="danger" 
-							on-label="ATIVO" off-label="INATIVO"
-							name="ativo" checked class="form-control js-ativo">
-		            </div>				
-				</div>
+<!-- 				<div class="row"> -->
+<!-- 					<div class="form-group col-sm-6"> -->
+<!-- 						<label for="ativo">Ativo:</label> -->
+<!-- 						<input type="checkbox" id="ativo" data-on-text="SIM" data-on-color="success"  -->
+<!-- 							data-off-text="NÃO" data-off-color="danger"  -->
+<!-- 							on-label="ATIVO" off-label="INATIVO" -->
+<!-- 							name="ativo" checked class="form-control js-ativo"> -->
+<!-- 		            </div>				 -->
+<!-- 				</div> -->
 				
 			</div>
 

@@ -51,11 +51,16 @@ public class UsuarioController {
 			Model model, RedirectAttributes attributes) {
 		
 		if (result.hasErrors()) {
-			model.addAttribute("mensagem", "Dados inválidos!");
+//			model.addAttribute("mensagem", "Dados inválidos!");
+			
+			System.out.println(">>> ERROS!");
+			
 			return cadastroUsuario(usuarioModel);
 		}
 		
-		usuarioService.salvar(usuarioModel);
+//		usuarioService.salvar(usuarioModel);
+		System.out.println(">>> Salvar dados. \n" + usuarioModel.toString());
+
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
 		return new ModelAndView("redirect:/usuario/cadastro");
 	}
