@@ -48,28 +48,51 @@
 			
 				<div class="row">
 					<div class="form-group col-sm-2">
-						<label for="id">ID:</label>
-						<input type="text" readonly id="id" class="form-control" th:field="*{idUsuario}">
+						<label for="id">ID</label>
+						<input type="text" id="id" class="form-control" th:field="*{idUsuario}">
 					</div>
 				</div>
+				
 	
 				<div class="row">
-					<div class="form-group col-sm-10">
-						<label for="nome">Nome:</label>
+					<div class="form-group col-sm-6">
+						<label for="nome">Nome</label>
 						<input type="text" id="nome" class="form-control" th:field="*{nome}">
 					</div>
 						
-					<div class="form-group col-sm-2">
+					<div class="form-group col-sm-6">
+						<label for="email">Email</label>
+						<input type="email" id="email" class="form-control" th:field="*{email}">
+					</div>
+						
+				</div>
+
+				
+				<div class="row">
+					<div class="form-group col-sm-4">
 						<label for="tipo">Credencial:</label>
 						<select id="tipo" class="form-control" th:field="*{administrador}">
 							<option value="">Selecione...</option>
 							<option th:each="credencial : ${credenciais}" th:value="${credencial}" th:text="${credencial.descricaoUsuario}"></option>
 						</select>
-		            </div>		
+		            </div>
+		            
+					<div class="form-group col-sm-4">
+						<label for="login">Login:</label>
+						<input type="text" id="login" class="form-control" th:field="*{login}">
+					</div>
+
+					<div class="form-group col-sm-4">
+						<label for="senha">Senha:</label>
+						<input type="password" id="senha" class="form-control" th:field="*{senha}">
+					</div>
 				</div>
 
 				
 				<div class="row">
+					<label for="ativo">Ativo</label>
+					<input type="radio" value="ATIVO" checked="checked" id="ativo" th:field="*{ativo}"/> 
+					<input type="radio" value="INATIVO" id="ativo" th:field="*{ativo}"/> 
 				</div>
 				
 <!-- 				<div class="row"> -->
@@ -78,7 +101,7 @@
 <!-- 						<input type="checkbox" id="ativo" data-on-text="SIM" data-on-color="success"  -->
 <!-- 							data-off-text="NÃO" data-off-color="danger"  -->
 <!-- 							on-label="ATIVO" off-label="INATIVO" -->
-<!-- 							name="ativo" checked class="form-control js-ativo"> -->
+<!-- 							checked class="form-control js-ativo" name="ativo"> -->
 <!-- 		            </div>				 -->
 <!-- 				</div> -->
 				

@@ -50,13 +50,13 @@ public class UsuarioController {
 	public ModelAndView cadastrar(@Valid UsuarioModel usuarioModel, BindingResult result, 
 			Model model, RedirectAttributes attributes) {
 		
-		if (result.hasErrors()) {
+//		if (result.hasErrors()) {
 //			model.addAttribute("mensagem", "Dados inválidos!");
-			
-			System.out.println(">>> ERROS!");
-			
-			return cadastroUsuario(usuarioModel);
-		}
+//			
+//			System.out.println(">>> ERROS!");
+//			
+//			return cadastroUsuario(usuarioModel);
+//		}
 		
 //		usuarioService.salvar(usuarioModel);
 		System.out.println(">>> Salvar dados. \n" + usuarioModel.toString());
