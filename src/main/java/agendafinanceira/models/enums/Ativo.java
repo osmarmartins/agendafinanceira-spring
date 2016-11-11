@@ -2,17 +2,16 @@ package agendafinanceira.models.enums;
 
 public enum Ativo {
 	
-	INATIVO(0), 
-	ATIVO(1);
+	INATIVO("Inativo"), 
+	ATIVO("Ativo");
 	
-	private int tipoAtivo;
+	private String descricao;
 	
-	private Ativo(int tipoAtivo){
-		this.tipoAtivo = tipoAtivo;
+	private Ativo(String descricao){
+		this.descricao = descricao;
 	}
 
-	public int getTipoAtivo() {
-		return tipoAtivo;
+	public String getDescricao(){
+		return descricao;
 	}
-
 }

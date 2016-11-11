@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agendafinanceira.models.PagamentoModel;
+import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.repositories.PagamentoRepository;
 import agendafinanceira.repositories.filters.PagamentoFilter;
 import agendafinanceira.services.PagamentoService;

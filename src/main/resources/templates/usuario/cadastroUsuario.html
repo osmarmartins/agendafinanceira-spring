@@ -89,11 +89,26 @@
 				</div>
 
 				
+<!-- 				<div class="row"> -->
+<!-- 					<label for="ativo">Ativo</label> -->
+<!-- 					<input type="radio" value="ATIVO" checked="checked" id="ativo" th:field="*{ativo}"/>  -->
+<!-- 					<input type="radio" value="INATIVO" id="inativo" th:field="*{ativo}"/>  -->
+<!-- 				</div> -->
+				
 				<div class="row">
-					<label for="ativo">Ativo</label>
-					<input type="radio" value="ATIVO" checked="checked" id="ativo" th:field="*{ativo}"/> 
-					<input type="radio" value="INATIVO" id="ativo" th:field="*{ativo}"/> 
+					<div class="col-lg-3  col-sm-6  form-group">
+						<label>Status</label>
+						<div>
+							<th:block th:each="status : ${tipoAtivo}">
+								<div class="radio  radio-inline">
+									<input th:id="|id_${status}|" type="radio" th:value="${status}" th:field="*{ativo}"> 
+									<label th:for="|id_${status}|" th:text="${status.descricao}">Nacional</label>
+								</div>
+							</th:block>
+						</div>
+					</div>
 				</div>
+				
 				
 <!-- 				<div class="row"> -->
 <!-- 					<div class="form-group col-sm-6"> -->

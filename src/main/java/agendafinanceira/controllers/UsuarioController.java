@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agendafinanceira.models.UsuarioModel;
+import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.models.enums.TipoUsuario;
 import agendafinanceira.repositories.UsuarioRepository;
 import agendafinanceira.repositories.filters.UsuarioFilter;
@@ -42,6 +43,7 @@ public class UsuarioController {
 	public ModelAndView cadastroUsuario(UsuarioModel usuarioModel){
 		ModelAndView mv = new ModelAndView("usuario/cadastroUsuario");
 		mv.addObject("credenciais", TipoUsuario.values());
+		mv.addObject("tipoAtivo", Ativo.values());
 		return mv;
 	}
 	
