@@ -27,29 +27,23 @@
 			</div>
 		</div>
 		
-		<div class="alert alert-danger alert-dismissible" role="alert">
-  			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  			<strong>Erro!</strong>
-  			<th:block th:each="erro : ${#fields.detailedErrors('${usuarioModel.*}')}">
-	  			<span th:text="${erro.message}"></span> 
-  			</th:block>
-		</div>	
+<!-- 		<div class="alert alert-success alert-dismissible" role="alert" th:if="${not #strings.isEmpty(mensagem)}"> -->
+<!--   			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button> -->
+<!-- 	  		<span th:text="${mensagem}"></span> -->
+<!-- 		</div>			 -->
 		
+		<th:block th:include="layout/fragments/mensagemSucesso"></th:block>
 		
 		<form class="form-vertical" method="POST" th:object="${usuarioModel}">
 		
-			<div class="alert alert-success alert-dismissible" role="alert">
-	  			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	  			<strong>Sucesso!</strong> <span th:text="${mensagem}"></span> 
-			</div>	
-			
+			<th:block th:include="layout/fragments/mensagemErro"></th:block>
 		
 			<div class="well">
 			
 				<div class="row">
 					<div class="form-group col-sm-2">
 						<label for="id">ID</label>
-						<input type="text" id="id" class="form-control" th:field="*{idUsuario}">
+						<input type="text" readonly id="id" class="form-control" th:field="*{idUsuario}">
 					</div>
 				</div>
 				
@@ -69,7 +63,7 @@
 
 				
 				<div class="row">
-					<div class="form-group col-sm-4">
+					<div class="form-group col-sm-3">
 						<label for="tipo">Credencial:</label>
 						<select id="tipo" class="form-control" th:field="*{administrador}">
 							<option value="">Selecione...</option>
@@ -77,26 +71,27 @@
 						</select>
 		            </div>
 		            
-					<div class="form-group col-sm-4">
+					<div class="form-group col-sm-3">
 						<label for="login">Login:</label>
 						<input type="text" id="login" class="form-control" th:field="*{login}">
 					</div>
 
-					<div class="form-group col-sm-4">
+					<div class="form-group col-sm-3">
 						<label for="senha">Senha:</label>
 						<input type="password" id="senha" class="form-control" th:field="*{senha}">
 					</div>
+
+					<div class="form-group col-sm-3">
+						<label for="confirma-senha">Confirmar Senha:</label>
+						<input type="password" id="confirma-senha" name="confirma-senha" class="form-control" th:field="*{confirmaSenha}">
+					</div>
+					
 				</div>
 
 				
-<!-- 				<div class="row"> -->
-<!-- 					<label for="ativo">Ativo</label> -->
-<!-- 					<input type="radio" value="ATIVO" checked="checked" id="ativo" th:field="*{ativo}"/>  -->
-<!-- 					<input type="radio" value="INATIVO" id="inativo" th:field="*{ativo}"/>  -->
-<!-- 				</div> -->
 				
 				<div class="row">
-					<div class="col-lg-3  col-sm-6  form-group">
+					<div class="col-sm-6  form-group">
 						<label>Status</label>
 						<div>
 							<th:block th:each="status : ${tipoAtivo}">

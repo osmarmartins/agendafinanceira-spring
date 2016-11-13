@@ -25,61 +25,52 @@ import agendafinanceira.utils.PageWrapper;
 
 @Controller
 public class UsuarioController {
-	
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
 
-	
 	@RequestMapping("login")
-	public String loginUsuario(){
+	public String loginUsuario() {
 		return "usuario/login";
 	}
 
-	@RequestMapping("usuario/cadastro")
-	public ModelAndView cadastroUsuario(UsuarioModel usuarioModel){
+	@RequestMapping("/usuario/cadastro")
+	public ModelAndView novo(UsuarioModel usuarioModel) {
 		ModelAndView mv = new ModelAndView("usuario/cadastroUsuario");
 		mv.addObject("credenciais", TipoUsuario.values());
 		mv.addObject("tipoAtivo", Ativo.values());
 		return mv;
 	}
-	
-	
-	@RequestMapping(value = "usuario/casdastro", method = RequestMethod.POST)
-	public ModelAndView cadastrar(@Valid UsuarioModel usuarioModel, BindingResult result, 
-			Model model, RedirectAttributes attributes) {
-		
-//		if (result.hasErrors()) {
-//			model.addAttribute("mensagem", "Dados inválidos!");
-//			
-//			System.out.println(">>> ERROS!");
-//			
-//			return cadastroUsuario(usuarioModel);
-//		}
-		
-//		usuarioService.salvar(usuarioModel);
-		System.out.println(">>> Salvar dados. \n" + usuarioModel.toString());
 
-		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
+	@RequestMapping(value = "/usuario/cadastro", method = RequestMethod.POST)
+	public ModelAndView cadastrar(@Valid UsuarioModel usuarioModel, BindingResult bindingResult, Model model,
+			RedirectAttributes redirectAttributes) {
+
+		if (bindingResult.hasErrors()) {
+			return novo(usuarioModel);
+		}
+
+		usuarioService.salvar(usuarioModel);
+		redirectAttributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
+
 		return new ModelAndView("redirect:/usuario/cadastro");
 	}
-	
-	
-	@GetMapping("/usuario")
-	public ModelAndView pesquisar(UsuarioFilter usuarioFilter, BindingResult result
-			, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
 
-		ModelAndView mv = new ModelAndView("usuario/pesquisaUsuario");
+	@GetMapping("/usuario")
+	public ModelAndView pesquisar(UsuarioFilter usuarioFilter, BindingResult result,
+			@PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
+
+		ModelAndView mv = new ModelAndView("/usuario/pesquisaUsuario");
 		mv.addObject("usuarios", usuarioRepository.findAll());
-		
-//		PageWrapper<UsuarioModel> paginaWrapper = 
-//				new PageWrapper<>(usuarioRepository.filtrar(usuarioFilter, pageable), httpServletRequest);
-//		mv.addObject("pagina", paginaWrapper);
-		
-		
+
+		// PageWrapper<UsuarioModel> paginaWrapper = new
+		// PageWrapper<>(usuarioRepository.filtrar(usuarioFilter, pageable),
+		// httpServletRequest);
+		// mv.addObject("pagina", paginaWrapper);
+
 		return mv;
 	}
 

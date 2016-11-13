@@ -9,9 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.models.enums.TipoUsuario;
@@ -22,32 +26,35 @@ public class UsuarioModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
 	private Long idUsuario;
 
-	@Size(max=100, message="Não é permitido mais de 100 caracteres para o nome")
+	@Size(max = 100, message = "Não é permitido mais de 100 caracteres para o nome")
+	@NotEmpty(message = "Informe o nome do usuário")
 	private String nome;
 
-	@Size(max=150, message="Não é permitido mais de 150 caracteres para o e-mail")
+	@Size(max = 150, message = "Não é permitido mais de 150 caracteres para o e-mail")
+	@Email(message = "e-mail inválido")
 	private String email;
 
-	@Size(max=50, message="Não é permitido mais de 50 caracteres para o login")
+	@Size(max = 50, message = "Não é permitido mais de 50 caracteres para o login")
+	@NotBlank(message = "Informe o login")
 	private String login;
 
 	private String senha;
 
+	@Transient
+	private String confirmaSenha;
+
 	@Enumerated
-	@NotBlank(message = "Informe o tipo de usuário")
+	@NotNull(message = "Informe o tipo de usuário")
 	private TipoUsuario administrador;
 
 	@Enumerated
-	@NotBlank(message = "Informe se o usuário está ativo ou não")
+	@NotNull(message = "Informe se o usuário está ativo ou não")
 	private Ativo ativo;
-	
-	
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -87,6 +94,14 @@ public class UsuarioModel implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getConfirmaSenha() {
+		return confirmaSenha;
+	}
+
+	public void setConfirmaSenha(String confirmaSenha) {
+		this.confirmaSenha = confirmaSenha;
 	}
 
 	public TipoUsuario getAdministrador() {
@@ -133,7 +148,8 @@ public class UsuarioModel implements Serializable {
 	@Override
 	public String toString() {
 		return "UsuarioModel [idUsuario=" + idUsuario + ", nome=" + nome + ", email=" + email + ", login=" + login
-				+ ", senha=" + senha + ", administrador=" + administrador + ", ativo=" + ativo + "]";
+				+ ", senha=" + senha + ", confirmaSenha=" + confirmaSenha + ", administrador=" + administrador
+				+ ", ativo=" + ativo + "]";
 	}
 
 }
