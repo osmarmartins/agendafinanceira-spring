@@ -9,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import agendafinanceira.models.enums.Ativo;
 
@@ -32,7 +34,7 @@ public class SetorModel implements Serializable {
 	private String descricao;
 	
 	@Enumerated
-	@NotBlank(message = "Informe se o setor está ativo ou não.")	
+	@NotNull(message = "Informe se o setor está ativo ou não.")
 	private Ativo ativo;
 
 	public Long getIdSetor() {
