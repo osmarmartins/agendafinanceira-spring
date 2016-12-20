@@ -16,12 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agendafinanceira.models.SetorModel;
+import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.repositories.SetorRepository;
 import agendafinanceira.repositories.filters.SetorFilter;
 import agendafinanceira.services.SetorService;
 import agendafinanceira.utils.PageWrapper;
 
 @Controller
+@RequestMapping("/setor")
 public class SetorController {
 
 	
@@ -32,19 +34,24 @@ public class SetorController {
 	private SetorService setorService;
 
 	
-	@RequestMapping("setor/novo")
+	@RequestMapping("/novo")
 	public ModelAndView cadastroSetor(SetorModel setorModel){
 		ModelAndView mv = new ModelAndView("setor/cadastro");
+		mv.addObject("tipoAtivo", Ativo.values());
+		System.out.println("(get)Setor: " + setorModel.toString());
 		return mv;
 	}
 	
-	
-	@RequestMapping(value = "setor/novo", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/novo", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid SetorModel setorModel, BindingResult result, 
 			Model model, RedirectAttributes attributes) {
+		
 		if (result.hasErrors()) {
 			return cadastroSetor(setorModel);
 		}
+
+		System.out.println("(post)Setor: " + setorModel.toString());
 		
 		setorService.salvar(setorModel);
 		attributes.addFlashAttribute("mensagem", "Setor salvo com sucesso!");
@@ -52,7 +59,7 @@ public class SetorController {
 	}
 	
 	
-	@GetMapping("/setor")
+	@GetMapping
 	public ModelAndView pesquisar(SetorFilter setorFilter, BindingResult result
 			, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
 		ModelAndView mv = new ModelAndView("setor/index");

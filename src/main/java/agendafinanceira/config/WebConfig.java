@@ -2,6 +2,8 @@ package agendafinanceira.config;
 
 import java.util.Locale;
 
+import javax.swing.text.DefaultFormatter;
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -9,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.format.support.DefaultFormattingConversionService;
+import org.springframework.format.support.FormattingConversionService;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -23,6 +27,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import agendafinanceira.controllers.UsuarioController;
+import agendafinanceira.controllers.converters.SetorConverter;
 import agendafinanceira.thymeleaf.AppDialect;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
@@ -52,7 +57,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		SpringTemplateEngine engine = new SpringTemplateEngine();
 		engine.setEnableSpringELCompiler(true);
 		engine.setTemplateResolver(templateResolver());
-		
+
 		engine.addDialect(new LayoutDialect());
 		engine.addDialect(new AppDialect());
 		return engine;
@@ -66,7 +71,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		resolver.setTemplateMode(TemplateMode.HTML);
 		return resolver;
 	}
-	
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
@@ -76,6 +81,14 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 	public LocaleResolver localeResolver() {
 		return new FixedLocaleResolver(new Locale("pt", "BR"));
 	}
-		
-	
+
+	@Bean
+	public FormattingConversionService mvcConvertionService() {
+
+		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
+		conversionService.addConverter(new SetorConverter());
+		return conversionService;
+
+	}
+
 }

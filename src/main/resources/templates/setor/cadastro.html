@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/padrao'">
+	
+<head></head>
+<body>
+
+<section layout:fragment="corpo">
+
+	<div class="container">
+
+		<ol class="breadcrumb">
+			<li><a href="">Dashboard</a></li>
+			<li><a href="">Cadastro</a></li>
+			<li><a href="">Setores</a></li>
+		</ol>
+
+		<div class="row cabecalho">
+			<div class="col-xs-12 col-md-6">
+				<h1>Cadastro de Setores</h1>
+			</div>
+		</div>
+
+
+		<form method="POST" th:object="${setorModel}" class="form-vertical  js-form-loading">
+
+			<div class="row">
+				<div class="col-sm-2  form-group">
+					<label for="id">ID:</label> 
+					<input id="id" type="text" readonly="readonly" class="form-control" th:field="*{idSetor}"/>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-6  form-group">
+					<label for="descricao">Descrição</label> 
+					<input id="descricao" type="text" class="form-control" th:field="*{descricao}"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-6  form-group">
+					<label>Status</label>
+					<div>
+						<th:block th:each="status : ${tipoAtivo}">
+							<div class="radio  radio-inline">
+								<input th:id="|id_${status}|" type="radio" th:value="${status}" th:field="*{ativo}"> 
+								<label th:for="|id_${status}|" th:text="${status.descricao}">Nacional</label>
+							</div>
+						</th:block>
+					</div>
+				</div>
+			</div>
+			
+			
+<!-- 			<div class="row"> -->
+<!-- 			  <div class="col-sm-2 form-group"> -->
+<!-- 			    <div class="input-group"> -->
+<!-- 			      <span class="input-group-addon"> -->
+<!-- 			        <input type="checkbox"> -->
+<!-- 			      </span> -->
+<!-- 			      <input type="text" class="form-control" value="Ativo"> -->
+<!-- 			    </div> -->
+<!-- 			  </div> -->
+<!-- 			</div>			 -->
+
+			<div class="row">
+				<div class="col-sm-6">
+					<button type="submit" class="btn btn-primary">Novo Setor</button>
+				</div>
+			</div>
+		</form>
+
+		
+	</div>
+
+</section>	
+
+</body>
+</html>
