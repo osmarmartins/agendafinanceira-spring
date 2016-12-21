@@ -29,12 +29,12 @@ public class SetorModel implements Serializable {
 	@Column(name="id_setor")
 	private Long idSetor;
 	
-	@NotBlank
+	@NotBlank(message = "Descrição deve ser informada.")
 	@Size(max=100, message="Descrição não pode ultrapassar 100 caracteres.")
 	private String descricao;
 	
 	@Enumerated
-	@NotNull(message = "Informe se o setor está ativo ou não.")
+	@NotNull(message = "Informe o status do setor.")
 	private Ativo ativo;
 
 	public Long getIdSetor() {

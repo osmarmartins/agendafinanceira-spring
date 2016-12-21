@@ -34,16 +34,16 @@ public class SetorController {
 	private SetorService setorService;
 
 	
-	@RequestMapping("/novo")
+	@RequestMapping("/manutencao")
 	public ModelAndView cadastroSetor(SetorModel setorModel){
-		ModelAndView mv = new ModelAndView("setor/cadastro");
+		ModelAndView mv = new ModelAndView("setor/cadastroSetor");
 		mv.addObject("tipoAtivo", Ativo.values());
 		System.out.println("(get)Setor: " + setorModel.toString());
 		return mv;
 	}
 	
 
-	@RequestMapping(value = "/novo", method = RequestMethod.POST)
+	@RequestMapping(value = "/manutencao", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid SetorModel setorModel, BindingResult result, 
 			Model model, RedirectAttributes attributes) {
 		
@@ -55,14 +55,14 @@ public class SetorController {
 		
 		setorService.salvar(setorModel);
 		attributes.addFlashAttribute("mensagem", "Setor salvo com sucesso!");
-		return new ModelAndView("redirect:/setor/novo");
+		return new ModelAndView("redirect:/setor/manutencao");
 	}
 	
 	
 	@GetMapping
 	public ModelAndView pesquisar(SetorFilter setorFilter, BindingResult result
 			, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
-		ModelAndView mv = new ModelAndView("setor/index");
+		ModelAndView mv = new ModelAndView("setor/listaSetores");
 		mv.addObject("setores", setorRepository.findAll());
 		
 //		PageWrapper<SetorModel> paginaWrapper = new PageWrapper<>(setorRepository.filtrar(setorFilter, pageable)

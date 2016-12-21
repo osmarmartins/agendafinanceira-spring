@@ -1,5 +1,6 @@
 package agendafinanceira.config;
 
+import java.math.BigDecimal;
 import java.util.Locale;
 
 import javax.swing.text.DefaultFormatter;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.format.number.NumberStyleFormatter;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.web.servlet.LocaleResolver;
@@ -77,18 +79,25 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
 	}
 
-	@Bean
-	public LocaleResolver localeResolver() {
-		return new FixedLocaleResolver(new Locale("pt", "BR"));
-	}
 
 	@Bean
 	public FormattingConversionService mvcConvertionService() {
 
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
 		conversionService.addConverter(new SetorConverter());
-		return conversionService;
 
+		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
+		conversionService.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);
+		
+		NumberStyleFormatter integerFormatter = new NumberStyleFormatter("#,##0");
+		conversionService.addFormatterForFieldType(Integer.class, integerFormatter);
+		
+		return conversionService;
+	}
+	
+	@Bean
+	public LocaleResolver localeResolver() {
+		return new FixedLocaleResolver(new Locale("pt", "BR"));
 	}
 
 }
