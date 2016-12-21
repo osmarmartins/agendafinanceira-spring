@@ -62,7 +62,7 @@ public class SetorController {
 	@GetMapping
 	public ModelAndView pesquisar(SetorFilter setorFilter, BindingResult result
 			, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
-		ModelAndView mv = new ModelAndView("setor/listaSetores");
+		ModelAndView mv = new ModelAndView("setor/ListarSetores");
 		mv.addObject("setores", setorRepository.findAll());
 		
 //		PageWrapper<SetorModel> paginaWrapper = new PageWrapper<>(setorRepository.filtrar(setorFilter, pageable)
