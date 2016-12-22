@@ -31,6 +31,8 @@
 	
 			<form method="POST" th:object="${setorModel}" class="form-vertical  js-form-loading">
 			
+				<div id="mensagem" class="alert alert-danger hidden" role="alert"></div>
+			
 				<th:block th:include="layout/fragments/mensagemErro"></th:block>
 				
 				<div class="row">
@@ -89,6 +91,7 @@
 </section>	
 
 <th:block layout:fragment="javaScript-extra">
+	<script th:src="@{/js/setor.js}"></script>
 	<script th:src="@{/js/bootstrap-switch.min.js}"></script>
 	<script>
 		$('.js-status').bootstrapSwitch();

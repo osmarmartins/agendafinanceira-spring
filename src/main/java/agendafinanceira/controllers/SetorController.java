@@ -6,12 +6,16 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -36,7 +40,7 @@ public class SetorController {
 	
 	@RequestMapping("/manutencao")
 	public ModelAndView cadastroSetor(SetorModel setorModel){
-		ModelAndView mv = new ModelAndView("setor/cadastroSetor");
+		ModelAndView mv = new ModelAndView("setor/CadastroSetor");
 		mv.addObject("tipoAtivo", Ativo.values());
 		System.out.println("(get)Setor: " + setorModel.toString());
 		return mv;
@@ -58,6 +62,22 @@ public class SetorController {
 		return new ModelAndView("redirect:/setor/manutencao");
 	}
 	
+
+	
+	@RequestMapping(value = "/manutencao", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid SetorModel setorModel, BindingResult result) {
+		
+		System.out.println(setorModel.toString());
+		
+		
+		if (result.hasErrors()) {
+			return ResponseEntity.badRequest().body(result.getFieldError("descricao").getDefaultMessage());
+		}
+		
+		setorModel = setorService.salvar(setorModel);
+
+		return ResponseEntity.ok(setorModel);
+	}	
 	
 	@GetMapping
 	public ModelAndView pesquisar(SetorFilter setorFilter, BindingResult result

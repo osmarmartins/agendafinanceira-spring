@@ -73,7 +73,7 @@
 
 		<footer class="row">
 			<div class="col-sm-6">
-				<button class="btn btn-primary" data-toggle="modal" data-target="#novo">Novo Setor</button>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#cadastro-modal-setor">Novo Setor</button>
 			</div>
 			<div class="col-sm-6 paginacao text-right">
 				<ul class="pagination">
@@ -89,37 +89,13 @@
 		</footer>
 	</div>
 
-
-	<div class="modal fade" id="modal-setor-cadastro">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Novo Setor</h4>
-				</div>
-				<form>
-					<div class="modal-body">
-						<div class="row">
-							<div class="form-group col-xs-12">
-								<label for="descricao">Descricao:</label>
-								<input type="text" id="descricao" name="descricao" class="form-control">
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">Salvar</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+	<div th:replace="setor/CadastroModalSetor :: modal"></div>
 
 </section>	
 
 <th:block layout:fragment="javaScript-extra">
-	<scrip>
-		
-	</scrip>
-	
+	<script th:scr="@{/js/setor.js}"></script>
 </th:block>
+
 </body>
 </html>
