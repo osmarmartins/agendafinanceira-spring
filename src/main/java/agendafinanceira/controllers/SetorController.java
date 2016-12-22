@@ -46,28 +46,29 @@ public class SetorController {
 		return mv;
 	}
 	
-
-	@RequestMapping(value = "/manutencao", method = RequestMethod.POST)
-	public ModelAndView cadastrar(@Valid SetorModel setorModel, BindingResult result, 
-			Model model, RedirectAttributes attributes) {
-		
-		if (result.hasErrors()) {
-			return cadastroSetor(setorModel);
-		}
-
-		System.out.println("(post)Setor: " + setorModel.toString());
-		
-		setorService.salvar(setorModel);
-		attributes.addFlashAttribute("mensagem", "Setor salvo com sucesso!");
-		return new ModelAndView("redirect:/setor/manutencao");
-	}
-	
+//
+//	@RequestMapping(value = "/manutencao", method = RequestMethod.POST)
+//	public ModelAndView cadastrar(@Valid SetorModel setorModel, BindingResult result, 
+//			Model model, RedirectAttributes attributes) {
+//		
+//		if (result.hasErrors()) {
+//			return cadastroSetor(setorModel);
+//		}
+//
+//		System.out.println("(post)Setor: " + setorModel.toString());
+//		
+//		setorService.salvar(setorModel);
+//		attributes.addFlashAttribute("mensagem", "Setor salvo com sucesso!");
+//		return new ModelAndView("redirect:/setor/manutencao");
+//	}
+//	
 
 	
 	@RequestMapping(value = "/manutencao", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid SetorModel setorModel, BindingResult result) {
 		
-		System.out.println(setorModel.toString());
+		System.out.println("SETOR >>>" + setorModel.toString());
+		System.out.println("Erro >>>" + result);
 		
 		
 		if (result.hasErrors()) {

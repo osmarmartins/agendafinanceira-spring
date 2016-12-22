@@ -23,22 +23,35 @@ $(function() {
 	}
 	
 	function onSalvarClick(){
-		console.log(url);
+		var descricaoSetor = descricaoSetor.val().trim();
+		var nomeEstilo = 'Setor teste modal';
 		$.ajax({
 			url: url,
 			method: 'POST',
 			contentType: 'application/json',
-			data: JSON.stringify({ descricao: descricaoSetor }),
+			data: JSON.stringify({ nome: nomeEstilo }),
 			error: onErrorModal,
 			success: onSuccessModal
-			
-		})
+		});
+		
+//		
+//		$.ajax({
+//			url: url,
+//			method: 'POST',
+//			contentType: 'application/json',
+//			data: JSON.stringify({ descricao: 'Setor teste modal', ativo: 'ATIVO' }),
+//			error: onErrorModal,
+//			success: onSuccessModal
+//			
+//		});
+//		
+		
 	}
 	
 	function onErrorModal(obj){
 		var mensagemErro = obj.responseText;
-		mensagem.removeClass('hidden');
 		mensagem.html('<span>' + mensagemErro + '</span>');
+		mensagem.removeClass('hidden');
 		form.find('.form-group').addClass('has-error');
 	}
 	
