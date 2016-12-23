@@ -22,61 +22,35 @@ $(function() {
 		form.find('.form-group').removeClass('has-error');
 	}
 	
+
 	function onSalvarClick(){
-		console.log(url);
+		var descricao = descricaoSetor.val().trim();
 		$.ajax({
 			url: url,
 			method: 'POST',
 			contentType: 'application/json',
-			data: JSON.stringify({ descricao: descricaoSetor }),
+			data: JSON.stringify({ descricao: descricao, ativo: 'ATIVO' }),
 			error: onErrorModal,
 			success: onSuccessModal
 			
-		})
+		});
+		
 	}
+	
 	
 	function onErrorModal(obj){
 		var mensagemErro = obj.responseText;
-		mensagem.removeClass('hidden');
 		mensagem.html('<span>' + mensagemErro + '</span>');
+		mensagem.removeClass('hidden');
 		form.find('.form-group').addClass('has-error');
 	}
 	
 	function onSuccessModal(setorModal){
+		window.location.reload(true);
 		modalSetor.modal('hide');
 	}
 	
 	
-})
-
-
-
-
-
-/*
-var AgendaFinanceira = AgendaFinanceira || {};
-
-AgendaFinanceira.SetorCadastro = (function(){
-
-	function SetorCadastro(){
-		this.formModal = $('#modal-setor-cadastro');
-		this.inputSetor = $('#setor-text');
-		this.mensagem = $('#mensagem');
-		this.url = '';
-		
-	} 
-	
-	SetorCadastro.prototype.enable = function(){
-		
-		
-	}
-	
-	
-}());
-
-$(function(){
-	var setor = new AgendaFinanceira.SetorCadastro();
-	setor.enable();
 });
-*/
+
 

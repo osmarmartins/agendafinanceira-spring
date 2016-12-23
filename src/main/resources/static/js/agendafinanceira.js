@@ -1,73 +1,4 @@
-$(function() {
-	
-	var modalSetor = $('#cadastro-modal-setor');
-	var btnSalvar = modalSetor.find('#salvar-setor');
-	var form = modalSetor.find('form');
-	var descricaoSetor = $('#setor-descricao');
-	var mensagem = $('#mensagem');
-	var url = form.attr('action');
-	
-	form.on('submit', function(event) { event.preventDefault() });
-	modalSetor.on('shown.bs.modal', onModalShow);
-	modalSetor.on('hide.bs.modal', onModalClose);
-	btnSalvar.on('click', onSalvarClick);
-
-	function onModalShow(){
-		descricaoSetor.focus();
-	}
-	
-	function onModalClose(){
-		descricaoSetor.val('');
-		mensagem.addClass('hidden');
-		form.find('.form-group').removeClass('has-error');
-	}
-	
-	function onSalvarClick(){
-		var descricaoSetor = descricaoSetor.val().trim();
-		var nomeEstilo = 'Setor teste modal';
-		$.ajax({
-			url: url,
-			method: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify({ nome: nomeEstilo }),
-			error: onErrorModal,
-			success: onSuccessModal
-		});
-		
-//		
-//		$.ajax({
-//			url: url,
-//			method: 'POST',
-//			contentType: 'application/json',
-//			data: JSON.stringify({ descricao: 'Setor teste modal', ativo: 'ATIVO' }),
-//			error: onErrorModal,
-//			success: onSuccessModal
-//			
-//		});
-//		
-		
-	}
-	
-	function onErrorModal(obj){
-		var mensagemErro = obj.responseText;
-		mensagem.html('<span>' + mensagemErro + '</span>');
-		mensagem.removeClass('hidden');
-		form.find('.form-group').addClass('has-error');
-	}
-	
-	function onSuccessModal(setorModal){
-		modalSetor.modal('hide');
-	}
-	
-	
-})
-
-
-
-
-
-
-// Criação do Objeto (caso não exista, será criado um novo)
+// Criação do Objeto para representar o namespace (caso não exista, será criado um novo)
 var AgendaFinanceira = AgendaFinanceira || {}
 
 // Declaração da função (Equivalente a declaração da classe)
@@ -85,12 +16,14 @@ AgendaFinanceira.MaskMoney = (function(){
 		this.plain.maskMoney({precision: 0, thousands: '.'});
 	}
 	
+	return MaskMoney;
+	
 }());
 
 
-// Instância objeto maskMoney
+// Instanciar objeto maskMoney e executar
 $(function() {
-//	var maskMoney = new AgendaFinanceira.MaskMoney();
-//	maskMoney.enable();
+	var maskMoney = new AgendaFinanceira.MaskMoney();
+	maskMoney.enable();
 });
 
