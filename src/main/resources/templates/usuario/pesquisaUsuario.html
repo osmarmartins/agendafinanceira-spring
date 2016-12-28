@@ -12,13 +12,13 @@
 
 	<div class="container">
 		<ol class="breadcrumb">
-			<li><a href="">Dashboard</a></li>
+			<li><a th:href="@{/}">Dashboard</a></li>
 			<li><a href="">Usuário</a></li>
 		</ol>
 
 		<div class="row cabecalho">
 			<div class="col-xs-12 col-md-6">
-				<h1>Cadastro de Usuário</h1>
+				<h1>Usuários</h1>
 			</div>
 			<div class="col-xs-12 col-md-4 col-md-offset-2 busca">
 				<div class="input-group">
@@ -75,7 +75,7 @@
 
 		<footer class="row">
 			<div class="col-sm-6">
-				<button class="btn btn-primary" data-toggle="modal" data-target="#novo">Novo Usuário</button>
+				<a class="btn btn-primary" th:href="@{/usuario/cadastro}">Novo Usuário</a>
 			</div>
 			<div class="col-sm-6 paginacao text-right">
 				<ul class="pagination">
@@ -92,29 +92,6 @@
 	</div>
 
 
-	<div class="modal fade" id="novo">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Novo Usuário</h4>
-				</div>
-				<form>
-					<div class="modal-body">
-						<div class="row">
-							<div class="form-group col-xs-12">
-								<label for="descricao">Nome do usuário:</label>
-								<input type="text" id="descricao" name="descricao" class="form-control">
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary">Salvar</button>
-						<button type="submit" class="btn btn-default">Fechar</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
 	
 </section>
 

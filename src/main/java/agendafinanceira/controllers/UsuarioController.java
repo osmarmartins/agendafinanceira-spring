@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,7 @@ import agendafinanceira.services.UsuarioService;
 import agendafinanceira.utils.PageWrapper;
 
 @Controller
+@RequestMapping("/usuario")
 public class UsuarioController {
 
 	@Autowired
@@ -32,12 +34,12 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	@RequestMapping("login")
+	@RequestMapping("/login")
 	public String loginUsuario() {
 		return "usuario/login";
 	}
 
-	@RequestMapping("/usuario/cadastro")
+	@RequestMapping("/cadastro")
 	public ModelAndView novo(UsuarioModel usuarioModel) {
 		ModelAndView mv = new ModelAndView("usuario/cadastroUsuario");
 		mv.addObject("credenciais", TipoUsuario.values());
@@ -45,7 +47,7 @@ public class UsuarioController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/usuario/cadastro", method = RequestMethod.POST)
+	@RequestMapping(value = "/cadastro", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid UsuarioModel usuarioModel, BindingResult bindingResult, Model model,
 			RedirectAttributes redirectAttributes) {
 
@@ -53,13 +55,19 @@ public class UsuarioController {
 			return novo(usuarioModel);
 		}
 
-		usuarioService.salvar(usuarioModel);
+		try {
+			usuarioService.salvar(usuarioModel);
+		} catch (Exception e) {
+			bindingResult.addError(new ObjectError("Error", e.getMessage()));
+			return novo(usuarioModel);
+		} 
+
 		redirectAttributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
 
 		return new ModelAndView("redirect:/usuario/cadastro");
 	}
 
-	@GetMapping("/usuario")
+	@GetMapping
 	public ModelAndView pesquisar(UsuarioFilter usuarioFilter, BindingResult result,
 			@PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
 

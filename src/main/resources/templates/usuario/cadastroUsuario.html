@@ -6,6 +6,7 @@
 	
 <head>
 	<title>Cadastro de Usuário</title>
+	<link rel="stylesheet" th:href="@{/css/bootstrap-toggle.min.css}"/>
 	<link rel="stylesheet" th:href="@{/css/bootstrap-switch.min.css}"/>
 </head>
 
@@ -16,9 +17,9 @@
 	<div class="container">
 
 		<ol class="breadcrumb">
-			<li><a href="">Dashboard</a></li>
-			<li><a href="">Usuário</a></li>
-			<li><a href="">Cadastro</a></li>
+			<li><a th:href="@{/}">Dashboard</a></li>
+			<li><a th:href="@{/usuario}">Usuário</a></li>
+			<li><a href="#" draggable="false">Cadastro</a></li>
 		</ol>
 
 		<div class="row cabecalho">
@@ -26,11 +27,6 @@
 				<h1>Cadastro de Usuário</h1>
 			</div>
 		</div>
-		
-<!-- 		<div class="alert alert-success alert-dismissible" role="alert" th:if="${not #strings.isEmpty(mensagem)}"> -->
-<!--   			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button> -->
-<!-- 	  		<span th:text="${mensagem}"></span> -->
-<!-- 		</div>			 -->
 		
 		<th:block th:include="layout/fragments/mensagemSucesso"></th:block>
 		
@@ -105,22 +101,29 @@
 				</div>
 				
 				
-<!-- 				<div class="row"> -->
-<!-- 					<div class="form-group col-sm-6"> -->
-<!-- 						<label for="ativo">Ativo:</label> -->
-<!-- 						<input type="checkbox" id="ativo" data-on-text="SIM" data-on-color="success"  -->
-<!-- 							data-off-text="NÃO" data-off-color="danger"  -->
-<!-- 							on-label="ATIVO" off-label="INATIVO" -->
-<!-- 							checked class="form-control js-ativo" name="ativo"> -->
-<!-- 		            </div>				 -->
-<!-- 				</div> -->
+				<div class="row">
+					<div class="form-group col-sm-6">
+						<label for="ativo" class="control-label">Ativo:</label>
+						<input type="checkbox" id="ativo" data-on-text="SIM" data-on-color="success" 
+							data-off-text="NÃO" data-off-color="danger" 
+							on-label="ATIVO" off-label="INATIVO"
+							checked class="form-control js-ativo" name="ativo">
+		            </div>				
+				</div>
+
+				<div class="row">
+					<div class="form-group  col-sm-3">
+						<input type="checkbox" class="js-toggle" checked data-toggle="toggle" data-on="ATIVO" data-off="INATIVO" data-onstyle="success" data-offstyle="danger"/>
+					</div>
+				</div>
 				
 			</div>
+
 
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<button type="submit" class="btn btn-primary">Salvar</button>
-					<button class="btn btn-default">Voltar</button>
+					<a class="btn btn-default" th:href="@{/usuario}">Voltar</a>
 				</div>
 			</div>					
 		</form>
@@ -135,6 +138,12 @@
 	<script>
 		$('.js-ativo').bootstrapSwitch();
 	</script>
+	
+	<script th:src="@{/js/bootstrap-toggle.min.js}"></script>
+	<script>
+	    $('.js-toggle').bootstrapToggle();
+	</script>
+	
 </th:block>
 
 </body>
