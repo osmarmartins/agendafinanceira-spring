@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/padrao'">
+	
+<head></head>
+<body>
+
+<section layout:fragment="corpo">
+	<div class="container">
+		<ol class="breadcrumb">
+			<li><a href="">Dashboard</a></li>
+			<li><a href="">Contas</a></li>
+		</ol>
+
+		<div class="row cabecalho">
+			<div class="col-xs-12 col-md-6">
+				<h1>Contas</h1>
+			</div>
+			<div class="col-xs-12 col-md-4 col-md-offset-2 busca">
+				<div class="input-group">
+					<input type="text" name="busca" class="form-control"
+						placeholder="Pesquisar por descrição"> <span
+						class="input-group-btn">
+						<button type="button" class="btn btn-default">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="table-responsive  bw-tabela-simples">
+			<table
+				class="dados-os table table-striped table-bordered table-hover">
+
+				<thead>
+					<tr>
+						<th>Código</th>
+						<th>Conta</th>
+						<th class="text-center">Ativo</th>
+						<th class="text-center">Operações</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="conta : ${contas}">
+						<td th:text="${conta.idConta}"></td>
+						<td th:text="${conta.descricao}"></td>
+
+						<td class="text-center">
+							<a class="btn  btn-link  btn-xs" title="Ativo"> 
+								<i class="glyphicon glyphicon-ok text-success"></i>
+							</a>
+						</td>
+
+						<td class="text-center">
+							<a class="btn  btn-link  btn-xs" title="Editar"> 
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a> 
+							<a class="btn  btn-link  btn-xs" title="Excluir"> 
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</td>
+					</tr>
+ 					
+ 					 
+<!--  					<tr th:if="${pagina.vazia}"> -->
+<!-- 						<td colspan="4">Nenhum usuário encontrado</td> -->
+<!-- 					</tr> -->
+					
+					
+				</tbody>
+			</table>
+		</div>
+
+
+		<footer class="row">
+			<div class="col-sm-6">
+				<button class="btn btn-primary" data-toggle="modal" data-target="#cadastro-modal-conta">Nova Conta</button>
+			</div>
+			<div class="col-sm-6 paginacao text-right">
+				<ul class="pagination">
+					<li class="disabled"><a href=""><span>«</span></a></li>
+					<li class="active"><a href="">1</a></li>
+					<li><a href="">2</a></li>
+					<li><a href="">3</a></li>
+					<li><a href="">4</a></li>
+					<li><a href="">5</a></li>
+					<li><a href=""><span>»</span></a></li>
+				</ul>
+			</div>
+		</footer>
+	</div>
+
+	<div th:replace="conta/CadastroModalConta :: modal"></div>
+
+</section>	
+
+<th:block layout:fragment="javaScript-extra">
+	<script th:src="@{/js/conta.js}"></script>
+</th:block>
+
+
+</body>
+</html>

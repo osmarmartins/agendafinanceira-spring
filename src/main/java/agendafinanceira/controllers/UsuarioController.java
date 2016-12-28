@@ -41,7 +41,7 @@ public class UsuarioController {
 
 	@RequestMapping("/cadastro")
 	public ModelAndView novo(UsuarioModel usuarioModel) {
-		ModelAndView mv = new ModelAndView("usuario/cadastroUsuario");
+		ModelAndView mv = new ModelAndView("usuario/CadastroUsuario");
 		mv.addObject("credenciais", TipoUsuario.values());
 		mv.addObject("tipoAtivo", Ativo.values());
 		return mv;
@@ -71,7 +71,7 @@ public class UsuarioController {
 	public ModelAndView pesquisar(UsuarioFilter usuarioFilter, BindingResult result,
 			@PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
 
-		ModelAndView mv = new ModelAndView("/usuario/pesquisaUsuario");
+		ModelAndView mv = new ModelAndView("/usuario/ListarUsuarios");
 		mv.addObject("usuarios", usuarioRepository.findAll());
 
 		// PageWrapper<UsuarioModel> paginaWrapper = new
