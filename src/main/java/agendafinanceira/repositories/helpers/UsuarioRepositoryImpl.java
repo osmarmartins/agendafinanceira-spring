@@ -1,31 +1,40 @@
 package agendafinanceira.repositories.helpers;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import agendafinanceira.models.UsuarioModel;
 import agendafinanceira.repositories.filters.UsuarioFilter;
-import agendafinanceira.utils.PaginacaoUtil;
 
-public class UsuarioQueriesImpl implements UsuarioQueries {
+public class UsuarioRepositoryImpl implements UsuarioRepositoryQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
 
-	@Autowired
-	private PaginacaoUtil paginacaoUtil;
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly=true)
+	@Override
+	public List<UsuarioModel> filtrar(UsuarioFilter filtro) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(UsuarioModel.class);
+		
+		if (filtro.getNome() != null){
+			criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
+		}
+		
+		return criteria.list();
+	}
+	
+	
 
+/*
 	@SuppressWarnings("unchecked")
 	@Override
 	public Page<UsuarioModel> filtrar(UsuarioFilter filtro, Pageable pageable) {
@@ -54,5 +63,6 @@ public class UsuarioQueriesImpl implements UsuarioQueries {
 		}
 		
 	}
+*/
 
 }

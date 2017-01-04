@@ -6,19 +6,14 @@ import agendafinanceira.models.enums.TipoUsuario;
 public class UsuarioFilter {
 	
 	private Long idUsuario;
-	
 	private String nome;
-
 	private String email;
-	
 	private String login;
-	
 	private String senha;
-	
 	private TipoUsuario administrador;
-	
 	private Ativo ativo;
 
+	
 	public Long getIdUsuario() {
 		return idUsuario;
 	}
