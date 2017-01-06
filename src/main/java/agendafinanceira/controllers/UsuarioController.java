@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -69,16 +70,13 @@ public class UsuarioController {
 
 	@GetMapping
 	public ModelAndView pesquisar(UsuarioFilter usuarioFilter, BindingResult result,
-			@PageableDefault(size = 10) Pageable pageable) {
+			@PageableDefault(size = 2) Pageable pageable) {
 
 		ModelAndView mv = new ModelAndView("/usuario/ListarUsuarios");
-		
-		System.out.println(">>>> pageNumber: " + pageable.getPageNumber() );
-		System.out.println(">>>> nome de pesquisa: " + usuarioFilter.getNome() );
-		
 				
-//		mv.addObject("usuarios", usuarioRepository.findAll(pageable));
-		mv.addObject("usuarios", usuarioRepository.filtrar(usuarioFilter));
+		Page<UsuarioModel> pagina = usuarioRepository.filtrar(usuarioFilter, pageable); 
+
+		mv.addObject("pagina", pagina);
 		
 		
 

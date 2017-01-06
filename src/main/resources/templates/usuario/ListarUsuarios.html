@@ -51,7 +51,7 @@
 				</thead>
 
 				<tbody>
-					<tr th:each="usuario : ${usuarios}">
+					<tr th:each="usuario : ${pagina.content}">
 						<td th:text="${usuario.idUsuario}"></td>
 						<td th:text="${usuario.nome}"></td>
 
@@ -66,12 +66,10 @@
 						</a></td>
 					</tr>
  					
+ 					<tr th:if="${#lists.isEmpty(pagina.content)}">
+						<td colspan="4">Nenhum usuário encontrado</td>
+					</tr>
  					 
-<!--  					<tr th:if="${pagina.vazia}"> -->
-<!-- 						<td colspan="4">Nenhum usuário encontrado</td> -->
-<!-- 					</tr> -->
-					
-					
 				</tbody>
 			</table>
 		</div>
@@ -81,15 +79,26 @@
 			<div class="col-sm-6">
 				<a class="btn btn-primary" th:href="@{/usuario/cadastro}">Novo Usuário</a>
 			</div>
-			<div class="col-sm-6 paginacao text-right">
-				<ul class="pagination">
-					<li class="disabled"><a href=""><span>«</span></a></li>
-					<li><a href="?page=0">1</a></li>
-					<li><a href="?page=1">2</a></li>
-					<li><a href="?page=2">3</a></li>
-					<li><a href="?page=3">4</a></li>
-					<li><a href="?page=4">5</a></li>
-					<li class="disabled"><a href=""><span>»</span></a></li>
+			
+			<div class="col-sm-6 paginacao text-right" th:if="${not #lists.isEmpty(pagina.content)}">
+				<ul class="pagination" th:with="paginaAtual=${pagina.number}">
+					<li th:class="${pagina.first} ? disabled">
+						<a th:href="|?page=${paginaAtual - 1}|" th:remove="${pagina.first} ? tag">
+							<span>«</span>
+						</a>
+					</li>
+					
+					<th:block th:each="p : ${#numbers.sequence(1, pagina.totalPages)}" th:with="numeroPagina=${p - 1}">
+						<li th:class="${paginaAtual == numeroPagina} ? active">
+							<a th:href="|?page=${p - 1}|">[[${p}]]</a>
+						</li>
+					</th:block>
+					
+					<li th:class="${pagina.last} ? disabled">
+						<a th:href="|?page=${paginaAtual + 1}|" th:remove="${pagina.last} ? tag">
+							<span>»</span>
+						</a>
+					</li>
 				</ul>
 			</div>
 		</footer>
