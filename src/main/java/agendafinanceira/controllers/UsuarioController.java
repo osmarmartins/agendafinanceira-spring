@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import agendafinanceira.controllers.page.Paginacao;
 import agendafinanceira.models.UsuarioModel;
 import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.models.enums.TipoUsuario;
@@ -61,7 +62,7 @@ public class UsuarioController {
 		} catch (Exception e) {
 			bindingResult.addError(new ObjectError("Error", e.getMessage()));
 			return novo(usuarioModel);
-		} 
+		}
 
 		redirectAttributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
 
@@ -70,20 +71,12 @@ public class UsuarioController {
 
 	@GetMapping
 	public ModelAndView pesquisar(UsuarioFilter usuarioFilter, BindingResult result,
-			@PageableDefault(size = 2) Pageable pageable) {
+			@PageableDefault(size = 5) Pageable pageable, HttpServletRequest httpServletRequest) {
 
 		ModelAndView mv = new ModelAndView("/usuario/ListarUsuarios");
-				
-		Page<UsuarioModel> pagina = usuarioRepository.filtrar(usuarioFilter, pageable); 
-
-		mv.addObject("pagina", pagina);
-		
-		
-
-		// PageWrapper<UsuarioModel> paginaWrapper = new
-		// PageWrapper<>(usuarioRepository.filtrar(usuarioFilter, pageable),
-		// httpServletRequest);
-		// mv.addObject("pagina", paginaWrapper);
+		Paginacao<UsuarioModel> paginacao = new Paginacao<>(usuarioRepository.filtrar(usuarioFilter, pageable),
+				httpServletRequest);
+		mv.addObject("pagina", paginacao);
 
 		return mv;
 	}
