@@ -43,8 +43,14 @@
 
 				<thead>
 					<tr>
-						<th>Código</th>
-						<th>Usuário</th>
+						<th>
+							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'idUsuario', 'Código')"></th:block>
+						</th>
+						
+						<th>
+							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'nome', 'Usuário')"></th:block>
+						</th>
+						
 						<th class="text-center">Ativo</th>
 						<th class="text-center">Operações</th>
 					</tr>
@@ -80,28 +86,9 @@
 				<a class="btn btn-primary" th:href="@{/usuario/cadastro}">Novo Usuário</a>
 			</div>
 			
-			<div class="col-sm-6 paginacao text-right" th:if="${not pagina.vazia}">
-				<ul class="pagination">
-					<li th:class="${pagina.primeira} ? disabled">
-						<a th:href="${pagina.urlPagina(pagina.atual - 1)}" th:remove="${pagina.primeira} ? tag">
-							<span>«</span>
-						</a>
-					</li>
-					
-					<th:block th:each="p : ${#numbers.sequence(1, pagina.total)}" th:with="numeroPagina=${p - 1}">
-						<li th:class="${pagina.atual == numeroPagina} ? active">
-							<a th:href="${pagina.urlPagina(numeroPagina)}">[[${p}]]</a>
-						</li>
-					</th:block>
-					
-					<li th:class="${pagina.ultima} ? disabled">
-						<a th:href="${pagina.urlPagina(pagina.atual + 1)}" th:remove="${pagina.ultima} ? tag">
-							<span>»</span>
-						</a>
-					</li>
-				</ul>
-			</div>
+			<th:block th:replace="layout/fragments/Paginacao :: pageComponent (${pagina})"></th:block>
 		</footer>
+		
 	</div>
 
 

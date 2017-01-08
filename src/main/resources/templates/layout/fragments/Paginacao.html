@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org">
+	
+	<th:block th:fragment="pageComponent (pagina)">
+	
+		<div class="col-sm-6 paginacao text-right">
+			<ul class="pagination">
+			
+				<li th:class="${pagina.primeira} ? disabled">
+					<a th:href="${pagina.urlPagina(pagina.atual - 1)}"><span>«</span></a>
+				</li>
+				
+				<th:block th:each="p : ${#numbers.sequence(1, pagina.total)}" th:with="numeroPagina=${p - 1}">
+					<li th:class="${pagina.atual == numeroPagina} ? active">
+						<a th:href="|?page=${p-1}|">[[${p}]]</a>
+					</li>
+				</th:block>
+
+
+				<li th:class="${pagina.ultima} ? disabled">
+					<a th:href="${pagina.urlPagina(pagina.atual + 1)}"><span>»</span></a>
+				</li>
+			</ul>
+		</div>
+
+	</th:block>
+		
+</html>

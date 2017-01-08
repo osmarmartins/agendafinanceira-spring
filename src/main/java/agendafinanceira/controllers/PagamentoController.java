@@ -20,7 +20,6 @@ import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.repositories.PagamentoRepository;
 import agendafinanceira.repositories.filters.PagamentoFilter;
 import agendafinanceira.services.PagamentoService;
-import agendafinanceira.utils.PageWrapper;
 
 @Controller
 public class PagamentoController {

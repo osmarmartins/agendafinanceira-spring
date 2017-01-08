@@ -12,35 +12,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import agendafinanceira.models.SetorModel;
-import agendafinanceira.models.UsuarioModel;
 import agendafinanceira.repositories.filters.SetorFilter;
-import agendafinanceira.utils.PaginacaoUtil;
+import agendafinanceira.repositories.page.PageComponent;
 
-public class SetorQueriesImpl implements SetorQueries {
+public class SetorRepositoryImpl implements SetorRepositoryQueries {
 	
 
 	@PersistenceContext
 	private EntityManager manager;
-
+	
 	@Autowired
-	private PaginacaoUtil paginacaoUtil;
+	private PageComponent PageComponent;
 
 	@SuppressWarnings("unchecked")
+	@Transactional(readOnly=true)
 	@Override
-	public Page<SetorModel> filtrar(SetorFilter filtro, Pageable pageable) {
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(UsuarioModel.class);
+	public Page<SetorModel> filtrar(SetorFilter filtro, Pageable page) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(SetorModel.class);
 
-		paginacaoUtil.preparar(criteria, pageable);
+		PageComponent.initializer(page, criteria);
 		adicionarFiltro(filtro, criteria);
-		
-		return new PageImpl<>(criteria.list(), pageable, total(filtro));
+
+		return new PageImpl<>(criteria.list(), page, total(filtro));
 	}
 
 	private Long total(SetorFilter filtro) {
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(UsuarioModel.class);
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(SetorModel.class);
 		adicionarFiltro(filtro, criteria);
 		criteria.setProjection(Projections.rowCount());
 		return (Long) criteria.uniqueResult();
@@ -50,13 +51,11 @@ public class SetorQueriesImpl implements SetorQueries {
 		if (filtro != null) {
 			
 			if (!StringUtils.isEmpty(filtro.getDescricao())) {
-				criteria.add(Restrictions.ilike("nome", filtro.getDescricao(), MatchMode.ANYWHERE));
+				criteria.add(Restrictions.ilike("descricao", filtro.getDescricao(), MatchMode.ANYWHERE));
 			}
 
 		}
 		
 	}
-
-	
 
 }

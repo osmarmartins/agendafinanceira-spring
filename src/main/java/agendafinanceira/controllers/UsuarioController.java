@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -24,7 +23,6 @@ import agendafinanceira.models.enums.TipoUsuario;
 import agendafinanceira.repositories.UsuarioRepository;
 import agendafinanceira.repositories.filters.UsuarioFilter;
 import agendafinanceira.services.UsuarioService;
-import agendafinanceira.utils.PageWrapper;
 
 @Controller
 @RequestMapping("/usuario")
@@ -71,11 +69,10 @@ public class UsuarioController {
 
 	@GetMapping
 	public ModelAndView pesquisar(UsuarioFilter usuarioFilter, BindingResult result,
-			@PageableDefault(size = 5) Pageable pageable, HttpServletRequest httpServletRequest) {
+			@PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
 
 		ModelAndView mv = new ModelAndView("/usuario/ListarUsuarios");
-		Paginacao<UsuarioModel> paginacao = new Paginacao<>(usuarioRepository.filtrar(usuarioFilter, pageable),
-				httpServletRequest);
+		Paginacao<UsuarioModel> paginacao = new Paginacao<>(usuarioRepository.filtrar(usuarioFilter, pageable),	httpServletRequest);
 		mv.addObject("pagina", paginacao);
 
 		return mv;

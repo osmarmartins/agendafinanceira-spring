@@ -8,28 +8,32 @@
 <body>
 
 <section layout:fragment="corpo">
-	<div class="container">
-		<ol class="breadcrumb">
-			<li><a href="">Dashboard</a></li>
-			<li><a href="">Setores</a></li>
-		</ol>
 
-		<div class="row cabecalho">
-			<div class="col-xs-12 col-md-6">
-				<h1>Setores</h1>
-			</div>
-			<div class="col-xs-12 col-md-4 col-md-offset-2 busca">
-				<div class="input-group">
-					<input type="text" name="busca" class="form-control"
-						placeholder="Pesquisar por descrição"> <span
-						class="input-group-btn">
-						<button type="button" class="btn btn-default">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
+	<div class="container">
+		<form method="GET" th:object="${setorFilter}">
+			<ol class="breadcrumb">
+				<li><a href="">Dashboard</a></li>
+				<li><a href="">Setores</a></li>
+			</ol>
+	
+			<div class="row cabecalho">
+				<div class="col-xs-12 col-md-6">
+					<h1>Setores</h1>
+				</div>
+				
+				<div class="col-xs-12 col-md-4 col-md-offset-2 busca">
+					<div class="input-group">
+						<input type="text" name="busca" class="form-control" placeholder="Pesquisar por descrição" th:field="*{descricao}"> 
+							<span class="input-group-btn">
+								<button type="submit" class="btn btn-default">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
+					</div>
 				</div>
 			</div>
-		</div>
+		</form>
+
 
 		<div class="table-responsive  bw-tabela-simples">
 			<table
@@ -37,15 +41,21 @@
 
 				<thead>
 					<tr>
-						<th>Código</th>
-						<th>Setor</th>
+						<th>
+							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'idSetor', 'Código')"></th:block>
+						</th>
+						
+						<th>
+							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'descricao', 'Setor')"></th:block>
+						</th>
+						
 						<th class="text-center">Ativo</th>
 						<th class="text-center">Operações</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<tr th:each="setor : ${setores}">
+					<tr th:each="setor : ${pagina.conteudo}">
 						<td th:text="${setor.idSetor}"></td>
 						<td th:text="${setor.descricao}"></td>
 
@@ -59,11 +69,10 @@
 								class="glyphicon glyphicon-remove"></i>
 						</a></td>
 					</tr>
- 					
  					 
-<!--  					<tr th:if="${pagina.vazia}"> -->
-<!-- 						<td colspan="4">Nenhum usuário encontrado</td> -->
-<!-- 					</tr> -->
+ 					<tr th:if="${pagina.vazia}">
+						<td colspan="4">Nenhum usuário encontrado</td>
+					</tr>
 					
 					
 				</tbody>
@@ -75,18 +84,10 @@
 			<div class="col-sm-6">
 				<button class="btn btn-primary" data-toggle="modal" data-target="#cadastro-modal-setor">Novo Setor</button>
 			</div>
-			<div class="col-sm-6 paginacao text-right">
-				<ul class="pagination">
-					<li class="disabled"><a href=""><span>«</span></a></li>
-					<li class="active"><a href="">1</a></li>
-					<li><a href="">2</a></li>
-					<li><a href="">3</a></li>
-					<li><a href="">4</a></li>
-					<li><a href="">5</a></li>
-					<li><a href=""><span>»</span></a></li>
-				</ul>
-			</div>
+			
+			<th:block th:replace="layout/fragments/Paginacao :: pageComponent (${pagina})"></th:block>
 		</footer>
+		
 	</div>
 
 	<div th:replace="setor/CadastroModalSetor :: modal"></div>

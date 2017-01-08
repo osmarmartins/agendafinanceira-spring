@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import agendafinanceira.controllers.page.Paginacao;
 import agendafinanceira.models.SetorModel;
 import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.repositories.SetorRepository;
 import agendafinanceira.repositories.filters.SetorFilter;
 import agendafinanceira.services.SetorService;
-import agendafinanceira.utils.PageWrapper;
 
 @Controller
 @RequestMapping("/setor")
@@ -43,7 +43,6 @@ public class SetorController {
 	public ModelAndView cadastroSetor(SetorModel setorModel){
 		ModelAndView mv = new ModelAndView("setor/CadastroSetor");
 		mv.addObject("tipoAtivo", Ativo.values());
-		System.out.println("(get)Setor: " + setorModel.toString());
 		return mv;
 	}
 	
@@ -86,12 +85,10 @@ public class SetorController {
 	@GetMapping
 	public ModelAndView pesquisar(SetorFilter setorFilter, BindingResult result
 			, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
+
 		ModelAndView mv = new ModelAndView("setor/ListarSetores");
-		mv.addObject("setores", setorRepository.findAll());
-		
-//		PageWrapper<SetorModel> paginaWrapper = new PageWrapper<>(setorRepository.filtrar(setorFilter, pageable)
-//				, httpServletRequest);
-//		mv.addObject("pagina", paginaWrapper);
+		Paginacao<SetorModel> paginacao = new Paginacao<>(setorRepository.filtrar(setorFilter, pageable), httpServletRequest);
+		mv.addObject("pagina", paginacao);
 		
 		return mv;
 	}
