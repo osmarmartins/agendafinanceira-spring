@@ -17,15 +17,14 @@ import org.springframework.util.StringUtils;
 import agendafinanceira.models.PagamentoModel;
 import agendafinanceira.models.UsuarioModel;
 import agendafinanceira.repositories.filters.PagamentoFilter;
-import agendafinanceira.utils.PaginacaoUtil;
 
 public class PagamentoQueriesImpl implements PagementoQueries{
 
 	@PersistenceContext
 	private EntityManager manager;
 
-	@Autowired
-	private PaginacaoUtil paginacaoUtil;
+//	@Autowired
+//	private PaginacaoUtil paginacaoUtil;
 	
 	
 	@SuppressWarnings("unchecked")
@@ -33,7 +32,7 @@ public class PagamentoQueriesImpl implements PagementoQueries{
 	public Page<PagamentoModel> filtrar(PagamentoFilter filtro, Pageable pageable) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(UsuarioModel.class);
 
-		paginacaoUtil.preparar(criteria, pageable);
+//		paginacaoUtil.preparar(criteria, pageable);
 		adicionarFiltro(filtro, criteria);
 		
 		return new PageImpl<>(criteria.list(), pageable, total(filtro));

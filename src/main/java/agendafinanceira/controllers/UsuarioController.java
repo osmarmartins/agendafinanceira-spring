@@ -23,6 +23,7 @@ import agendafinanceira.models.enums.TipoUsuario;
 import agendafinanceira.repositories.UsuarioRepository;
 import agendafinanceira.repositories.filters.UsuarioFilter;
 import agendafinanceira.services.UsuarioService;
+import agendafinanceira.services.exception.UsuarioJaCadastradoException;
 
 @Controller
 @RequestMapping("/usuario")
@@ -57,8 +58,9 @@ public class UsuarioController {
 
 		try {
 			usuarioService.salvar(usuarioModel);
-		} catch (Exception e) {
-			bindingResult.addError(new ObjectError("Error", e.getMessage()));
+		} catch (UsuarioJaCadastradoException e) {
+//			bindingResult.addError(new ObjectError("Error", e.getMessage()));
+			bindingResult.rejectValue("login", e.getMessage(), e.getMessage());
 			return novo(usuarioModel);
 		}
 
