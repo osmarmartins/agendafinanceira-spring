@@ -86,58 +86,32 @@
 
 				
 				
-<!-- 				<div class="row"> -->
-<!-- 					<div class="col-sm-6  form-group"> -->
-<!-- 						<label>Status</label> -->
-<!-- 						<div> -->
-<!-- 							<th:block th:each="status : ${tipoAtivo}"> -->
-<!-- 								<div class="radio  radio-inline"> -->
-<!-- 									<input th:id="|id_${status}|" type="radio" th:value="${status}">  -->
-<!-- 									<label th:for="|id_${status}|" th:text="${status.descricao}">Nacional</label> -->
-<!-- 								</div> -->
-<!-- 							</th:block> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
+				<div class="row" style="display: none">
+					<div class="col-sm-6  form-group">
+						<label>Status</label>
+						<div>
+							<th:block th:each="status : ${tipoAtivo}">
+								<div class="radio  radio-inline">
+									<input th:id="|id_${status}|" type="radio" th:value="${status}" th:field="*{ativo}"> 
+									<label th:for="|id_${status}|" th:text="${status.descricao}"></label>
+								</div>
+							</th:block>
+						</div>
+					</div>
+				</div>
 				
-				
-<!-- 				<div class="row"> -->
-<!-- 					<div class="form-group col-sm-6"> -->
-<!-- 						<label for="ativo" class="control-label">Ativo:</label> -->
-<!-- 						<input type="checkbox" id="ativo"  -->
-<!-- 							data-on-text="SIM"  -->
-<!-- 							data-on-color="success"  -->
-<!-- 							data-off-text="NÃO"  -->
-<!-- 							data-off-color="danger"  -->
-<!-- 							on-label="ATIVO"  -->
-<!-- 							off-label="INATIVO" -->
-<!-- 							th:checked="${ativo=='ATIVO'}"   -->
-<!-- 							class="form-control js-ativo"  -->
-<!-- 							name="ativo" -->
-<!-- 							th:field="*{ativo}"> -->
-<!-- 		            </div>				 -->
-<!-- 				</div> -->
-
-
-				<input type="checkbox" class="js-ativo" 
-					data-size="small" 
-					data-off-color="danger" 
-					data-on-text="Ativo" 
-					data-off-text="Inativo" 
-					th:field="*{ativo.valor}"/>
-
-
-<!-- 				<div class="row"> -->
-<!-- 					<div class="form-group  col-sm-3"> -->
-<!-- 						<input type="checkbox"  -->
-<!-- 							class="js-toggle" checked  -->
-<!-- 							data-toggle="toggle"  -->
-<!-- 							data-on="ATIVO"  -->
-<!-- 							data-off="INATIVO"  -->
-<!-- 							data-onstyle="success"  -->
-<!-- 							data-offstyle="danger"/> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
+				<div class="row">
+					<div class="form-group  col-sm-3">
+						<input type="checkbox"
+							id="usuario-status" checked
+							class="js-toggle"
+							data-toggle="toggle" 
+							data-on="ATIVO" 
+							data-off="INATIVO" 
+							data-onstyle="success" 
+							data-offstyle="danger"/>
+					</div>
+				</div>
 				
 			</div>
 
@@ -164,12 +138,20 @@
 	<script th:src="@{/js/bootstrap-toggle.min.js}"></script>
 	<script>
 	    $('.js-toggle').bootstrapToggle();
-	</script>
-	
-	<script>
+		$('#id_ATIVO').prop('checked', true).change()
+	    
+	    $('#usuario-status').change(function() {
+	    	
+	    	if($(this).prop('checked')){
+	    		$('#id_ATIVO').prop('checked', true).change()
+	    	}else{
+	    		$('#id_INATIVO').prop('checked', true).change()
+	    	}
+	    	
+	      })
 		
 	</script>
-	
+		
 </th:block>
 
 </body>

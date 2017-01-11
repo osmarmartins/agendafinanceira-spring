@@ -47,7 +47,7 @@ public class UsuarioModel implements Serializable {
 
 	@Transient
 	private String confirmaSenha;
-
+	
 	@Enumerated
 	@NotNull(message = "Informe o tipo de usuário")
 	private TipoUsuario administrador;
@@ -119,7 +119,7 @@ public class UsuarioModel implements Serializable {
 	public void setAtivo(Ativo ativo) {
 		this.ativo = ativo;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -152,4 +152,6 @@ public class UsuarioModel implements Serializable {
 				+ ", ativo=" + ativo + "]";
 	}
 
+	
+	
 }
