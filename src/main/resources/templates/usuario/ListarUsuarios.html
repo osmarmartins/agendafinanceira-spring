@@ -61,15 +61,21 @@
 						<td th:text="${usuario.idUsuario}"></td>
 						<td th:text="${usuario.nome}"></td>
 
-						<td class="text-center"><a class="btn  btn-link  btn-xs"
-							title="Ativo"> <i class="glyphicon glyphicon-ok text-success"></i>
-						</a></td>
+						<td class="text-center">
+							<a class="btn btn-link btn-xs" title="Ativo"> 
+								<i id="js-status" class="glyphicon glyphicon-ok text-success"></i>
+							</a>
+						</td>
 
-						<td class="text-center"><a class="btn  btn-link  btn-xs"
-							title="Editar"> <i class="glyphicon glyphicon-pencil"></i>
-						</a> <a class="btn  btn-link  btn-xs" title="Excluir"> <i
-								class="glyphicon glyphicon-remove"></i>
-						</a></td>
+						<td class="text-center">
+							<a class="btn btn-link btn-xs" title="Editar"> 
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a> 
+
+							<a class="btn  btn-link  btn-xs" title="Excluir"> 
+								<i class="glyphicon glyphicon-trash"></i>
+							</a>
+						</td>
 					</tr>
  					
  					<tr th:if="${pagina.vazia}">
@@ -94,6 +100,29 @@
 
 	
 </section>
+
+<th:block layout:fragment="javaScript-extra">
+	<script>
+		$(document).ready(function() {
+			$(".js-status").on( "click", function() {
+				alert('acessou');
+				$(".js-status").removeClass("glyphicon-ok text-success");
+				$(".js-status").addClass("glyphicon-remove text-danger");
+			});
+/*	
+			$(".item2").on( "click", function() {
+				$(".item2").removeClass("blue");
+			});
+	
+			$(".item3").on( "click", function() {
+				$(".item3").toggleClass("blue");
+			});
+*/			
+		});
+	</script>
+		
+</th:block>
+
 
 </body>
 </html>
