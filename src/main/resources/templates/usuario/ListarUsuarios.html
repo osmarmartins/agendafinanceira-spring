@@ -62,8 +62,9 @@
 						<td th:text="${usuario.nome}"></td>
 
 						<td class="text-center">
-							<a class="btn btn-link btn-xs" title="Ativo"> 
-								<i id="js-status" class="glyphicon glyphicon-ok text-success"></i>
+							<a class="btn btn-link btn-xs" title="Ativo" th:href="@{/usuario/login}">
+								<i class="glyphicon" 
+									th:classappend="${usuario.ativo == T(agendafinanceira.models.enums.Ativo).ATIVO ? 'glyphicon-ok text-success' : 'glyphicon-remove text-danger'}"></i>
 							</a>
 						</td>
 
@@ -103,22 +104,6 @@
 
 <th:block layout:fragment="javaScript-extra">
 	<script>
-		$(document).ready(function() {
-			$(".js-status").on( "click", function() {
-				alert('acessou');
-				$(".js-status").removeClass("glyphicon-ok text-success");
-				$(".js-status").addClass("glyphicon-remove text-danger");
-			});
-/*	
-			$(".item2").on( "click", function() {
-				$(".item2").removeClass("blue");
-			});
-	
-			$(".item3").on( "click", function() {
-				$(".item3").toggleClass("blue");
-			});
-*/			
-		});
 	</script>
 		
 </th:block>

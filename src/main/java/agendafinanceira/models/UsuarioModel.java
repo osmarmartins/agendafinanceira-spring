@@ -55,7 +55,7 @@ public class UsuarioModel implements Serializable {
 	@Enumerated
 	@NotNull(message = "Informe se o usuário está ativo ou não")
 	private Ativo ativo;
-
+	
 	public Long getIdUsuario() {
 		return idUsuario;
 	}
@@ -120,6 +120,7 @@ public class UsuarioModel implements Serializable {
 		this.ativo = ativo;
 	}
 	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -152,6 +153,4 @@ public class UsuarioModel implements Serializable {
 				+ ", ativo=" + ativo + "]";
 	}
 
-	
-	
 }

@@ -77,6 +77,8 @@ public class UsuarioController {
 		Paginacao<UsuarioModel> paginacao = new Paginacao<>(usuarioRepository.filtrar(usuarioFilter, pageable),	httpServletRequest);
 		mv.addObject("pagina", paginacao);
 
+		System.out.println(paginacao.getConteudo());
+		
 		return mv;
 	}
 
