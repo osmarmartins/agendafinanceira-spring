@@ -1,15 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
 <Context>
-    <Resource name="jdbc/agendaFinanceiraDB" auth="Container" 
+    <Resource 
+    		name="jdbc/agendaFinanceiraDB" 
+    		auth="Container" 
             factory="org.apache.naming.factory.BeanFactory"
             type="com.mchange.v2.c3p0.ComboPooledDataSource"
             driverClass="com.mysql.jdbc.Driver"
-            jdbcUrl="jdbc:mysql://localhost/webfinancas?useSSL=false"
-            user="root"
-            password="" 
+            jdbcUrl="jdbc:mysql://webfinancas.mysql.uhserver.com/webfinancas?useSSL=false"
+            user="osmar"
+            password="prisma.70"
+            
             initialPoolSize="5" 
             minPoolSize="5"
-            maxPoolSize="5" 
+            maxPoolSize="5"
+
+			checkoutTimeout="5000"
+			idleConnectionTestPeriod="60"
+			testConnectionOnCheckout="true" 
+			preferredTestQuery="SELECT 1" 
+    		testConnectionOnCheckin="true"            
      />
 </Context>
+
+
+<!-- 
+	c3p0_spring_config.xml
+	https://gist.github.com/chrissom/2351568
+ -->
+
+
+
+<!-- Configuração alternativa ao c3po
+
+
+    <Resource
+      	  name="jdbc/agendaFinanceiraDB"
+    	  auth="Container"
+    	  type="javax.sql.DataSource"
+    	  factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+    	  initialSize="10"
+    	  maxActive="10"
+    	  maxIdle="5"
+    	  minIdle="5"
+    	  timeBetweenEvictionRunsMillis="34000"
+    	  minEvictableIdleTimeMillis="55000"
+    	  validationQuery="SELECT 1"
+    	  validationInterval="34000"
+    	  testOnBorrow="true"
+    	  removeAbandoned="true"
+    	  removeAbandonedTimeout="55"
+    	  username="osmar"
+    	  password="prisma.70"
+    	  driverClassName="com.mysql.jdbc.Driver"
+    	  url="jdbc:mysql://webfinancas.mysql.uhserver.com/webfinancas?allowMultiQueries=true"    
+     
+     />
+
+ -->
