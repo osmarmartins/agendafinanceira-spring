@@ -30,99 +30,99 @@
 		
 		<th:block th:include="layout/fragments/mensagemSucesso"></th:block>
 		
-		<form class="form-vertical" method="POST" th:object="${usuarioModel}">
-		
-			<th:block th:include="layout/fragments/mensagemErro"></th:block>
-		
-			<div class="well">
+		<div class="well">
+			<form class="form-vertical" method="POST" th:object="${usuarioModel}">
 			
-				<div class="row">
-					<div class="form-group col-sm-2">
-						<label for="id">ID</label>
-						<input type="text" readonly id="id" class="form-control" th:field="*{idUsuario}">
-					</div>
-				</div>
+				<th:block th:include="layout/fragments/mensagemErro"></th:block>
+			
 				
-	
-				<div class="row">
-					<div class="form-group col-sm-6">
-						<label for="nome">Nome</label>
-						<input type="text" id="nome" class="form-control" th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? has-error">
-					</div>
-						
-					<div class="form-group col-sm-6">
-						<label for="email">Email</label>
-						<input type="email" id="email" class="form-control" th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? has-error">
-					</div>
-						
-				</div>
-
-				
-				<div class="row">
-					<div class="form-group col-sm-3">
-						<label for="tipo">Credencial:</label>
-						<select id="tipo" class="form-control" th:field="*{administrador}" th:classappend="${#fields.hasErrors('administrador')} ? has-error">
-							<option value="">Selecione...</option>
-							<option th:each="credencial : ${credenciais}" th:value="${credencial}" th:text="${credencial.descricaoUsuario}"></option>
-						</select>
-		            </div>
-		            
-					<div class="form-group col-sm-3">
-						<label for="login">Login:</label>
-						<input type="text" id="login" class="form-control" th:field="*{login}" th:classappend="${#fields.hasErrors('login')} ? has-error">
-					</div>
-
-					<div class="form-group col-sm-3">
-						<label for="senha">Senha:</label>
-						<input type="password" id="senha" class="form-control" th:field="*{senha}" th:classappend="${#fields.hasErrors('senha')} ? has-error">
-					</div>
-
-					<div class="form-group col-sm-3">
-						<label for="confirma-senha">Confirmar Senha:</label>
-						<input type="password" id="confirma-senha" name="confirma-senha" class="form-control" th:field="*{confirmaSenha}">
-					</div>
-					
-				</div>
-
-				
-				
-				<div class="row" style="display: none">
-					<div class="col-sm-6  form-group">
-						<label>Status</label>
-						<div>
-							<th:block th:each="status : ${tipoAtivo}">
-								<div class="radio  radio-inline">
-									<input th:id="|id_${status}|" type="radio" th:value="${status}" th:field="*{ativo}"> 
-									<label th:for="|id_${status}|" th:text="${status.descricao}"></label>
-								</div>
-							</th:block>
+					<div class="row">
+						<div class="form-group col-sm-2">
+							<label for="id">ID</label>
+							<input type="text" readonly id="id" class="form-control" th:field="*{idUsuario}">
 						</div>
 					</div>
-				</div>
-				
-				<div class="row">
-					<div class="form-group  col-sm-3">
-						<input type="checkbox"
-							id="usuario-status" checked
-							class="js-toggle"
-							data-toggle="toggle" 
-							data-on="ATIVO" 
-							data-off="INATIVO" 
-							data-onstyle="success" 
-							data-offstyle="danger"/>
+					
+		
+					<div class="row">
+						<div class="form-group col-sm-6">
+							<label for="nome">Nome</label>
+							<input type="text" id="nome" class="form-control" th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+						</div>
+							
+						<div class="form-group col-sm-6">
+							<label for="email">Email</label>
+							<input type="email" id="email" class="form-control" th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? has-error">
+						</div>
+							
 					</div>
-				</div>
+	
+					
+					<div class="row">
+						<div class="form-group col-sm-3">
+							<label for="tipo">Credencial:</label>
+							<select id="tipo" class="form-control" th:field="*{administrador}" th:classappend="${#fields.hasErrors('administrador')} ? has-error">
+								<option value="">Selecione...</option>
+								<option th:each="credencial : ${credenciais}" th:value="${credencial}" th:text="${credencial.descricaoUsuario}"></option>
+							</select>
+			            </div>
+			            
+						<div class="form-group col-sm-3">
+							<label for="login">Login:</label>
+							<input type="text" id="login" class="form-control" th:field="*{login}" th:classappend="${#fields.hasErrors('login')} ? has-error">
+						</div>
+	
+						<div class="form-group col-sm-3">
+							<label for="senha">Senha:</label>
+							<input type="password" id="senha" class="form-control" th:field="*{senha}" th:classappend="${#fields.hasErrors('senha')} ? has-error">
+						</div>
+	
+						<div class="form-group col-sm-3">
+							<label for="confirma-senha">Confirmar Senha:</label>
+							<input type="password" id="confirma-senha" name="confirma-senha" class="form-control" th:field="*{confirmaSenha}">
+						</div>
+						
+					</div>
+	
+					
+					
+					<div class="row" style="display: none">
+						<div class="col-sm-6  form-group">
+							<label>Status</label>
+							<div>
+								<th:block th:each="status : ${tipoAtivo}">
+									<div class="radio  radio-inline">
+										<input th:id="|id_${status}|" type="radio" th:value="${status}" th:field="*{ativo}"> 
+										<label th:for="|id_${status}|" th:text="${status.descricao}"></label>
+									</div>
+								</th:block>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group  col-sm-3">
+							<input type="checkbox"
+								id="usuario-status" checked
+								class="js-toggle"
+								data-toggle="toggle" 
+								data-on="ATIVO" 
+								data-off="INATIVO" 
+								data-onstyle="success" 
+								data-offstyle="danger"/>
+						</div>
+					</div>
+	
+				<div class="row">
+					<div class="form-group col-sm-12">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+						<a class="btn btn-default" th:href="@{/usuario}">Voltar</a>
+					</div>
+				</div>					
+			</form>
 				
-			</div>
+		</div>
 
-
-			<div class="row">
-				<div class="form-group col-sm-12">
-					<button type="submit" class="btn btn-primary">Salvar</button>
-					<a class="btn btn-default" th:href="@{/usuario}">Voltar</a>
-				</div>
-			</div>					
-		</form>
 				
 	</div>
 
@@ -130,12 +130,15 @@
 </section>
 
 <th:block layout:fragment="javaScript-extra">
+
 	<script th:src="@{/js/bootstrap-switch.min.js}"></script>
+
 	<script>
 		$('.js-ativo').bootstrapSwitch();
 	</script>
 	
 	<script th:src="@{/js/bootstrap-toggle.min.js}"></script>
+
 	<script>
 	    $('.js-toggle').bootstrapToggle();
 		$('#id_ATIVO').prop('checked', true).change()
@@ -149,7 +152,6 @@
 	    	}
 	    	
 	      })
-		
 	</script>
 		
 </th:block>

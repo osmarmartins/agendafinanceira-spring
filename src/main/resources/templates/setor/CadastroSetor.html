@@ -26,10 +26,11 @@
 			</div>
 		</div>
 
+		<th:block th:include="layout/fragments/mensagemSucesso"></th:block>
+		
 		<div class="well">
-			<th:block th:include="layout/fragments/mensagemSucesso"></th:block>
 	
-			<form method="POST" th:object="${setorModel}" class="form-vertical  js-form-loading">
+			<form method="POST" th:action="@{/setor/cadastro}" th:object="${setorModel}" class="form-vertical  js-form-loading">
 			
 				<div id="mensagem" class="alert alert-danger hidden" role="alert"></div>
 			
@@ -48,6 +49,39 @@
 						<input id="descricao" type="text" class="form-control" th:field="*{descricao}" autofocus="autofocus"/>
 					</div>
 				</div>
+
+
+				<input type="text" id="situacao" th:value="*{ativo}"/>				
+<!--  				<div class="row" style="display: none"> -->
+ 				<div class="row">
+					<div class="col-sm-6  form-group">
+						<label>Status</label>
+						<div>
+							<th:block th:each="status : ${tipoAtivo}">
+								<div class="radio  radio-inline">
+									<input type="radio" th:id="|id_${status}|" th:value="${status}" th:field="*{ativo}" th:selected="${status.ATIVO}"> 
+									<label th:for="|id_${status}|" th:text="${status.descricao}"></label>
+								</div>
+							</th:block>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group  col-sm-3">
+						<input type="checkbox"
+							id="usuario-status" 
+							class="js-toggle"
+							data-toggle="toggle" 
+							data-on="ATIVO" 
+							data-off="INATIVO" 
+							data-onstyle="success" 
+							data-offstyle="danger"/>
+					</div>
+				</div>
+ 				
+				
+<!-- 				
 				
 				<div class="row">
 					<div class="col-sm-12  form-group">
@@ -83,29 +117,73 @@
 						<button type="submit" class="btn btn-primary">Novo Setor</button>
 					</div>
 				</div>
+ -->		
+				
+				<div class="row">
+					<div class="form-group col-sm-12">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+						<a class="btn btn-default" th:href="@{/setor}">Voltar</a>
+					</div>
+				</div>	
+							
 			</form>
 		</div>
-		
 	</div>
 
 </section>	
 
+<!-- <th:block layout:fragment="javaScript-extra"> -->
+<!-- 	<script th:src="@{/js/setor.js}"></script> -->
+<!-- 	<script th:src="@{/js/bootstrap-switch.min.js}"></script> -->
+<!-- 	<script> -->
+// 		$('.js-status').bootstrapSwitch();
+<!-- 	</script> -->
+	
+<!-- 	<script th:src="@{/js/bootstrap-toggle.min.js}"></script> -->
+<!-- 	<script> -->
+// 	    $('.js-toggle').bootstrapToggle();
+<!-- 	</script> -->
+	
+	
+<!-- </th:block> -->
+
 <th:block layout:fragment="javaScript-extra">
-	<script th:src="@{/js/setor.js}"></script>
+
 	<script th:src="@{/js/bootstrap-switch.min.js}"></script>
+
 	<script>
-		$('.js-status').bootstrapSwitch();
+		$('.js-ativo').bootstrapSwitch();
 	</script>
 	
 	<script th:src="@{/js/bootstrap-toggle.min.js}"></script>
+
 	<script>
 	    $('.js-toggle').bootstrapToggle();
+
+	    if ($('#situacao').prop('value')=='ATIVO'){
+    		$('#usuario-status').prop('checked');
+    	}else{
+    		$('#usuario-status').prop('unchecked');
+    	}
+	    	
+
+		$('#usuario-status').prop('checked', false);
+
+	    
+	    $('#usuario-status').change(function() {
+	    	
+	    	if($(this).prop('checked')){
+	    		$('#id_ATIVO').prop('checked', true).change();
+	    		$('#situacao').prop('value', 'ATIVO');
+	    	}else{
+	    		$('#id_INATIVO').prop('checked', true).change()
+	    		$('#situacao').prop('value', 'INATIVO');
+	    	}
+	    	
+	      })
 	</script>
-	
-	
+		
 </th:block>
-
-
 
 </body>
 </html>

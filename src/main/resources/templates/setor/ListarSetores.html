@@ -10,7 +10,7 @@
 <section layout:fragment="corpo">
 
 	<div class="container">
-		<form method="GET" th:object="${setorFilter}">
+		<form method="GET" id="tabela-setores" th:object="${setorFilter}">
 			<ol class="breadcrumb">
 				<li><a href="">Dashboard</a></li>
 				<li><a href="">Setores</a></li>
@@ -59,15 +59,23 @@
 						<td th:text="${setor.idSetor}"></td>
 						<td th:text="${setor.descricao}"></td>
 
-						<td class="text-center"><a class="btn  btn-link  btn-xs"
-							title="Ativo"> <i class="glyphicon glyphicon-ok text-success"></i>
+						<td class="text-center">
+							<a class="btn btn-link btn-xs" title="Ativar/Desativar" id="ativar-desativar">
+								<i class="glyphicon" 
+									th:classappend="${setor.ativo == T(agendafinanceira.models.enums.Ativo).ATIVO ? 'glyphicon-ok text-success' : 'glyphicon-remove text-danger'}">
+								</i>
+							</a>
 						</a></td>
 
-						<td class="text-center"><a class="btn  btn-link  btn-xs"
-							title="Editar"> <i class="glyphicon glyphicon-pencil"></i>
-						</a> <a class="btn  btn-link  btn-xs" title="Excluir"> <i
-								class="glyphicon glyphicon-remove"></i>
-						</a></td>
+						<td class="text-center">
+							<a class="btn  btn-link  btn-xs" title="Alterar" th:href="@{/setor/cadastro/{id}(id=${setor.idSetor})}" > 
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a> 
+							
+							<a class="btn  btn-link  btn-xs" title="Excluir"> 
+								<i class="glyphicon glyphicon-trash"></i>
+							</a>
+						</td>
 					</tr>
  					 
  					<tr th:if="${pagina.vazia}">
@@ -81,9 +89,14 @@
 
 
 		<footer class="row">
+<!-- 			<div class="col-sm-6"> -->
+<!-- 				<button class="btn btn-primary" data-toggle="modal" data-target="#cadastro-modal-setor">Novo Setor</button> -->
+<!-- 			</div> -->
+
 			<div class="col-sm-6">
-				<button class="btn btn-primary" data-toggle="modal" data-target="#cadastro-modal-setor">Novo Setor</button>
+				<a class="btn btn-primary" th:href="@{/setor/cadastro}">Novo Setor</a>
 			</div>
+
 			
 			<th:block th:replace="layout/fragments/Paginacao :: pageComponent (${pagina})"></th:block>
 		</footer>

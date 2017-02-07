@@ -20,7 +20,7 @@ public class SetorService {
 	public SetorModel salvar(SetorModel setor) {
 
 		Optional<SetorModel> setorOptional = setorRepository.findByDescricaoIgnoreCase(setor.getDescricao());
-		if (setorOptional.isPresent()) {
+		if (setorOptional.isPresent() && !setorOptional.get().getIdSetor().equals(setor.getIdSetor()) ) {
 			throw new DescricaoSetorExistenteException("Setor já cadastrado");
 		}
 

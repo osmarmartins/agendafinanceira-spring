@@ -63,7 +63,7 @@
 
 						<td class="text-center">
 							<a class="btn btn-link btn-xs" title="Ativo" th:href="@{/usuario/login}">
-								<i class="glyphicon" 
+								<i class="glyphicon" id="icone-ativo" 
 									th:classappend="${usuario.ativo == T(agendafinanceira.models.enums.Ativo).ATIVO ? 'glyphicon-ok text-success' : 'glyphicon-remove text-danger'}"></i>
 							</a>
 						</td>
@@ -80,7 +80,7 @@
 					</tr>
  					
  					<tr th:if="${pagina.vazia}">
-						<td colspan="4">Nenhum usuário encontrado</td>
+						<td colspan="4">Nenhum registro encontrado</td>
 					</tr>
  					 
 				</tbody>
