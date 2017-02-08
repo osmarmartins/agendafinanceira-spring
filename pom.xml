@@ -27,7 +27,10 @@
 
 		<!-- Thymeleaf -->
 		<thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
-
+		
+		<!-- Thymeleaf extras data attribute -->
+		<thymeleaf-extras-data-attribute.version>2.0.1</thymeleaf-extras-data-attribute.version>
+		
 		<!-- Bean Validation / Hibernate Validator -->
 		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
 
@@ -111,6 +114,14 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<!-- Thymeleaf extras data attribute -->
+		<dependency>
+    		<groupId>com.github.mxab.thymeleaf.extras</groupId>
+    		<artifactId>thymeleaf-extras-data-attribute</artifactId>
+    		<version>${thymeleaf-extras-data-attribute.version}</version>
+    		<scope>compile</scope>
+		</dependency>
+		
 		<!-- Bean Validation / Hibernate Validator -->
 		<dependency>
 			<groupId>org.hibernate</groupId>

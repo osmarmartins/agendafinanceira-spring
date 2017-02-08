@@ -60,7 +60,10 @@
 						<td th:text="${setor.descricao}"></td>
 
 						<td class="text-center">
-							<a class="btn btn-link btn-xs" title="Ativar/Desativar" id="ativar-desativar">
+							<a class="btn btn-link btn-xs js-tooltip js-btn-ativar-desativar" title="Ativar/Desativar" id="ativar-desativar"
+							 	data:url="@{/setor/{id}(id=${setor.idSetor})}" 
+							 	data:descricao="${setor.descricao}" 
+							 	data:status="${setor.ativo}"> 
 								<i class="glyphicon" 
 									th:classappend="${setor.ativo == T(agendafinanceira.models.enums.Ativo).ATIVO ? 'glyphicon-ok text-success' : 'glyphicon-remove text-danger'}">
 								</i>
@@ -68,11 +71,13 @@
 						</a></td>
 
 						<td class="text-center">
-							<a class="btn  btn-link  btn-xs" title="Alterar" th:href="@{/setor/cadastro/{id}(id=${setor.idSetor})}" > 
+							<a class="btn btn-link btn-xs js-tooltip" title="Alterar" th:href="@{/setor/cadastro/{id}(id=${setor.idSetor})}" > 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a> 
 							
-							<a class="btn  btn-link  btn-xs" title="Excluir"> 
+							<a class="btn btn-link btn-xs js-tooltip js-btn-excluir"  title="Excluir" href="#"
+							 	data:url="@{/setor/{id}(id=${setor.idSetor})}" 
+							 	data:descricao="${setor.descricao}"> 
 								<i class="glyphicon glyphicon-trash"></i>
 							</a>
 						</td>
@@ -107,9 +112,9 @@
 
 </section>	
 
-<th:block layout:fragment="javaScript-extra">
-	<script th:src="@{/js/setor.js}"></script>
-</th:block>
+<!-- <th:block layout:fragment="javaScript-extra"> -->
+<!-- 	<script th:src="@{/js/setor.js}"></script> -->
+<!-- </th:block> -->
 
 
 </body>
