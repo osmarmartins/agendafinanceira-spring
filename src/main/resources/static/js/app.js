@@ -18,7 +18,7 @@ $(function() {
 		
 		swal({
 			title: 'Confirma exclusão?',
-			text: 'Excluir "' + descricao + '"? Você não poderá reverter a operação.',
+			text: 'Excluir "' + descricao + '" ?',
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: '#DD6B55',
@@ -41,11 +41,17 @@ $(function() {
 		});
 		
 	}
-	
+
 	function onSucesso(event){
-		swal('Pronto!', 'Operação realizada com sucesso!', 'success');
+		swal({
+			title: 'Pronto!',
+			text: 'Operação realizada com sucesso.',
+			type: 'success'
+		}, onSucessoRecarregar);			
+	}
+	
+	function onSucessoRecarregar(event){
 		window.location.reload();
-		
 	}
 
 	function onErro(event){
@@ -54,12 +60,13 @@ $(function() {
 	}
 	
 	
+	
 	// Ativar-Desativar
 	function onAtivarDesativar(event){
 		btnAtivarDesativarClicado = $(event.currentTarget);
 		url = btnAtivarDesativarClicado.data('url');
 		descricao = btnAtivarDesativarClicado.data('descricao');
-		var operacao = btnAtivarDesativarClicado.data('status')=='ATIVO'? 'Desativar: ' : 'Ativar:- '; 
+		var operacao = btnAtivarDesativarClicado.data('status')=='ATIVO'? 'Desativar: ' : 'Ativar: '; 
 		
 		swal({
 			title: 'Confirma operação?',
@@ -73,7 +80,6 @@ $(function() {
 		}, onAtivarDestivarConfirmado);		
 		
 	}
-	
 	
 	
 	function onAtivarDestivarConfirmado(event){

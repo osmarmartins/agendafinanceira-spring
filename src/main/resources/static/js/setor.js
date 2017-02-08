@@ -31,20 +31,7 @@ $(function() {
 		if (btnAtivarDesativar.hasClass("glyphicon-remove")){
 			status = 'INATIVO';
 		}
-
-		
-/*		
-		$.ajax({
-			url: url,
-			method: 'PUT',
-			contentType: 'application/json',
-			data: JSON.stringify({ descricao: descricao, ativo: 'ATIVO' }),
-			error: onErrorModal,
-			success: onSuccessModal
-			
-		});
-*/
-		
+	
 	}
 	
 

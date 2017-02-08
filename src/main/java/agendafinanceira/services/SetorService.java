@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import agendafinanceira.models.SetorModel;
+import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.repositories.SetorRepository;
 import agendafinanceira.services.exception.DescricaoSetorExistenteException;
+import agendafinanceira.services.exception.ExcluirEntidadeException;
 
 @Service
 public class SetorService {
@@ -29,7 +31,18 @@ public class SetorService {
 
 	@Transactional
 	public void excluir(SetorModel setor) {
-		setorRepository.delete(setor);
+		try {
+			setorRepository.delete(setor);
+			setorRepository.flush();
+		} catch (ExcluirEntidadeException e) {
+			throw new ExcluirEntidadeException("Não foi possível excluir o setor! Verifique se está em uso nos lançamentos financeiros.");
+		}		
+	}
+	
+	@Transactional
+	public void alterarStatus(SetorModel setor){
+		setor.setAtivo(setor.getAtivo().equals(Ativo.ATIVO)?Ativo.INATIVO:Ativo.ATIVO);
+		setorRepository.save(setor);
 	}
 
 }

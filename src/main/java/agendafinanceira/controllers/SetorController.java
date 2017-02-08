@@ -6,13 +6,17 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,6 +26,7 @@ import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.repositories.SetorRepository;
 import agendafinanceira.repositories.filters.SetorFilter;
 import agendafinanceira.services.SetorService;
+import agendafinanceira.services.exception.ExcluirEntidadeException;
 
 @Controller
 @RequestMapping("/setor")
@@ -87,57 +92,25 @@ public class SetorController {
 	}
 
 	
-	
-	
-	
-/*	
-	
-	
-	
-	
-	@RequestMapping("/manutencao")
-	public ModelAndView manutencaoSetor(SetorModel setorModel){
-		ModelAndView mv = new ModelAndView("setor/CadastroSetor");
-		mv.addObject("tipoAtivo", Ativo.values());
-		return mv;
-	}
-	
-
-	@RequestMapping(value = "/manutencao", method = RequestMethod.POST)
-	public ModelAndView cadastrar(@Valid SetorModel setorModel, BindingResult result, 
-			Model model, RedirectAttributes attributes) {
+	@DeleteMapping("/{idSetor}")
+	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("idSetor") SetorModel setor){
 		
-		if (result.hasErrors()) {
-			return cadastroSetor(setorModel);
-		}
-
 		try {
-			setorService.salvar(setorModel);
-		} catch (Exception e) {
-			result.addError(new ObjectError("Error", "Setor já cadastrado"));
-			return cadastroSetor(setorModel);
+			setorService.excluir(setor);
+		} catch (ExcluirEntidadeException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 		
-		attributes.addFlashAttribute("mensagem", "Setor salvo com sucesso!");
-		return new ModelAndView("redirect:/setor/manutencao");
+		return ResponseEntity.ok().build();
 	}
 	
+	
+	@PutMapping("/{idSetor}")
+	public @ResponseBody ResponseEntity<?> alterarStatus(@PathVariable("idSetor") SetorModel setor){
+		
+		setorService.alterarStatus(setor);
+		
+		return ResponseEntity.ok().build();
+	}
 
-	
-	@RequestMapping(value = "/manutencao", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid SetorModel setorModel, BindingResult result) {
-		
-		System.out.println();
-		
-		if (result.hasErrors()) {
-			return ResponseEntity.badRequest().body(result.getFieldError("descricao").getDefaultMessage());
-		}
-		
-		setorModel = setorService.salvar(setorModel);
-
-		return ResponseEntity.ok(setorModel);
-	}	
-	
-	
-*/	
 }
