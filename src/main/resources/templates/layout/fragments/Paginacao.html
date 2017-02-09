@@ -19,7 +19,7 @@
 
 
 				<li th:class="${pagina.ultima} ? disabled">
-					<a th:href="${pagina.urlPagina(pagina.atual + (pagina.primeira ? 0 : 1))}"><span>»</span></a>
+					<a th:href="${pagina.urlPagina(pagina.atual + (pagina.ultima ? 0 : 1))}"><span>»</span></a>
 				</li>
 			</ul>
 		</div>

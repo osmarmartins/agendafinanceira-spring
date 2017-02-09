@@ -60,7 +60,7 @@
 						<td th:text="${setor.descricao}"></td>
 
 						<td class="text-center">
-							<a class="btn btn-link btn-xs js-tooltip js-btn-ativar-desativar" title="Ativar/Desativar" id="ativar-desativar"
+							<a class="btn btn-link btn-xs js-btn-ativar-desativar" data-toggle="tooltip" data-placement="top" title="Ativar/Desativar" id="ativar-desativar"
 							 	data:url="@{/setor/{id}(id=${setor.idSetor})}" 
 							 	data:descricao="${setor.descricao}" 
 							 	data:status="${setor.ativo}"> 
@@ -71,11 +71,18 @@
 						</a></td>
 
 						<td class="text-center">
-							<a class="btn btn-link btn-xs js-tooltip" title="Alterar" th:href="@{/setor/cadastro/{id}(id=${setor.idSetor})}" > 
+							<a class="btn btn-link btn-xs" 
+								data-toggle="tooltip" 
+								data-placement="top" 
+								title="Alterar" 
+								th:href="@{/setor/cadastro/{id}(id=${setor.idSetor})}" > 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a> 
 							
-							<a class="btn btn-link btn-xs js-tooltip js-btn-excluir"  title="Excluir" href="#"
+							<a class="btn btn-link btn-xs js-btn-excluir" 
+								data-toggle="tooltip" 
+								data-placement="top" 
+								title="Excluir" href="#"
 							 	data:url="@{/setor/{id}(id=${setor.idSetor})}" 
 							 	data:descricao="${setor.descricao}"> 
 								<i class="glyphicon glyphicon-trash"></i>

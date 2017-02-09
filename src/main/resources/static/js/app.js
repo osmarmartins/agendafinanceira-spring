@@ -6,10 +6,11 @@ $(function() {
 	var url;
 	var descricao;
 	
+	$('[data-toggle="tooltip"]').tooltip()
+	
 	btnExcluir.on('click', onExcluir);
 	btnAtivarDesativar.on('click', onAtivarDesativar);
-	
-	
+
 	// Excluir 
 	function onExcluir(event){
 		btnExcluirClicado = $(event.currentTarget);
