@@ -62,18 +62,30 @@
 						<td th:text="${usuario.nome}"></td>
 
 						<td class="text-center">
-							<a class="btn btn-link btn-xs" title="Ativo" th:href="@{/usuario/login}">
+							<a class="btn btn-link btn-xs js-btn-ativar-desativar" data-toggle="tooltip" data-placement="top" title="Ativar/Desativar" id="ativar-desativar"
+							 	data:url="@{/usuario/{id}(id=${usuario.idUsuario})}" 
+							 	data:descricao="${usuario.nome}" 
+							 	data:status="${usuario.ativo}"> 
 								<i class="glyphicon" id="icone-ativo" 
 									th:classappend="${usuario.ativo == T(agendafinanceira.models.enums.Ativo).ATIVO ? 'glyphicon-ok text-success' : 'glyphicon-remove text-danger'}"></i>
 							</a>
 						</td>
 
 						<td class="text-center">
-							<a class="btn btn-link btn-xs" title="Editar"> 
+							<a class="btn btn-link btn-xs"
+								data-toggle="tooltip" 
+								data-placement="top" 
+								title="Alterar" 
+								th:href="@{/usuario/cadastro/{id}(id=${usuario.IdUsuario})}" > 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a> 
 
-							<a class="btn  btn-link  btn-xs" title="Excluir"> 
+							<a class="btn  btn-link  btn-xs  js-btn-excluir"
+								data-toggle="tooltip" 
+								data-placement="top" 
+								title="Excluir" href="#"
+							 	data:url="@{/usuario/{id}(id=${usuario.idUsuario})}" 
+							 	data:descricao="${usuario.nome}"> 
 								<i class="glyphicon glyphicon-trash"></i>
 							</a>
 						</td>

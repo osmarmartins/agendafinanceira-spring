@@ -83,32 +83,7 @@
 <th:block layout:fragment="javaScript-extra">
 
 	<script th:src="@{/js/bootstrap-toggle.min.js}"></script>
-
-	<script>
-		var textStatus = $('#text-status');
-	    var toggleStatus = $('#toggle-status');
-	    
-	    // Novos registros serão inicializados como ATIVO
-	    if (textStatus.val()==''){
-	    	textStatus.val('ATIVO');
-	    }
-
-	    // Inicializa o toggle com o valor inicial na aplicação (back-end)
-	    toggleStatus.bootstrapToggle((textStatus.val()=='ATIVO')? 'on' : 'off');
-	    
-	    // Alterar valor  
-	   	toggleStatus.change(function() {
-	   		
-	   		console.log('Status: ' + toggleStatus.prop('checked'));
-	   		if (toggleStatus.prop('checked')){
-	   			textStatus.val('ATIVO');
-	   		}else{
-	   			textStatus.val('INATIVO');
-	   		}
-	   		
-	      })
-	    
-	</script>
+	<script th:src="@{/js/toggle.js}"></script>
 		
 </th:block>
 
