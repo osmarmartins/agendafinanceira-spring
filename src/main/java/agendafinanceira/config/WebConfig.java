@@ -3,8 +3,6 @@ package agendafinanceira.config;
 import java.math.BigDecimal;
 import java.util.Locale;
 
-import javax.swing.text.DefaultFormatter;
-
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

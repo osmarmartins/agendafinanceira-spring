@@ -21,76 +21,63 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agendafinanceira.controllers.page.Paginacao;
-import agendafinanceira.models.SetorModel;
+import agendafinanceira.models.ContaModel;
 import agendafinanceira.models.enums.Ativo;
-import agendafinanceira.repositories.SetorRepository;
-import agendafinanceira.repositories.filters.SetorFilter;
-import agendafinanceira.services.SetorService;
+import agendafinanceira.repositories.ContaRepository;
+import agendafinanceira.repositories.filters.ContaFilter;
+import agendafinanceira.services.ContaService;
 import agendafinanceira.services.exception.ExcluirEntidadeException;
 
 @Controller
-@RequestMapping("/setor")
-public class SetorController {
+@RequestMapping("/conta")
+public class ContaController {
+
+	@Autowired
+	private ContaRepository contaRepository;
 	
 	@Autowired
-	private SetorRepository setorRepository;
-	
-	@Autowired
-	private SetorService setorService;
+	private ContaService contaService;
 
 	@GetMapping("/cadastro")
-	public ModelAndView cadastrarSetor(SetorModel setor){
-		ModelAndView mv = new ModelAndView("setor/CadastroSetor");
+	public ModelAndView cadastrar(ContaModel conta){
+		ModelAndView mv = new ModelAndView("conta/CadastroConta");
 		mv.addObject("tipoAtivo", Ativo.values());
 		return mv;
 	}
 	
 	@GetMapping("/cadastro/{id}")
-	public ModelAndView alterarSetor(@PathVariable("id") SetorModel setor){
-		ModelAndView mv = new ModelAndView("setor/CadastroSetor");
+	public ModelAndView alterar(@PathVariable("id") ContaModel conta){
+		ModelAndView mv = new ModelAndView("conta/CadastroConta");
 		mv.addObject("tipoAtivo", Ativo.values());
-		mv.addObject("setorModel", setor);
+		mv.addObject("contaModel", conta);
 		return mv;
 	}
 	
 	@PostMapping("/cadastro")
-	public ModelAndView salvar(@Valid SetorModel setor, BindingResult result, 
+	public ModelAndView salvar(@Valid ContaModel conta, BindingResult result, 
 			RedirectAttributes attributes) {
 		
 		if (result.hasErrors()) {
-			return cadastrarSetor(setor);
+			return cadastrar(conta);
 		}
 
 		try {
-			setorService.salvar(setor);
+			contaService.salvar(conta);
 		} catch (Exception e) {
-			result.addError(new ObjectError("Error", "Setor já cadastrado"));
-			return cadastrarSetor(setor);
+			result.addError(new ObjectError("Error", "Conta já cadastrada"));
+			return cadastrar(conta);
 		}
 		
-		attributes.addFlashAttribute("mensagem", "Setor salvo com sucesso!");
-		return new ModelAndView("redirect:/setor/cadastro");
+		attributes.addFlashAttribute("mensagem", "Conta salva com sucesso!");
+		return new ModelAndView("redirect:/conta/cadastro");
 	}
 	
-	
-	
-	@GetMapping
-	public ModelAndView pesquisar(SetorFilter setorFilter, BindingResult result,
-			@PageableDefault(size = 8) Pageable pageable, HttpServletRequest httpServletRequest) {
-
-		ModelAndView mv = new ModelAndView("setor/ListarSetores");
-		Paginacao<SetorModel> paginacao = new Paginacao<>(setorRepository.filtrar(setorFilter, pageable), httpServletRequest);
-		mv.addObject("pagina", paginacao);
-		
-		return mv;
-	}
-
 	
 	@DeleteMapping("/{id}")
-	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("id") SetorModel setor){
+	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("id") ContaModel conta){
 		
 		try {
-			setorService.excluir(setor);
+			contaService.excluir(conta);
 		} catch (ExcluirEntidadeException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
@@ -100,11 +87,23 @@ public class SetorController {
 	
 	
 	@PutMapping("/{id}")
-	public @ResponseBody ResponseEntity<?> alterarStatus(@PathVariable("id") SetorModel setor){
+	public @ResponseBody ResponseEntity<?> alterarStatus(@PathVariable("id") ContaModel conta){
 		
-		setorService.alterarStatus(setor);
+		contaService.alterarStatus(conta);
 		
 		return ResponseEntity.ok().build();
+	}
+	
+	
+	@GetMapping
+	public ModelAndView pesquisar(ContaFilter contaFilter, BindingResult result,
+			@PageableDefault(size = 8) Pageable pageable, HttpServletRequest httpServletRequest) {
+
+		ModelAndView mv = new ModelAndView("conta/ListarContas");
+		Paginacao<ContaModel> paginacao = new Paginacao<>(contaRepository.filtrar(contaFilter, pageable), httpServletRequest);
+		mv.addObject("pagina", paginacao);
+		
+		return mv;
 	}
 
 }

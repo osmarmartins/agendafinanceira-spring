@@ -2,34 +2,38 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="'layout/padrao'">
+	layout:decorate="~{layout/padrao}">
 	
 <head></head>
 <body>
 
 <section layout:fragment="corpo">
-	<div class="container">
-		<ol class="breadcrumb">
-			<li><a href="">Dashboard</a></li>
-			<li><a href="">Contas</a></li>
-		</ol>
 
-		<div class="row cabecalho">
-			<div class="col-xs-12 col-md-6">
-				<h1>Contas</h1>
-			</div>
-			<div class="col-xs-12 col-md-4 col-md-offset-2 busca">
-				<div class="input-group">
-					<input type="text" name="busca" class="form-control"
-						placeholder="Pesquisar por descrição"> <span
-						class="input-group-btn">
-						<button type="button" class="btn btn-default">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
+	<div class="container">
+		<form method="GET" id="tabela-contas" th:object="${contaFilter}">
+			<ol class="breadcrumb">
+				<li><a href="">Dashboard</a></li>
+				<li><a href="">Contas</a></li>
+			</ol>
+	
+			<div class="row cabecalho">
+				<div class="col-xs-12 col-md-6">
+					<h1>Contas</h1>
+				</div>
+				
+				<div class="col-xs-12 col-md-4 col-md-offset-2 busca">
+					<div class="input-group">
+						<input type="text" name="busca" class="form-control" placeholder="Pesquisar por descrição" th:field="*{descricao}"> 
+							<span class="input-group-btn">
+								<button type="submit" class="btn btn-default">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
+					</div>
 				</div>
 			</div>
-		</div>
+		</form>
+
 
 		<div class="table-responsive  bw-tabela-simples">
 			<table
@@ -37,38 +41,58 @@
 
 				<thead>
 					<tr>
-						<th>Código</th>
-						<th>Conta</th>
+						<th>
+							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'idConta', 'Código')"></th:block>
+						</th>
+						
+						<th>
+							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'descricao', 'Conta')"></th:block>
+						</th>
+						
 						<th class="text-center">Ativo</th>
 						<th class="text-center">Operações</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<tr th:each="conta : ${contas}">
+					<tr th:each="conta : ${pagina.conteudo}">
 						<td th:text="${conta.idConta}"></td>
 						<td th:text="${conta.descricao}"></td>
 
 						<td class="text-center">
-							<a class="btn  btn-link  btn-xs" title="Ativo"> 
-								<i class="glyphicon glyphicon-ok text-success"></i>
+							<a class="btn btn-link btn-xs js-btn-ativar-desativar" data-toggle="tooltip" data-placement="top" title="Ativar/Desativar" id="ativar-desativar"
+							 	data:url="@{/conta/{id}(id=${conta.idConta})}" 
+							 	data:descricao="${conta.descricao}" 
+							 	data:status="${conta.ativo}"> 
+								<i class="glyphicon" 
+									th:classappend="${conta.ativo == T(agendafinanceira.models.enums.Ativo).ATIVO ? 'glyphicon-ok text-success' : 'glyphicon-remove text-danger'}">
+								</i>
 							</a>
-						</td>
+						</a></td>
 
 						<td class="text-center">
-							<a class="btn  btn-link  btn-xs" title="Editar"> 
+							<a class="btn btn-link btn-xs" 
+								data-toggle="tooltip" 
+								data-placement="top" 
+								title="Alterar" 
+								th:href="@{/conta/cadastro/{id}(id=${conta.idConta})}" > 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a> 
-							<a class="btn  btn-link  btn-xs" title="Excluir"> 
-								<i class="glyphicon glyphicon-remove"></i>
+							
+							<a class="btn btn-link btn-xs js-btn-excluir" 
+								data-toggle="tooltip" 
+								data-placement="top" 
+								title="Excluir" href="#"
+							 	data:url="@{/conta/{id}(id=${conta.idConta})}" 
+							 	data:descricao="${conta.descricao}"> 
+								<i class="glyphicon glyphicon-trash"></i>
 							</a>
 						</td>
 					</tr>
- 					
  					 
-<!--  					<tr th:if="${pagina.vazia}"> -->
-<!-- 						<td colspan="4">Nenhum usuário encontrado</td> -->
-<!-- 					</tr> -->
+ 					<tr th:if="${pagina.vazia}">
+						<td colspan="4">Nenhum registro encontrado</td>
+					</tr>
 					
 					
 				</tbody>
@@ -78,30 +102,15 @@
 
 		<footer class="row">
 			<div class="col-sm-6">
-				<button class="btn btn-primary" data-toggle="modal" data-target="#cadastro-modal-conta">Nova Conta</button>
+				<a class="btn btn-primary" th:href="@{/conta/cadastro}">Nova Conta</a>
 			</div>
-			<div class="col-sm-6 paginacao text-right">
-				<ul class="pagination">
-					<li class="disabled"><a href=""><span>«</span></a></li>
-					<li class="active"><a href="">1</a></li>
-					<li><a href="">2</a></li>
-					<li><a href="">3</a></li>
-					<li><a href="">4</a></li>
-					<li><a href="">5</a></li>
-					<li><a href=""><span>»</span></a></li>
-				</ul>
-			</div>
+			
+			<th:block th:replace="layout/fragments/Paginacao :: pageComponent (${pagina})"></th:block>
 		</footer>
+		
 	</div>
 
-	<div th:replace="conta/CadastroModalConta :: modal"></div>
-
 </section>	
-
-<th:block layout:fragment="javaScript-extra">
-	<script th:src="@{/js/conta.js}"></script>
-</th:block>
-
 
 </body>
 </html>

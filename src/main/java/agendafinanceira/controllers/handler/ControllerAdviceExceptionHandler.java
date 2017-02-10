@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import agendafinanceira.services.exception.DescricaoSetorExistenteException;
+import agendafinanceira.services.exception.DescricaoExistenteException;
 import agendafinanceira.services.exception.UsuarioJaCadastradoException;
 
 @ControllerAdvice
@@ -16,8 +16,8 @@ public class ControllerAdviceExceptionHandler {
 	}
 
 	
-	@ExceptionHandler(DescricaoSetorExistenteException.class)
-	public ResponseEntity<String> handleDescricaoSetorExistenteException(DescricaoSetorExistenteException e){
+	@ExceptionHandler(DescricaoExistenteException.class)
+	public ResponseEntity<String> handleDescricaoSetorExistenteException(DescricaoExistenteException e){
 		return ResponseEntity.badRequest().body(e.getMessage());
 	}
 

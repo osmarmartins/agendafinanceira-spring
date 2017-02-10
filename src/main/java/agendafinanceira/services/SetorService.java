@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import agendafinanceira.models.SetorModel;
 import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.repositories.SetorRepository;
-import agendafinanceira.services.exception.DescricaoSetorExistenteException;
+import agendafinanceira.services.exception.DescricaoExistenteException;
 import agendafinanceira.services.exception.ExcluirEntidadeException;
 
 @Service
@@ -23,7 +23,7 @@ public class SetorService {
 
 		Optional<SetorModel> setorOptional = setorRepository.findByDescricaoIgnoreCase(setor.getDescricao());
 		if (setorOptional.isPresent() && !setorOptional.get().getIdSetor().equals(setor.getIdSetor()) ) {
-			throw new DescricaoSetorExistenteException("Setor já cadastrado");
+			throw new DescricaoExistenteException("Setor já cadastrado");
 		}
 
 		return setorRepository.saveAndFlush(setor);
