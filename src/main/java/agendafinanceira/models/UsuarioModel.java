@@ -56,6 +56,10 @@ public class UsuarioModel implements Serializable {
 	@NotNull(message = "Informe se o usuário está ativo ou não")
 	private Ativo ativo;
 	
+	public boolean isNovo(){
+		return idUsuario == null;	
+	}
+	
 	public Long getIdUsuario() {
 		return idUsuario;
 	}
@@ -152,5 +156,6 @@ public class UsuarioModel implements Serializable {
 				+ ", senha=" + senha + ", confirmaSenha=" + confirmaSenha + ", administrador=" + administrador
 				+ ", ativo=" + ativo + "]";
 	}
+
 
 }

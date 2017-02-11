@@ -9,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import agendafinanceira.models.UsuarioModel;
 import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.repositories.UsuarioRepository;
+import agendafinanceira.security.Encrpty;
 import agendafinanceira.services.exception.ExcluirEntidadeException;
+import agendafinanceira.services.exception.HashMD5Exception;
 import agendafinanceira.services.exception.SenhasNaoConferemException;
-import agendafinanceira.services.exception.UsuarioJaCadastradoException;
+import agendafinanceira.services.exception.UsuarioException;
 
 @Service
 public class UsuarioService {
@@ -22,18 +24,35 @@ public class UsuarioService {
 	@Transactional
 	public UsuarioModel salvar(UsuarioModel usuario){
 		
-		System.out.println(usuario.toString());
-
-		Optional<UsuarioModel> usuarioOptional = usuarioRepository.findByLoginIgnoreCase(usuario.getLogin());
+		Optional<UsuarioModel> usuarioOptional; 
+				
+		usuarioOptional = usuarioRepository.findByLoginIgnoreCase(usuario.getLogin());
 		
-		System.out.println(usuarioOptional.toString());
-
-		if (usuarioOptional.isPresent() && !usuarioOptional.get().getIdUsuario().equals(usuario.getIdUsuario()) ) {
-			throw new UsuarioJaCadastradoException("Login já cadastrado!");
+		if (usuarioOptional.isPresent() && !usuarioOptional.get().getLogin().equals(usuario.getLogin()) ) {
+			throw new UsuarioException("Login já cadastrado!");
 		}
 		
-		if (!usuario.getSenha().equals(usuario.getConfirmaSenha()) ){
-			throw new SenhasNaoConferemException("Senhas informadas não conferem!");
+
+		usuarioOptional = usuarioRepository.findByEmailIgnoreCase(usuario.getEmail());
+		
+		if (usuarioOptional.isPresent() && !usuarioOptional.get().getEmail().equals(usuario.getEmail()) ) {
+			throw new UsuarioException("e-mail já cadastrado!");
+		}
+		
+		if (usuario.getSenha().isEmpty()){
+			// preserva a senha original
+			UsuarioModel usuarioAtual = usuarioRepository.findOne(usuario.getIdUsuario());
+			usuario.setSenha(usuarioAtual.getSenha());
+		}else{
+			if (!usuario.getSenha().equals(usuario.getConfirmaSenha()) ){
+				throw new SenhasNaoConferemException("Senhas informadas não conferem!");
+			}
+
+			try {
+				usuario.setSenha(Encrpty.getMD5(usuario.getSenha()));
+			} catch (HashMD5Exception e) {
+				throw new HashMD5Exception("Erro na codificação da senha!" + e.getMessage());
+			}
 		}
 		
 		return usuarioRepository.saveAndFlush(usuario);

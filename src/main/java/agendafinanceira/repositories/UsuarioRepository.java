@@ -11,6 +11,8 @@ import agendafinanceira.repositories.helpers.UsuarioRepositoryQueries;
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioModel, Long>, UsuarioRepositoryQueries {
 	
-	Optional<UsuarioModel> findByLoginIgnoreCase(String login); 
+	Optional<UsuarioModel> findByLoginIgnoreCase(String login);
+
+	Optional<UsuarioModel> findByEmailIgnoreCase(String email); 
 	
 }
