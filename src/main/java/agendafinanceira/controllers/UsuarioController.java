@@ -28,6 +28,10 @@ import agendafinanceira.repositories.UsuarioRepository;
 import agendafinanceira.repositories.filters.UsuarioFilter;
 import agendafinanceira.services.UsuarioService;
 import agendafinanceira.services.exception.ExcluirEntidadeException;
+import agendafinanceira.services.exception.HashMD5Exception;
+import agendafinanceira.services.exception.SenhasNaoConferemException;
+import agendafinanceira.services.exception.UsuarioEmailException;
+import agendafinanceira.services.exception.UsuarioLoginException;
 
 @Controller
 @RequestMapping("/usuario")
@@ -71,8 +75,20 @@ public class UsuarioController {
 
 		try {
 			usuarioService.salvar(usuario);
+		} catch (UsuarioLoginException e) {
+			result.rejectValue("login", e.getMessage(), e.getMessage());
+			return cadastrar(usuario);
+		} catch (UsuarioEmailException e) {
+			result.rejectValue("email", e.getMessage(), e.getMessage());
+			return cadastrar(usuario);
+		} catch (SenhasNaoConferemException e) {
+			result.rejectValue("senha", e.getMessage(), e.getMessage());
+			return cadastrar(usuario);
+		} catch (HashMD5Exception e) {
+			result.rejectValue("senha", e.getMessage(), e.getMessage());
+			return cadastrar(usuario);
 		} catch (Exception e) {
-			result.addError(new ObjectError("Error", "Usuário já cadastrado"));
+			result.rejectValue("idUsuario", e.getMessage(), e.getMessage());
 			return cadastrar(usuario);
 		}
 		

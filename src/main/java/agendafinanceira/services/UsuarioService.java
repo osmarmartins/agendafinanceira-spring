@@ -13,7 +13,8 @@ import agendafinanceira.security.Encrpty;
 import agendafinanceira.services.exception.ExcluirEntidadeException;
 import agendafinanceira.services.exception.HashMD5Exception;
 import agendafinanceira.services.exception.SenhasNaoConferemException;
-import agendafinanceira.services.exception.UsuarioException;
+import agendafinanceira.services.exception.UsuarioEmailException;
+import agendafinanceira.services.exception.UsuarioLoginException;
 
 @Service
 public class UsuarioService {
@@ -28,15 +29,15 @@ public class UsuarioService {
 				
 		usuarioOptional = usuarioRepository.findByLoginIgnoreCase(usuario.getLogin());
 		
-		if (usuarioOptional.isPresent() && !usuarioOptional.get().getLogin().equals(usuario.getLogin()) ) {
-			throw new UsuarioException("Login já cadastrado!");
+		if (usuarioOptional.isPresent() && usuarioOptional.get().getLogin().equals(usuario.getLogin()) ) {
+			throw new UsuarioLoginException("Login já cadastrado!");
 		}
 		
 
 		usuarioOptional = usuarioRepository.findByEmailIgnoreCase(usuario.getEmail());
 		
-		if (usuarioOptional.isPresent() && !usuarioOptional.get().getEmail().equals(usuario.getEmail()) ) {
-			throw new UsuarioException("e-mail já cadastrado!");
+		if (usuarioOptional.isPresent() && usuarioOptional.get().getEmail().equals(usuario.getEmail()) ) {
+			throw new UsuarioEmailException("e-mail já cadastrado!");
 		}
 		
 		if (usuario.getSenha().isEmpty()){

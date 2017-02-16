@@ -1,10 +1,10 @@
 package agendafinanceira.services.exception;
 
-public class UsuarioException extends RuntimeException {
+public class UsuarioLoginException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	
-	public UsuarioException(String msg) {
+	public UsuarioLoginException(String msg) {
 		super(msg);
 	}
 

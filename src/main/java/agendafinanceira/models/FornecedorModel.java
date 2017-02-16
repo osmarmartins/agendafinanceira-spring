@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -30,11 +31,14 @@ public class FornecedorModel implements Serializable {
 	private Long idFornecedor;
 	
 	@Column(name="nome_fantasia")
+	@NotBlank(message = "Nome/Nome fantasia fantasia não informado.")
 	private String nomeFantasia;
 	
 	@Column(name="razao_social")
+	@NotBlank(message = "Razão social não informada.")
 	private String razaoSocial;
 	
+	@Enumerated
 	@Column(name="pf_pj")
 	private TipoPessoa tipo;
 	
@@ -42,7 +46,7 @@ public class FornecedorModel implements Serializable {
 	private String documento;
 	
 	@Enumerated
-	@NotBlank(message = "Informe se o fornecedor está ativo ou não.")	
+	@NotNull(message = "Informe se o fornecedor está ativo ou não.")	
 	private Ativo ativo;
 	
 	@OneToMany(mappedBy="fornecedor")

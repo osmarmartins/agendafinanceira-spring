@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/padrao}">
+	
+<head>
+	<title>Cadastro de Fornecedor</title>
+	<link rel="stylesheet" th:href="@{/css/bootstrap-toggle.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/bootstrap-switch.min.css}"/>
+</head>
+
+<body>
+
+<section layout:fragment="corpo">
+
+	<div class="container">
+
+		<ol class="breadcrumb">
+			<li><a th:href="@{/}">Dashboard</a></li>
+			<li><a th:href="@{/usuario}">Fornecedor</a></li>
+			<li><a href="#" draggable="false">Cadastro</a></li>
+		</ol>
+
+		<div class="row cabecalho">
+			<div class="col-xs-12 col-md-6">
+				<h1>Cadastro de Fornecedor</h1>
+			</div>
+		</div>
+		
+		<th:block th:include="layout/fragments/mensagemSucesso"></th:block>
+		
+		<div class="well">
+			<form class="form-vertical" th:action="@{/fornecedor/cadastro}" method="POST" th:object="${fornecedorModel}">
+			
+				<th:block th:include="layout/fragments/mensagemErro"></th:block>
+			
+			
+				<div class="row">
+					<div class="form-group col-sm-2" th:classappend="${#fields.hasErrors('idFornecedor')} ? has-error">
+						<label for="id" class="control-label">ID</label>
+						<input type="text" readonly id="id" class="form-control" th:field="*{idFornecedor}">
+					</div>
+					
+					<div class="form-group col-sm-4">
+					</div>
+					
+					
+					
+					
+				  <div class="form-group col-sm-3">
+					<label for="id" class="control-label">Pessoa Jurídica</label>
+				    <div class="input-group">
+				      <span class="input-group-addon">
+				        <input type="radio" name="pj_pf" aria-label="...">
+				      </span>
+				      <input type="text" class="form-control" placeholder="Digite o CNPJ" aria-label="...">
+				    </div><!-- /input-group -->
+				  </div><!-- /.col-lg-6 -->
+				  
+				  <div class="form-group col-sm-3">
+					<label for="id" class="control-label">Pessoa Física</label>
+				    <div class="input-group">
+				      <span class="input-group-addon">
+				        <input type="radio" name="pj_pf" aria-label="...">
+				      </span>
+				      <input type="text" class="form-control" placeholder="Digite o CPF" aria-label="...">
+				    </div><!-- /input-group -->
+				  </div><!-- /.col-lg-6 -->
+					
+					
+					
+					
+					
+				</div>
+				
+	
+				<div class="row">
+					<div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('nomeFantasia')} ? has-error">
+						<label for="nome" class="control-label">Nome Fantasia</label>
+						<input type="text" id="nomeFantasia" class="form-control" th:field="*{nomeFantasia}" th:classappend="${#fields.hasErrors('nomeFantasia')} ? has-error">
+					</div>
+						
+					<div class="form-group col-sm-6" th:classappend="${#fields.hasErrors('razaoSocial')} ? has-error">
+						<label for="email" class="control-label">Razão Social</label>
+						<input type="text" id="razaoSocial" class="form-control" th:field="*{razaoSocial}" th:classappend="${#fields.hasErrors('razaoSocial')} ? has-error">
+					</div>
+						
+				</div>
+
+				
+<!-- 				<div class="row"> -->
+<!-- 					<div class="form-group col-sm-3" th:classappend="${#fields.hasErrors('administrador')} ? has-error"> -->
+<!-- 						<label for="tipo" class="control-label">Credencial:</label> -->
+<!-- 						<select id="tipo" class="form-control" th:field="*{administrador}" th:classappend="${#fields.hasErrors('administrador')} ? has-error"> -->
+<!-- 							<option value="">Selecione...</option> -->
+<!-- 							<option th:each="credencial : ${credenciais}" th:value="${credencial}" th:text="${credencial.descricaoUsuario}"></option> -->
+<!-- 						</select> -->
+<!-- 		            </div> -->
+		            
+<!-- 					<div class="form-group col-sm-3" th:classappend="${#fields.hasErrors('login')} ? has-error"> -->
+<!-- 						<label for="login" class="control-label">Login:</label> -->
+<!-- 						<input type="text" id="login" class="form-control" th:field="*{login}"> -->
+<!-- 					</div> -->
+
+<!-- 					<div class="form-group col-sm-3" th:classappend="${#fields.hasErrors('senha')} ? has-error"> -->
+<!-- 						<label for="senha" class="control-label">Senha:</label> -->
+<!-- 						<input type="password" id="senha" class="form-control" th:field="*{senha}"> -->
+<!-- 						<label th:if="*{not novo}" style="color: red;">Informe somente se for alterar</label> -->
+<!-- 					</div> -->
+
+<!-- 					<div class="form-group col-sm-3" th:classappend="${#fields.hasErrors('confirmaSenha')} ? has-error"> -->
+<!-- 						<label for="confirma-senha" class="control-label">Confirmar Senha:</label> -->
+<!-- 						<input type="password" id="confirma-senha" name="confirma-senha" class="form-control" th:field="*{confirmaSenha}"> -->
+<!-- 					</div> -->
+					
+<!-- 				</div> -->
+				
+				<div class="row">
+					<input type="hidden" id="text-status" th:value="*{ativo}" th:name="ativo"/>
+									
+					<div class="form-group col-sm-3">
+						<input type="checkbox"
+							id="toggle-status" checked 
+							class="js-toggle"
+							data-on="ATIVO" 
+							data-off="INATIVO" 
+							data-onstyle="success" 
+							data-offstyle="danger"/>
+					</div>
+				</div>
+	
+				<div class="row">
+					<div class="form-group col-sm-12">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+						<a class="btn btn-default" th:href="@{/fornecedor}">Voltar</a>
+					</div>
+				</div>					
+			</form>
+				
+		</div>
+
+				
+	</div>
+
+	
+</section>
+
+<th:block layout:fragment="javaScript-extra">
+
+	<script th:src="@{/js/bootstrap-toggle.min.js}"></script>
+	<script th:src="@{/js/toggle.js}"></script>
+		
+</th:block>
+
+</body>
+</html>l>
