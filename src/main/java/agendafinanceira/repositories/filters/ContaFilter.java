@@ -4,11 +4,9 @@ import agendafinanceira.models.enums.Ativo;
 
 public class ContaFilter {
 	
-	public Long idConta;
-	
-	public String descricao;
-	
-	public Ativo ativo;
+	private Long idConta;
+	private String descricao;
+	private Ativo ativo;
 
 	public Long getIdConta() {
 		return idConta;

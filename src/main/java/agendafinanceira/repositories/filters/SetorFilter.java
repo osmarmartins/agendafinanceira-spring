@@ -5,9 +5,7 @@ import agendafinanceira.models.enums.Ativo;
 public class SetorFilter {
 	
 	private Long idSetor;
-	
 	private String descricao;
-	
 	private Ativo ativo;
 
 	public Long getIdSetor() {

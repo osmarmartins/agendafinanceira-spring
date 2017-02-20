@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,9 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
-
-import agendafinanceira.models.enums.Ativo;
 
 @Entity
 @Table(name="contatos")
@@ -58,10 +54,6 @@ public class ContatoModel implements Serializable {
 	
 	private String site;
 	
-	@Enumerated
-	@NotBlank(message = "Informe se o fornecedor está ativo ou não.")	
-	private Ativo ativo;
-
 	public Long getIdContato() {
 		return idContato;
 	}
@@ -174,14 +166,6 @@ public class ContatoModel implements Serializable {
 		this.site = site;
 	}
 
-	public Ativo getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Ativo ativo) {
-		this.ativo = ativo;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -212,8 +196,8 @@ public class ContatoModel implements Serializable {
 		return "ContatoModel [idContato=" + idContato + ", fornecedor=" + fornecedor + ", contato=" + contato
 				+ ", endereco=" + endereco + ", complemento=" + complemento + ", bairro=" + bairro + ", cep=" + cep
 				+ ", cidade=" + cidade + ", uf=" + uf + ", telefone1=" + telefone1 + ", telefone2=" + telefone2
-				+ ", telefone3=" + telefone3 + ", email=" + email + ", site=" + site + ", ativo=" + ativo + "]";
+				+ ", telefone3=" + telefone3 + ", email=" + email + ", site=" + site + "]";
 	}
-	
+
 
 }

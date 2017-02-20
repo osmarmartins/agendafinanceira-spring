@@ -10,19 +10,12 @@ import agendafinanceira.models.enums.SituacaoPagamento;
 public class PagamentoFilter {
 	
 	private Long idPagamento;
-	
 	private SetorModel setor;
-	
 	private ContaModel conta;
-	
 	private FornecedorModel fornecedor;
-	
 	private String documento;
-	
 	private Date emissao;
-	
 	private String historico;
-	
 	private SituacaoPagamento situacao;
 
 	public Long getIdPagamento() {
