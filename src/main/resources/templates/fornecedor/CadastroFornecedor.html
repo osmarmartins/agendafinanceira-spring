@@ -42,28 +42,22 @@
 						<input type="text" readonly id="id" class="form-control" th:field="*{idFornecedor}">
 					</div>
 					
-					 <div class="form-group col-sm-offset-4 col-sm-3">
-						<label for="id" class="control-label">Pessoa Jurídica</label>
-						   <div class="input-group">
-						     <span class="input-group-addon">
-						       <input type="radio" name="pj_pf" aria-label="...">
-						     </span>
-						     <input type="text" class="form-control" placeholder="Digite o CNPJ" aria-label="...">
-						   </div><!-- /input-group -->
-					 </div><!-- /.col-lg-6 -->
-						 
-					 <div class="form-group col-sm-3">
-						<label for="id" class="control-label">Pessoa Física</label>
-						   <div class="input-group">
-						     <span class="input-group-addon">
-						       <input type="radio" name="pj_pf" aria-label="...">
-						     </span>
-						     <input type="text" class="form-control" placeholder="Digite o CPF" aria-label="...">
-						   </div><!-- /input-group -->
-					 </div><!-- /.col-lg-6 -->
-					
+					<div class="form-group col-sm-3" th:classappend="${#fields.hasErrors('tipo')} ? has-error">
+						<label class="control-label">Tipo de Pessoa</label></br>
+						<th:block th:each="pessoa: ${tipoPessoa}">
+							<label class="radio-inline">
+								<input type="radio" th:id="|id_${pessoa.tipoPessoa}|" th:text="${pessoa.descricao}" th:value="${pessoa}" th:field="*{tipo}">
+							</label>					
+						</th:block>
+					</div>
 				</div>
 				
+				<div class="row">
+					<div class="form-group col-sm-3">
+						<label for="documento" class="control-label">Documento</label>
+						<input type="text" id="documento" class="form-control" th:field="*{documento}">
+					</div>
+				</div>
 	
 				<div class="row">
 					<div class="form-group col-sm-12" th:classappend="${#fields.hasErrors('nomeFantasia')} ? has-error">
@@ -94,9 +88,7 @@
 					</div>
 				</div>
 
-				
-				<fieldset>
-					<legend>Contatos:</legend>
+				<div class="well well-sm" th:if="*{idFornecedor}">
 					<div class="table-responsive">
 						<table
 							class="table table-striped table-bordered table-hover">
@@ -142,9 +134,9 @@
 									</td>
 								</tr>
 			 					 
-<!-- 			 					<tr th:if="${contatos.isEmpty}"> -->
-<!-- 									<td colspan="4">Nenhum contato encontrado</td> -->
-<!-- 								</tr> -->
+			 					<tr th:if="*{not possuiContatos}">
+									<td colspan="4">Nenhum contato encontrado</td>
+								</tr>
 								
 							</tbody>
 						</table>
@@ -156,11 +148,14 @@
 						</div>
 					</div>					
 					
-				</fieldset>
+				</div> <!-- grid de contatos -->
+				
+				
 	
 				<div class="row">
 					<div class="form-group col-sm-12">
 						<button type="submit" class="btn btn-primary">Salvar</button>
+						<a class="btn btn-default" th:href="@{/fornecedor/cadastro}">Novo Fornecedor</a>
 						<a class="btn btn-default" th:href="@{/fornecedor}">Voltar</a>
 					</div>
 				</div>					

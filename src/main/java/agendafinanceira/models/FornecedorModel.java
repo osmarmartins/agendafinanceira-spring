@@ -2,10 +2,12 @@ package agendafinanceira.models;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,6 +42,7 @@ public class FornecedorModel implements Serializable {
 	
 	@Enumerated
 	@Column(name="pf_pj")
+	@NotNull(message = "Informe o tipo de pessoa PF/PJ.")	
 	private TipoPessoa tipo;
 	
 	@Column(name="cpf_cnpj")
@@ -51,6 +54,10 @@ public class FornecedorModel implements Serializable {
 	
 	@OneToMany(mappedBy="fornecedor")
 	private List<ContatoModel> contatos;
+	
+	public Boolean isPossuiContatos(){
+		return contatos.size()>0;
+	}
 
 	public Long getIdFornecedor() {
 		return idFornecedor;

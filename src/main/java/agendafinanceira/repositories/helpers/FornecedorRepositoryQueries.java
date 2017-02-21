@@ -9,5 +9,7 @@ import agendafinanceira.repositories.filters.FornecedorFilter;
 public interface FornecedorRepositoryQueries {
 	
 	public Page<FornecedorModel> filtrar(FornecedorFilter filtro, Pageable pageable);
+	
+	public FornecedorModel buscarFornecedor(Long id);
 
 }

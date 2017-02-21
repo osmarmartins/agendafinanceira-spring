@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -27,6 +28,17 @@ public class FornecedorRepositoryImpl implements FornecedorRepositoryQueries {
 	
 	@Autowired
 	private PageComponent PageComponent;
+	
+
+	@Transactional(readOnly = true)
+	@Override
+	public FornecedorModel buscarFornecedor(Long id) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(FornecedorModel.class);
+		criteria.createAlias("contatos", "c", JoinType.LEFT_OUTER_JOIN);
+		criteria.add(Restrictions.eq("idFornecedor", id));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		return (FornecedorModel) criteria.uniqueResult();
+	}	
 	
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly=true)
@@ -56,6 +68,6 @@ public class FornecedorRepositoryImpl implements FornecedorRepositoryQueries {
 
 		}
 		
-	}	
+	}
 
 }

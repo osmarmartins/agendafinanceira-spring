@@ -2,17 +2,24 @@ package agendafinanceira.models.enums;
 
 public enum TipoPessoa {
 	
-	PF(0),
-	PJ(1);
+	PF("PF", "Pessoa Física"),
+	PJ("PJ", "Pessoa Jurídica");
 	
-	private int tipoPessoa;
+	private String tipoPessoa;
+	private String descricao;
 	
-	private TipoPessoa(int tipoPessoa){
+	private TipoPessoa(String tipoPessoa, String descricao){
 		this.tipoPessoa = tipoPessoa;
+		this.descricao = descricao;
 	}
 
-	public int getTipoPessoa() {
+	public String getTipoPessoa() {
 		return tipoPessoa;
 	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
 	
 }
