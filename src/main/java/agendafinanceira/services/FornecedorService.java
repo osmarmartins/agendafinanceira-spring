@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import agendafinanceira.models.FornecedorModel;
+import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.repositories.FornecedorRepository;
 import agendafinanceira.repositories.filters.FornecedorFilter;
+import agendafinanceira.services.exception.ExcluirEntidadeException;
 
 @Service
 public class FornecedorService {
@@ -27,6 +29,22 @@ public class FornecedorService {
 		return fornecedorRepository.saveAndFlush(fornecedor);
 	}
 
+	@Transactional
+	public void alterarStatus(FornecedorModel fornecedor) {
+		fornecedor.setAtivo(fornecedor.getAtivo().equals(Ativo.ATIVO)?Ativo.INATIVO:Ativo.ATIVO);
+		fornecedorRepository.save(fornecedor);
+	}
+	
+	@Transactional
+	public void excluir(FornecedorModel fornecedor){
+		try {
+			fornecedorRepository.delete(fornecedor);
+			fornecedorRepository.flush();
+		} catch (ExcluirEntidadeException e) {
+			throw new ExcluirEntidadeException("Não foi possível excluir o fornecedor! Verifique se está em uso nos lançamentos financeiros.");
+		}		
+}
+	
 	public Page<FornecedorModel> filtrar(FornecedorFilter fornecedorFilter, Pageable pageable) {
 		return fornecedorRepository.filtrar(fornecedorFilter, pageable);
 	}

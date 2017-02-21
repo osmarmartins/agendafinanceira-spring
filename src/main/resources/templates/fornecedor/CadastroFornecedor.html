@@ -7,7 +7,6 @@
 <head>
 	<title>Cadastro de Fornecedor</title>
 	<link rel="stylesheet" th:href="@{/css/bootstrap-toggle.min.css}"/>
-	<link rel="stylesheet" th:href="@{/css/bootstrap-switch.min.css}"/>
 </head>
 
 <body>
@@ -18,8 +17,8 @@
 
 		<ol class="breadcrumb">
 			<li><a th:href="@{/}">Dashboard</a></li>
-			<li><a th:href="@{/usuario}">Fornecedor</a></li>
-			<li><a href="#" draggable="false">Cadastro</a></li>
+			<li><a th:href="@{/fornecedor}">Fornecedor</a></li>
+			<li><a href="" draggable="false">Cadastro</a></li>
 		</ol>
 
 		<div class="row cabecalho">
@@ -95,14 +94,8 @@
 			
 							<thead>
 								<tr>
-									<th>Contato
-<!-- 										<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'contato', 'Contato')"></th:block> -->
-									</th>
-									
-									<th>E-mail
-<!-- 										<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'email', 'E-mail')"></th:block> -->
-									</th>
-									
+									<th>Contato</th>
+									<th>E-mail</th>
 									<th class="text-center">Telefone</th>
 									<th class="text-center">Operações</th>
 								</tr>
@@ -119,7 +112,7 @@
 											data-toggle="tooltip" 
 											data-placement="top" 
 											title="Alterar" 
-											th:href="@{/contato/cadastro/{id}(id=${contato.idContato})}" > 
+											th:href="@{/fornecedor/contato/cadastro/{id}(id=${contato.idContato})}" > 
 											<i class="glyphicon glyphicon-pencil"></i>
 										</a> 
 										
@@ -144,7 +137,7 @@
 
 					<div class="row">
 						<div class="form-group col-sm-12">
-							<button class="btn btn-primary">Novo contato</button>
+							<a class="btn btn-primary" th:href="@{/fornecedor/contato/{id}(id=*{idFornecedor})}">Novo Contato</a>
 						</div>
 					</div>					
 					
@@ -177,4 +170,4 @@
 </th:block>
 
 </body>
-</html>l>
+</html>

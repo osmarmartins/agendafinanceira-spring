@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="contatos")
@@ -29,9 +31,12 @@ public class ContatoModel implements Serializable {
 	@JoinColumn(name = "id_fornecedor")
 	private FornecedorModel fornecedor;
 	
+	@NotBlank(message="Informe o nome do contato")
 	private String contato;
 	
 	private String endereco;
+	
+	private String numero;
 	
 	private String complemento;
 	
@@ -84,6 +89,14 @@ public class ContatoModel implements Serializable {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+	
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 
 	public String getComplemento() {
