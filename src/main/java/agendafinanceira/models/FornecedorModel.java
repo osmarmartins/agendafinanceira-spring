@@ -2,12 +2,10 @@ package agendafinanceira.models;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -114,6 +112,20 @@ public class FornecedorModel implements Serializable {
 	public void setContatos(List<ContatoModel> contatos) {
 		this.contatos = contatos;
 	}
+	
+//	public Contato addContato(Contato contato) {
+//		getContatos().add(contato);
+//		contato.setFornecedor(this);
+//
+//		return contato;
+//	}
+//
+//	public Contato removeContato(Contato contato) {
+//		getContatos().remove(contato);
+//		contato.setFornecedor(null);
+//
+//		return contato;
+//	}	
 
 	@Override
 	public int hashCode() {
@@ -143,9 +155,7 @@ public class FornecedorModel implements Serializable {
 	@Override
 	public String toString() {
 		return "FornecedorModel [idFornecedor=" + idFornecedor + ", nomeFantasia=" + nomeFantasia + ", razaoSocial="
-				+ razaoSocial + ", tipo=" + tipo + ", documento=" + documento + ", ativo=" + ativo + ", contatos="
-				+ contatos + "]";
+				+ razaoSocial + ", tipo=" + tipo + ", documento=" + documento + ", ativo=" + ativo + "]";
 	}
-	
 
 }

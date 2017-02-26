@@ -74,7 +74,7 @@ public class ContatoModel implements Serializable {
 	public void setFornecedor(FornecedorModel fornecedor) {
 		this.fornecedor = fornecedor;
 	}
-
+	
 	public String getContato() {
 		return contato;
 	}
@@ -207,10 +207,9 @@ public class ContatoModel implements Serializable {
 	@Override
 	public String toString() {
 		return "ContatoModel [idContato=" + idContato + ", fornecedor=" + fornecedor + ", contato=" + contato
-				+ ", endereco=" + endereco + ", complemento=" + complemento + ", bairro=" + bairro + ", cep=" + cep
-				+ ", cidade=" + cidade + ", uf=" + uf + ", telefone1=" + telefone1 + ", telefone2=" + telefone2
-				+ ", telefone3=" + telefone3 + ", email=" + email + ", site=" + site + "]";
+				+ ", endereco=" + endereco + ", numero=" + numero + ", complemento=" + complemento + ", bairro="
+				+ bairro + ", cep=" + cep + ", cidade=" + cidade + ", uf=" + uf + ", telefone1=" + telefone1
+				+ ", telefone2=" + telefone2 + ", telefone3=" + telefone3 + ", email=" + email + ", site=" + site + "]";
 	}
-
 
 }
