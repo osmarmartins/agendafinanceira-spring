@@ -3,18 +3,22 @@ package agendafinanceira.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agendafinanceira.models.ContatoModel;
 import agendafinanceira.models.FornecedorModel;
 import agendafinanceira.services.ContatoService;
+import agendafinanceira.services.exception.ExcluirEntidadeException;
 
 @Controller
 @RequestMapping("/fornecedor/contato")
@@ -49,6 +53,18 @@ public class ContatoController {
 		attributes.addFlashAttribute("mensagem", "Contato salvo com sucesso!");
 		return new ModelAndView("redirect:/fornecedor/contato/"+contato.getFornecedor().getIdFornecedor());
 	}
+	
+	@DeleteMapping("/{id}")
+	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("id") ContatoModel contato){
+		try {
+			contatoService.excluir(contato);
+		} catch (ExcluirEntidadeException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		
+		return ResponseEntity.ok().build();
+	}
+	
 	
 
 }

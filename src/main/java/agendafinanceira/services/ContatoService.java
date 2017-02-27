@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import agendafinanceira.models.ContatoModel;
 import agendafinanceira.models.FornecedorModel;
 import agendafinanceira.repositories.ContatoRepository;
+import agendafinanceira.services.exception.ExcluirEntidadeException;
 
 @Service
 public class ContatoService {
@@ -26,4 +27,14 @@ public class ContatoService {
 
 	}
 
+	@Transactional
+	public void excluir(ContatoModel contato){
+		try {
+			contatoRepository.delete(contato);
+			contatoRepository.flush();
+		} catch (ExcluirEntidadeException e) {
+			throw new ExcluirEntidadeException("Não foi possível excluir o contato!. Erro: " + e.getMessage());
+		}		
+	}
+	
 }

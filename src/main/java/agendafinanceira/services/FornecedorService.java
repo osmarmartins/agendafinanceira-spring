@@ -43,7 +43,7 @@ public class FornecedorService {
 		} catch (ExcluirEntidadeException e) {
 			throw new ExcluirEntidadeException("Não foi possível excluir o fornecedor! Verifique se está em uso nos lançamentos financeiros.");
 		}		
-}
+	}
 	
 	public Page<FornecedorModel> filtrar(FornecedorFilter fornecedorFilter, Pageable pageable) {
 		return fornecedorRepository.filtrar(fornecedorFilter, pageable);

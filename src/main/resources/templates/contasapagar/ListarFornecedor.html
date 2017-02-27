@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/padrao}">
+	
+<head></head>
+<body>
+
+<section layout:fragment="corpo">
+
+	<div class="container">
+		<form method="GET" id="tabela-fornecedor" th:object="${fornecedorFilter}">
+			<ol class="breadcrumb">
+				<li><a th:href="@{/}">Dashboard</a></li>
+				<li><a href="">Fornecedores</a></li>
+			</ol>
+	
+			<div class="row cabecalho">
+				<div class="col-xs-12 col-md-6">
+					<h1>Fornecedores</h1>
+				</div>
+				
+				<div class="col-sm-4">
+					<div class="input-group">
+						<input type="date"/>-<input type="date"/>
+					</div>
+				</div>
+				
+				<div class="col-xs-12 col-md-4 col-md-offset-2 busca">
+					<div class="input-group">
+						<input type="text" name="busca" class="form-control" placeholder="Pesquisar por nome fantasia" th:field="*{nomeFantasia}"> 
+							<span class="input-group-btn">
+								<button type="submit" class="btn btn-default">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
+					</div>
+				</div>
+			</div>
+		</form>
+
+
+		<div class="table-responsive">
+			<table
+				class="table table-striped table-bordered table-hover">
+
+				<thead>
+					<tr>
+						<th>
+							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'idFornecedor', 'Código')"></th:block>
+						</th>
+						
+						<th>
+							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'nomeFantasia', 'Nome/Razão Social')"></th:block>
+						</th>
+						
+						<th class="text-center">Ativo</th>
+						<th class="text-center">Operações</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="fornecedor : ${pagina.conteudo}">
+						<td th:text="${fornecedor.idFornecedor}"></td>
+						<td th:text="${fornecedor.nomeFantasia}"></td>
+
+						<td class="text-center">
+							<a class="btn btn-link btn-xs js-btn-ativar-desativar" data-toggle="tooltip" data-placement="top" title="Ativar/Desativar" id="ativar-desativar"
+							 	data:url="@{/fornecedor/{id}(id=${fornecedor.idFornecedor})}" 
+							 	data:descricao="${fornecedor.nomeFantasia}" 
+							 	data:status="${fornecedor.ativo}"> 
+								<i class="glyphicon" 
+									th:classappend="${fornecedor.ativo == T(agendafinanceira.models.enums.Ativo).ATIVO ? 'glyphicon-ok text-success' : 'glyphicon-remove text-danger'}">
+								</i>
+							</a>
+						</td>
+
+						<td class="text-center">
+							<a class="btn btn-link btn-xs" 
+								data-toggle="tooltip" 
+								data-placement="top" 
+								title="Alterar" 
+								th:href="@{/fornecedor/cadastro/{id}(id=${fornecedor.idFornecedor})}" > 
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a> 
+							
+							<a class="btn btn-link btn-xs js-btn-excluir" 
+								data-toggle="tooltip" 
+								data-placement="top" 
+								title="Excluir" href="#"
+							 	data:url="@{/fornecedor/{id}(id=${fornecedor.idFornecedor})}" 
+							 	data:descricao="${fornecedor.nomeFantasia}"> 
+								<i class="glyphicon glyphicon-trash"></i>
+							</a>
+						</td>
+					</tr>
+ 					 
+ 					<tr th:if="${pagina.vazia}">
+						<td colspan="4">Nenhum registro encontrado</td>
+					</tr>
+					
+					
+				</tbody>
+			</table>
+		</div>
+
+
+		<footer class="row">
+			<div class="col-sm-6">
+				<a class="btn btn-primary" th:href="@{/fornecedor/cadastro}">Novo Fonecedor</a>
+			</div>
+
+			
+			<th:block th:replace="layout/fragments/Paginacao :: pageComponent (${pagina})"></th:block>
+		</footer>
+		
+	</div>
+
+</section>	
+
+</body>
+</html>
