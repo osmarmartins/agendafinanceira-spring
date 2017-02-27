@@ -30,7 +30,7 @@
 		<th:block th:include="layout/fragments/mensagemSucesso"></th:block>
 		
 		<div class="well">
-			<form class="form-vertical" th:action="@{/fornecedor/cadastro/contato}" method="POST" th:object="${contatoModel}">
+			<form class="form-vertical" th:action="@{/fornecedor/contato/{id}(id=${idFornecedor})}" method="POST" th:object="${contatoModel}">
 			
 				<th:block th:include="layout/fragments/mensagemErro"></th:block>
 			

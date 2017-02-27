@@ -1,7 +1,5 @@
 package agendafinanceira.controllers;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -22,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agendafinanceira.controllers.page.Paginacao;
-import agendafinanceira.models.ContatoModel;
 import agendafinanceira.models.FornecedorModel;
 import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.models.enums.TipoPessoa;

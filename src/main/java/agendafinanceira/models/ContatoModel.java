@@ -206,10 +206,10 @@ public class ContatoModel implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ContatoModel [idContato=" + idContato + ", fornecedor=" + fornecedor + ", contato=" + contato
-				+ ", endereco=" + endereco + ", numero=" + numero + ", complemento=" + complemento + ", bairro="
-				+ bairro + ", cep=" + cep + ", cidade=" + cidade + ", uf=" + uf + ", telefone1=" + telefone1
-				+ ", telefone2=" + telefone2 + ", telefone3=" + telefone3 + ", email=" + email + ", site=" + site + "]";
+		return "ContatoModel [idContato=" + idContato + ", contato=" + contato + ", endereco=" + endereco + ", numero="
+				+ numero + ", complemento=" + complemento + ", bairro=" + bairro + ", cep=" + cep + ", cidade=" + cidade
+				+ ", uf=" + uf + ", telefone1=" + telefone1 + ", telefone2=" + telefone2 + ", telefone3=" + telefone3
+				+ ", email=" + email + ", site=" + site + "]";
 	}
 
 }

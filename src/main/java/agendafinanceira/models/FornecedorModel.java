@@ -113,13 +113,13 @@ public class FornecedorModel implements Serializable {
 		this.contatos = contatos;
 	}
 	
-//	public Contato addContato(Contato contato) {
-//		getContatos().add(contato);
-//		contato.setFornecedor(this);
-//
-//		return contato;
-//	}
-//
+	public ContatoModel addContato(ContatoModel contato) {
+		getContatos().add(contato);
+		contato.setFornecedor(this);
+
+		return contato;
+	}
+
 //	public Contato removeContato(Contato contato) {
 //		getContatos().remove(contato);
 //		contato.setFornecedor(null);
