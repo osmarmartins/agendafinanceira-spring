@@ -12,7 +12,7 @@
 	<div class="container">
 		<form method="GET" id="tabela-setores" th:object="${setorFilter}">
 			<ol class="breadcrumb">
-				<li><a href="">Dashboard</a></li>
+				<li><a th:href="@{/}">Dashboard</a></li>
 				<li><a href="">Setores</a></li>
 			</ol>
 	
@@ -35,7 +35,7 @@
 		</form>
 
 
-		<div class="table-responsive  bw-tabela-simples">
+		<div class="table-responsive">
 			<table
 				class="dados-os table table-striped table-bordered table-hover">
 

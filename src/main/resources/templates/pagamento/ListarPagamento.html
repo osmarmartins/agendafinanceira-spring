@@ -13,18 +13,12 @@
 		<form method="GET" id="tabela-fornecedor" th:object="${fornecedorFilter}">
 			<ol class="breadcrumb">
 				<li><a th:href="@{/}">Dashboard</a></li>
-				<li><a href="">Fornecedores</a></li>
+				<li><a href="">Contas a Pagar</a></li>
 			</ol>
 	
 			<div class="row cabecalho">
 				<div class="col-xs-12 col-md-6">
 					<h1>Fornecedores</h1>
-				</div>
-				
-				<div class="col-sm-4">
-					<div class="input-group">
-						<input type="date"/>-<input type="date"/>
-					</div>
 				</div>
 				
 				<div class="col-xs-12 col-md-4 col-md-offset-2 busca">
@@ -43,7 +37,7 @@
 
 		<div class="table-responsive">
 			<table
-				class="table table-striped table-bordered table-hover">
+				class="dados-os table table-striped table-bordered table-hover">
 
 				<thead>
 					<tr>

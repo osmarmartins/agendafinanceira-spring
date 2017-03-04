@@ -2,16 +2,12 @@ package agendafinanceira.repositories.filters;
 
 import java.util.Date;
 
-import agendafinanceira.models.ContaModel;
 import agendafinanceira.models.FornecedorModel;
-import agendafinanceira.models.SetorModel;
 import agendafinanceira.models.enums.SituacaoPagamento;
 
 public class PagamentoFilter {
 	
 	private Long idPagamento;
-	private SetorModel setor;
-	private ContaModel conta;
 	private FornecedorModel fornecedor;
 	private String documento;
 	private Date emissao;
@@ -24,22 +20,6 @@ public class PagamentoFilter {
 
 	public void setIdPagamento(Long idPagamento) {
 		this.idPagamento = idPagamento;
-	}
-
-	public SetorModel getSetor() {
-		return setor;
-	}
-
-	public void setSetor(SetorModel setor) {
-		this.setor = setor;
-	}
-
-	public ContaModel getConta() {
-		return conta;
-	}
-
-	public void setConta(ContaModel conta) {
-		this.conta = conta;
 	}
 
 	public FornecedorModel getFornecedor() {
