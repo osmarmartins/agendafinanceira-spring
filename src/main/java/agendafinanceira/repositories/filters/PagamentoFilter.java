@@ -2,65 +2,49 @@ package agendafinanceira.repositories.filters;
 
 import java.util.Date;
 
-import agendafinanceira.models.FornecedorModel;
 import agendafinanceira.models.enums.SituacaoPagamento;
 
 public class PagamentoFilter {
-	
-	private Long idPagamento;
-	private FornecedorModel fornecedor;
-	private String documento;
-	private Date emissao;
+
+	private String nome;
+	private Date vctoInicial;
+	private Date vctoFinal;
 	private String historico;
-	private SituacaoPagamento situacao;
-
-	public Long getIdPagamento() {
-		return idPagamento;
+	private SituacaoPagamento situacaoPgto;
+	
+	public String getNome() {
+		return nome;
 	}
-
-	public void setIdPagamento(Long idPagamento) {
-		this.idPagamento = idPagamento;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-
-	public FornecedorModel getFornecedor() {
-		return fornecedor;
+	public Date getVctoInicial() {
+		return vctoInicial;
 	}
-
-	public void setFornecedor(FornecedorModel fornecedor) {
-		this.fornecedor = fornecedor;
+	public void setVctoInicial(Date vctoInicial) {
+		this.vctoInicial = vctoInicial;
 	}
-
-	public String getDocumento() {
-		return documento;
+	public Date getVctoFinal() {
+		return vctoFinal;
 	}
-
-	public void setDocumento(String documento) {
-		this.documento = documento;
+	public void setVctoFinal(Date vctoFinal) {
+		this.vctoFinal = vctoFinal;
 	}
-
-	public Date getEmissao() {
-		return emissao;
-	}
-
-	public void setEmissao(Date emissao) {
-		this.emissao = emissao;
-	}
-
 	public String getHistorico() {
 		return historico;
 	}
-
 	public void setHistorico(String historico) {
 		this.historico = historico;
 	}
-
-	public SituacaoPagamento getSituacao() {
-		return situacao;
+	public SituacaoPagamento getSituacaoPgto() {
+		return situacaoPgto;
 	}
-
-	public void setSituacao(SituacaoPagamento situacao) {
-		this.situacao = situacao;
+	public void setSituacaoPgto(SituacaoPagamento situacaoPgto) {
+		this.situacaoPgto = situacaoPgto;
 	}
+	
+
+	
 	
 
 }

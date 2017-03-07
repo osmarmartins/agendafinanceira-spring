@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import agendafinanceira.models.PagamentoModel;
 import agendafinanceira.repositories.filters.PagamentoFilter;
 
-public interface PagementoQueries {
+public interface PagamentoRepositoryQueries {
 	
 	public Page<PagamentoModel> filtrar(PagamentoFilter filtro, Pageable pageable);
 

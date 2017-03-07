@@ -12,48 +12,52 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import agendafinanceira.models.PagamentoModel;
 import agendafinanceira.models.UsuarioModel;
 import agendafinanceira.repositories.filters.PagamentoFilter;
+import agendafinanceira.repositories.page.PageComponent;
 
-public class PagamentoQueriesImpl implements PagementoQueries{
+public class PagamentoRepositoryImpl implements PagamentoRepositoryQueries{
 
 	@PersistenceContext
 	private EntityManager manager;
+	
+	@Autowired
+	private PageComponent pageComponent;
 
-//	@Autowired
-//	private PaginacaoUtil paginacaoUtil;
-	
-	
 	@SuppressWarnings("unchecked")
+	@Transactional(readOnly=true)
 	@Override
-	public Page<PagamentoModel> filtrar(PagamentoFilter filtro, Pageable pageable) {
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(UsuarioModel.class);
-
-//		paginacaoUtil.preparar(criteria, pageable);
+	public Page<PagamentoModel> filtrar(PagamentoFilter filtro, Pageable page) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(PagamentoModel.class);
+		
+		pageComponent.initializer(page, criteria);
 		adicionarFiltro(filtro, criteria);
 		
-		return new PageImpl<>(criteria.list(), pageable, total(filtro));
+		return new PageImpl<>(criteria.list(), page, total(filtro));
 	}
 
 	private Long total(PagamentoFilter filtro) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(UsuarioModel.class);
-		adicionarFiltro(filtro, criteria);
 		criteria.setProjection(Projections.rowCount());
+		
+		adicionarFiltro(filtro, criteria);
+
 		return (Long) criteria.uniqueResult();
 	}
 
 	private void adicionarFiltro(PagamentoFilter filtro, Criteria criteria) {
-		if (filtro != null) {
-			
-			if (!StringUtils.isEmpty(filtro.getHistorico())) {
-				criteria.add(Restrictions.ilike("nome", filtro.getHistorico(), MatchMode.ANYWHERE));
-			}
-
+		
+		if (filtro.getNome() != null){
+			criteria.add(Restrictions.ilike("nome_fantasia", filtro.getNome(), MatchMode.ANYWHERE));
 		}
 		
+		// TODO filtro por vencimento (inicial e final)
+		
+		// TODO filtro por histórico
+		
+		// TODO filtro por situação
 	}
-
 }
