@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import agendafinanceira.models.PagamentoModel;
+import agendafinanceira.models.PagamentoParcelaModel;
 import agendafinanceira.models.UsuarioModel;
 import agendafinanceira.repositories.filters.PagamentoFilter;
 import agendafinanceira.repositories.page.PageComponent;
@@ -33,6 +35,7 @@ public class PagamentoRepositoryImpl implements PagamentoRepositoryQueries{
 	public Page<PagamentoModel> filtrar(PagamentoFilter filtro, Pageable page) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(PagamentoModel.class);
 		
+		criteria.createCriteria(PagamentoParcelaModel.class, JoinType.LEFT_OUTER_JOIN);
 		pageComponent.initializer(page, criteria);
 		adicionarFiltro(filtro, criteria);
 		

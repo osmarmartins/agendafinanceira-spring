@@ -10,7 +10,7 @@
 <section layout:fragment="corpo">
 
 	<div class="container">
-		<form method="GET" id="tabela-fornecedor" th:object="${fornecedorFilter}">
+		<form method="GET" id="tabela-fornecedor" th:object="${pagamentoFilter}">
 			<ol class="breadcrumb">
 				<li><a th:href="@{/}">Dashboard</a></li>
 				<li><a href="">Contas a Pagar</a></li>
@@ -18,12 +18,12 @@
 	
 			<div class="row cabecalho">
 				<div class="col-xs-12 col-md-6">
-					<h1>Fornecedores</h1>
+					<h1>Contas a Pagar</h1>
 				</div>
 				
 				<div class="col-xs-12 col-md-4 col-md-offset-2 busca">
 					<div class="input-group">
-						<input type="text" name="busca" class="form-control" placeholder="Pesquisar por nome fantasia" th:field="*{nomeFantasia}"> 
+						<input type="text" name="busca" class="form-control" placeholder="Pesquisar por nome fantasia"> 
 							<span class="input-group-btn">
 								<button type="submit" class="btn btn-default">
 									<span class="glyphicon glyphicon-search"></span>
@@ -41,41 +41,33 @@
 
 				<thead>
 					<tr>
-						<th>
-							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'idFornecedor', 'Código')"></th:block>
-						</th>
+<!-- 						<th> -->
+<!-- 							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'idFornecedor', 'Código')"></th:block> -->
+<!-- 						</th> -->
 						
-						<th>
-							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'nomeFantasia', 'Nome/Razão Social')"></th:block>
-						</th>
+<!-- 						<th> -->
+<!-- 							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'nomeFantasia', 'Nome/Razão Social')"></th:block> -->
+<!-- 						</th> -->
 						
-						<th class="text-center">Ativo</th>
+						<th class="text-center">Vencimento</th>
+						<th class="text-center">Nome/Razão Social</th>
+						<th class="text-center">Quitado</th>
 						<th class="text-center">Operações</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<tr th:each="fornecedor : ${pagina.conteudo}">
-						<td th:text="${fornecedor.idFornecedor}"></td>
-						<td th:text="${fornecedor.nomeFantasia}"></td>
-
-						<td class="text-center">
-							<a class="btn btn-link btn-xs js-btn-ativar-desativar" data-toggle="tooltip" data-placement="top" title="Ativar/Desativar" id="ativar-desativar"
-							 	data:url="@{/fornecedor/{id}(id=${fornecedor.idFornecedor})}" 
-							 	data:descricao="${fornecedor.nomeFantasia}" 
-							 	data:status="${fornecedor.ativo}"> 
-								<i class="glyphicon" 
-									th:classappend="${fornecedor.ativo == T(agendafinanceira.models.enums.Ativo).ATIVO ? 'glyphicon-ok text-success' : 'glyphicon-remove text-danger'}">
-								</i>
-							</a>
-						</td>
+					<tr th:each="pgto : ${pagina.conteudo}">
+						<td th:text="${pgto.parcelas.vencimento}"></td>
+						<td th:text="${pgto.fornecedor.nomeFantasia}"></td>
+						<td th:text="${pgto.parcelas.situacao}"></td>
 
 						<td class="text-center">
 							<a class="btn btn-link btn-xs" 
 								data-toggle="tooltip" 
 								data-placement="top" 
 								title="Alterar" 
-								th:href="@{/fornecedor/cadastro/{id}(id=${fornecedor.idFornecedor})}" > 
+								th:href="@{/pagamento/cadastro/{id}(id=${pgto.idPgto})}" > 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a> 
 							
@@ -83,8 +75,8 @@
 								data-toggle="tooltip" 
 								data-placement="top" 
 								title="Excluir" href="#"
-							 	data:url="@{/fornecedor/{id}(id=${fornecedor.idFornecedor})}" 
-							 	data:descricao="${fornecedor.nomeFantasia}"> 
+							 	data:url="@{/pagamento/{id}(id=${pgto.idPgto})}" 
+							 	data:descricao="${pgto.fornecedor.nomeFantasia}"> 
 								<i class="glyphicon glyphicon-trash"></i>
 							</a>
 						</td>
@@ -102,7 +94,7 @@
 
 		<footer class="row">
 			<div class="col-sm-6">
-				<a class="btn btn-primary" th:href="@{/fornecedor/cadastro}">Novo Fonecedor</a>
+				<a class="btn btn-primary" th:href="@{/pagamento/cadastro}">Novo Lançamento</a>
 			</div>
 
 			
