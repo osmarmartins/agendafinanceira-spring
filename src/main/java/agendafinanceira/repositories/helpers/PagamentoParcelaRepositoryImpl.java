@@ -8,18 +8,17 @@ import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
-import agendafinanceira.models.PagamentoModel;
+import agendafinanceira.models.PagamentoParcelaModel;
 import agendafinanceira.repositories.filters.PagamentoFilter;
 import agendafinanceira.repositories.page.PageComponent;
 
-public class PagamentoRepositoryImpl implements PagamentoRepositoryQueries{
+public class PagamentoParcelaRepositoryImpl implements PagamentoParcelaRepositoryQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
@@ -30,10 +29,8 @@ public class PagamentoRepositoryImpl implements PagamentoRepositoryQueries{
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly=true)
 	@Override
-	public Page<PagamentoModel> filtrar(PagamentoFilter filtro, Pageable page) {
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(PagamentoModel.class);
-		criteria.createAlias("parcelas", "p", JoinType.LEFT_OUTER_JOIN);
-		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+	public Page<PagamentoParcelaModel> filtrar(PagamentoFilter filtro, Pageable page) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(PagamentoParcelaModel.class);
 
 		pageComponent.initializer(page, criteria);
 		adicionarFiltro(filtro, criteria);
@@ -42,7 +39,7 @@ public class PagamentoRepositoryImpl implements PagamentoRepositoryQueries{
 	}
 
 	private Long total(PagamentoFilter filtro) {
-		Criteria criteria = manager.unwrap(Session.class).createCriteria(PagamentoModel.class);
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(PagamentoParcelaModel.class);
 		criteria.setProjection(Projections.rowCount());
 		
 		adicionarFiltro(filtro, criteria);
@@ -62,4 +59,6 @@ public class PagamentoRepositoryImpl implements PagamentoRepositoryQueries{
 		
 		// TODO filtro por situação
 	}
+	
+	
 }

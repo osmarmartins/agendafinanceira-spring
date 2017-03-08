@@ -17,7 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agendafinanceira.controllers.page.Paginacao;
 import agendafinanceira.models.PagamentoModel;
-import agendafinanceira.repositories.PagamentoRepository;
+import agendafinanceira.models.PagamentoParcelaModel;
+import agendafinanceira.repositories.PagamentoParcelaRepository;
 import agendafinanceira.repositories.filters.PagamentoFilter;
 import agendafinanceira.services.PagamentoService;
 
@@ -26,7 +27,7 @@ import agendafinanceira.services.PagamentoService;
 public class PagamentoController {
 	
 	@Autowired
-	private PagamentoRepository pagamentoRepository;
+	private PagamentoParcelaRepository pagamentoParcelaRepository;
 	
 	@Autowired
 	private PagamentoService pagamentoService;
@@ -57,7 +58,7 @@ public class PagamentoController {
 			, @PageableDefault(size = 8) Pageable pageable, HttpServletRequest httpServletRequest) {
 
 		ModelAndView mv = new ModelAndView("pagamento/ListarPagamento");
-		Paginacao<PagamentoModel> paginacao = new Paginacao<>(pagamentoRepository.filtrar(pagamentoFilter, pageable), httpServletRequest);
+		Paginacao<PagamentoParcelaModel> paginacao = new Paginacao<>(pagamentoParcelaRepository.filtrar(pagamentoFilter, pageable), httpServletRequest);
 		mv.addObject("pagina", paginacao);
 		
 		return mv;

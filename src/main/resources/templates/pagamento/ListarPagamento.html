@@ -51,23 +51,23 @@
 						
 						<th class="text-center">Vencimento</th>
 						<th class="text-center">Nome/Razão Social</th>
-						<th class="text-center">Quitado</th>
+						<th class="text-center">Situação</th>
 						<th class="text-center">Operações</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<tr th:each="pgto : ${pagina.conteudo}">
-						<td th:text="${pgto.parcelas.vencimento}"></td>
-						<td th:text="${pgto.fornecedor.nomeFantasia}"></td>
-						<td th:text="${pgto.parcelas.situacao}"></td>
+					<tr th:each="parcela : ${pagina.conteudo}">
+						<td th:text="${parcela.vencimento}"></td>
+						<td th:text="${parcela.pagamento.fornecedor.nomeFantasia}"></td>
+						<td th:text="${parcela.situacao}"></td>
 
 						<td class="text-center">
 							<a class="btn btn-link btn-xs" 
 								data-toggle="tooltip" 
 								data-placement="top" 
 								title="Alterar" 
-								th:href="@{/pagamento/cadastro/{id}(id=${pgto.idPgto})}" > 
+								th:href="@{/pagamento/cadastro/{id}(id=${parcela.idParcela})}" > 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a> 
 							
@@ -75,8 +75,8 @@
 								data-toggle="tooltip" 
 								data-placement="top" 
 								title="Excluir" href="#"
-							 	data:url="@{/pagamento/{id}(id=${pgto.idPgto})}" 
-							 	data:descricao="${pgto.fornecedor.nomeFantasia}"> 
+							 	data:url="@{/pagamento/{id}(id=${parcela.idParcela})}" 
+							 	data:descricao="${parcela.pagamento.fornecedor.nomeFantasia}"> 
 								<i class="glyphicon glyphicon-trash"></i>
 							</a>
 						</td>

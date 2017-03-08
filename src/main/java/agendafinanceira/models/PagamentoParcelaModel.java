@@ -37,6 +37,7 @@ public class PagamentoParcelaModel implements Serializable {
 	
 	private String parcela;
 
+	@Column(name="dt_vcto")
 	@Temporal(TemporalType.DATE)
 	private Date vencimento;
 	
