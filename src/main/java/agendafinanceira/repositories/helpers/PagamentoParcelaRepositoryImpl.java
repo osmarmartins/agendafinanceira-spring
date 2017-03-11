@@ -31,6 +31,8 @@ public class PagamentoParcelaRepositoryImpl implements PagamentoParcelaRepositor
 	@Override
 	public Page<PagamentoParcelaModel> filtrar(PagamentoFilter filtro, Pageable page) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(PagamentoParcelaModel.class);
+		criteria.createAlias("pagamento", "pagamento");
+		criteria.createAlias("pagamento.fornecedor", "fornecedor");
 
 		pageComponent.initializer(page, criteria);
 		adicionarFiltro(filtro, criteria);

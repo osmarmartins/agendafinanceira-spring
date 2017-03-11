@@ -9,7 +9,7 @@
             driverClass="com.mysql.jdbc.Driver"
             jdbcUrl="jdbc:mysql://webfinancas.mysql.uhserver.com/webfinancas?useSSL=false"
             user="osmar"
-            password="prisma.70"
+            password="prisma.12"
             
             initialPoolSize="5" 
             minPoolSize="5"

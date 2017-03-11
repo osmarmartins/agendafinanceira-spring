@@ -32,8 +32,8 @@ public class PagamentoRepositoryImpl implements PagamentoRepositoryQueries{
 	@Override
 	public Page<PagamentoModel> filtrar(PagamentoFilter filtro, Pageable page) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(PagamentoModel.class);
-		criteria.createAlias("parcelas", "p", JoinType.LEFT_OUTER_JOIN);
-		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+//		criteria.createAlias("parcelas", "p", JoinType.LEFT_OUTER_JOIN);
+//		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 
 		pageComponent.initializer(page, criteria);
 		adicionarFiltro(filtro, criteria);

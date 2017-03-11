@@ -2,17 +2,17 @@ package agendafinanceira.models.enums;
 
 public enum SituacaoParcela {
 
-	NOVO(0), AGENDADO(1), PROGRAMADO(2), 
-	LIQUIDADO(3), BAIXADO(4), CANCELADO(9);
+	NOVO("Novo"), AGENDADO("Agendado"), PROGRAMADO("Programado"), 
+	LIQUIDADO("Liquidado"), BAIXADO("Baixado"), CANCELADO("Cancelado");
 
-	private int situacaoParcela;
+	private String descricao;
 
-	private SituacaoParcela(int situacaoParcela) {
-		this.situacaoParcela = situacaoParcela;
+	private SituacaoParcela(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public int getSituacaoParcela() {
-		return situacaoParcela;
+	public String getDescricao() {
+		return descricao;
 	}
 
 }

@@ -13,12 +13,12 @@
 		<form method="GET" id="tabela-fornecedor" th:object="${pagamentoFilter}">
 			<ol class="breadcrumb">
 				<li><a th:href="@{/}">Dashboard</a></li>
-				<li><a href="">Contas a Pagar</a></li>
+				<li><a href="">Pagamentos</a></li>
 			</ol>
 	
 			<div class="row cabecalho">
 				<div class="col-xs-12 col-md-6">
-					<h1>Contas a Pagar</h1>
+					<h1>Pagamentos</h1>
 				</div>
 				
 				<div class="col-xs-12 col-md-4 col-md-offset-2 busca">
@@ -41,17 +41,28 @@
 
 				<thead>
 					<tr>
-<!-- 						<th> -->
-<!-- 							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'idFornecedor', 'Código')"></th:block> -->
-<!-- 						</th> -->
+						<th>
+							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'vencimento', 'Vencimento')"></th:block>
+						</th>
 						
-<!-- 						<th> -->
-<!-- 							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'nomeFantasia', 'Nome/Razão Social')"></th:block> -->
-<!-- 						</th> -->
+						<th>
+							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'fornecedor.nomeFantasia', 'Fornecedor')"></th:block>
+						</th>
 						
-						<th class="text-center">Vencimento</th>
-						<th class="text-center">Nome/Razão Social</th>
-						<th class="text-center">Situação</th>
+						<th>
+							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'pagamento.historico', 'Histórico')"></th:block>
+						</th>
+						
+						<th class="text-center">Parcela</th>
+
+						<th>
+							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'valor', 'Valor')"></th:block>
+						</th>
+						
+						<th>
+							<th:block th:replace="layout/fragments/Ordenacao :: orderComponent (${pagina}, 'situacao', 'Situação')"></th:block>
+						</th>
+
 						<th class="text-center">Operações</th>
 					</tr>
 				</thead>
@@ -60,7 +71,10 @@
 					<tr th:each="parcela : ${pagina.conteudo}">
 						<td th:text="${parcela.vencimento}"></td>
 						<td th:text="${parcela.pagamento.fornecedor.nomeFantasia}"></td>
-						<td th:text="${parcela.situacao}"></td>
+						<td th:text="${parcela.pagamento.historico}"></td>
+						<td th:text="${parcela.parcela}"></td>
+						<td th:text="${parcela.valor - parcela.desconto + parcela.juros + parcela.mora + parcela.outros}"></td>
+						<td th:text="${parcela.situacao.descricao}"></td>
 
 						<td class="text-center">
 							<a class="btn btn-link btn-xs" 

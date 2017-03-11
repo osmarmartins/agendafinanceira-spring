@@ -2,16 +2,16 @@ package agendafinanceira.models.enums;
 
 public enum SituacaoPagamento {
 	
-	NOVO(0), EMABERTO(1), FINALIZADO(2);
+	NOVO("Novo"), EMABERTO("Em Aberto"), FINALIZADO("Finalizado");
 	
-	private int situacaoPagamento;
+	private String descricao;
 	
-	private SituacaoPagamento(int situacaoPagamento){
-		this.situacaoPagamento = situacaoPagamento;
+	private SituacaoPagamento(String descricao){
+		this.descricao = descricao;
 	}
 	
-	public int getSitucaoPagamento(){
-		return situacaoPagamento;
+	public String getDescricao(){
+		return descricao;
 	}
 
 }
