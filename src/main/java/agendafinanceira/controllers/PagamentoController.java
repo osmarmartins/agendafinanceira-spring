@@ -33,14 +33,14 @@ public class PagamentoController {
 	private PagamentoService pagamentoService;
 	
 	
-	@GetMapping("/novo")
+	@GetMapping("/lancamento")
 	public ModelAndView cadastroPagamento(PagamentoModel pagamentoModel){
-		ModelAndView mv = new ModelAndView("pagamento/ListarPagamento");
+		ModelAndView mv = new ModelAndView("pagamento/LancamentoPagamento");
 		return mv;
 	}
 	
 	
-	@PostMapping("/novo")
+	@PostMapping("/lancamento")
 	public ModelAndView cadastrar(@Valid PagamentoModel pagamentoModel, BindingResult result, 
 			Model model, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
@@ -49,10 +49,15 @@ public class PagamentoController {
 		
 		pagamentoService.salvar(pagamentoModel);
 		attributes.addFlashAttribute("mensagem", "Pagamento salvo com sucesso!");
-		return new ModelAndView("redirect:/pagamento/novo");
+		return new ModelAndView("redirect:/pagamento/lancamento");
 	}
 	
-		
+	@GetMapping("/lancamento/parcela")
+	public ModelAndView cadastroPagamentoParcela(PagamentoParcelaModel parcela){
+		ModelAndView mv = new ModelAndView("pagamento/LancamentoPagamentoParcela");
+		return mv;
+	}
+	
 	@GetMapping
 	public ModelAndView pesquisar(PagamentoFilter pagamentoFilter, BindingResult result
 			, @PageableDefault(size = 8) Pageable pageable, HttpServletRequest httpServletRequest) {

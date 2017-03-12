@@ -10,27 +10,60 @@
 <section layout:fragment="corpo">
 
 	<div class="container">
-		<form method="GET" id="tabela-fornecedor" th:object="${pagamentoFilter}">
+		<form method="GET" id="tabela-fornecedor" th:object="${pagamentoFilter}" class="form-horizontal">
 			<ol class="breadcrumb">
 				<li><a th:href="@{/}">Dashboard</a></li>
 				<li><a href="">Pagamentos</a></li>
 			</ol>
 	
 			<div class="row cabecalho">
-				<div class="col-xs-12 col-md-6">
+				<div class="col-md-12 busca">
 					<h1>Pagamentos</h1>
 				</div>
+			</div>
 				
-				<div class="col-xs-12 col-md-4 col-md-offset-2 busca">
+				
+			<div class="row cabecalho">
+				<div class="col-xs-12 col-md-2 busca">
+					<input type="date" placeholder="Data Inicial" class="form-control" />
+				</div>
+				
+				<div class="col-xs-12 col-md-2 busca">
+					<input type="date" placeholder="Data Final" class="form-control" />
+				</div>
+				
+				<div class="col-xs-12 col-md-2 busca">
+					<select class="form-control">
+						<option>Todos</option>
+						<option>Agendado</option>
+						<option>Programado</option>
+						<option>Baixado</option>
+						<option>Cancelado</option>
+					</select>
+				</div>
+				
+				<div class="col-xs-12 col-md-3 busca">
 					<div class="input-group">
-						<input type="text" name="busca" class="form-control" placeholder="Pesquisar por nome fantasia"> 
-							<span class="input-group-btn">
-								<button type="submit" class="btn btn-default">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
-							</span>
+						<input type="text" name="busca" class="form-control" placeholder="Pesquisar por fornecedor" readonly="readonly"/> 
+						<span class="input-group-btn">
+							<button class="btn btn-default">
+								<span class="glyphicon glyphicon-user"></span>
+							</button>
+						</span>
 					</div>
 				</div>
+				
+				<div class="col-xs-12 col-md-3 busca">
+					<div class="input-group">
+						<input type="text" name="busca" class="form-control" placeholder="Pesquisar por histórico"/> 
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-default">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</div>
+				</div>
+				
 			</div>
 		</form>
 
@@ -108,7 +141,7 @@
 
 		<footer class="row">
 			<div class="col-sm-6">
-				<a class="btn btn-primary" th:href="@{/pagamento/cadastro}">Novo Lançamento</a>
+				<a class="btn btn-primary" th:href="@{/pagamento/lancamento}">Novo Lançamento</a>
 			</div>
 
 			
