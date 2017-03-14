@@ -52,7 +52,7 @@ public class PagamentoController {
 		return new ModelAndView("redirect:/pagamento/lancamento");
 	}
 	
-	@GetMapping("/lancamento/parcela")
+	@GetMapping("/lancamento/parcela/{pagamento}")
 	public ModelAndView cadastroPagamentoParcela(PagamentoParcelaModel parcela){
 		ModelAndView mv = new ModelAndView("pagamento/LancamentoPagamentoParcela");
 		return mv;

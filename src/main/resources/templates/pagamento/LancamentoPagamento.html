@@ -93,21 +93,28 @@
 
 				<!-- Grid Parcelas -->
 
-<!-- 				<div class="well well-sm" th:if="*{idFornecedor}"> -->
-<!-- 					<div class="table-responsive"> -->
-<!-- 						<table -->
-<!-- 							class="table table-striped table-bordered table-hover"> -->
+				<div class="well well-sm">
+					<div class="table-responsive">
+						<table
+							class="table table-striped table-bordered table-hover">
 			
-<!-- 							<thead> -->
-<!-- 								<tr> -->
-<!-- 									<th>Contato</th> -->
-<!-- 									<th>E-mail</th> -->
-<!-- 									<th class="text-center">Telefone</th> -->
-<!-- 									<th class="text-center">Operações</th> -->
-<!-- 								</tr> -->
-<!-- 							</thead> -->
+							<thead>
+								<tr>
+									<th>Parcela</th>
+									<th>Dt.Vcto</th>
+									<th>Valor</th>
+									<th>Desconto</th>
+									<th>Juros</th>
+									<th>Mora</th>
+									<th>Outros</th>
+									<th>Total</th>
+									<th>Situação</th>
+									<th>Dt.Pgto</th>
+									<th>Operações</th>
+								</tr>
+							</thead>
 			
-<!-- 							<tbody> -->
+							<tbody>
 <!-- 								<tr th:each="contato : ${contatos}"> -->
 <!-- 									<td th:text="${contato.contato}"></td> -->
 <!-- 									<td th:text="${contato.email}"></td> -->
@@ -136,18 +143,17 @@
 <!-- 			 					<tr th:if="*{not possuiContatos}"> -->
 <!-- 									<td colspan="4">Nenhum contato encontrado</td> -->
 <!-- 								</tr> -->
-								
-<!-- 							</tbody> -->
-<!-- 						</table> -->
-<!-- 					</div> -->
+							</tbody>
+						</table>
+					</div>
 
-<!-- 					<div class="row"> -->
-<!-- 						<div class="form-group col-sm-12"> -->
-<!-- 							<a class="btn btn-primary" th:href="@{/fornecedor/contato/{id}(id=*{idFornecedor})}">Novo Contato</a> -->
-<!-- 						</div> -->
-<!-- 					</div>					 -->
+					<div class="row">
+						<div class="form-group col-sm-12">
+							<a class="btn btn-primary" th:href="@{/pagamento/lancamento/parcela/{id}(id=1)}">Nova Parcela</a>
+						</div>
+					</div>					
 					
-<!-- 				</div>  -->
+				</div> 
 				
 				<!-- Grid Parcelas -->
 				
