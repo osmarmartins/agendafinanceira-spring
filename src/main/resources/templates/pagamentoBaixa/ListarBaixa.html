@@ -10,15 +10,15 @@
 <section layout:fragment="corpo">
 
 	<div class="container">
-		<form method="GET" id="tabela-pgto" th:object="${pagamentoFilter}" class="form-horizontal">
+		<form method="GET" id="tabela-baixa" th:object="${pagamentoFilter}" class="form-horizontal">
 			<ol class="breadcrumb">
 				<li><a th:href="@{/}">Dashboard</a></li>
-				<li><a href="">Pagamentos</a></li>
+				<li><a href="">Baixa de Pagamento</a></li>
 			</ol>
 	
 			<div class="row cabecalho">
 				<div class="col-md-12 busca">
-					<h1>Pagamentos</h1>
+					<h1>Baixa de Pagamento</h1>
 				</div>
 			</div>
 				
@@ -32,17 +32,7 @@
 					<input type="date" placeholder="Data Final" class="form-control" />
 				</div>
 				
-				<div class="col-xs-12 col-md-2 busca">
-					<select class="form-control">
-						<option>Todos</option>
-						<option>Agendado</option>
-						<option>Programado</option>
-						<option>Baixado</option>
-						<option>Cancelado</option>
-					</select>
-				</div>
-				
-				<div class="col-xs-12 col-md-3 busca">
+				<div class="col-xs-12 col-md-4 busca">
 					<div class="input-group">
 						<input type="text" name="busca" class="form-control" placeholder="Pesquisar por fornecedor" readonly="readonly"/> 
 						<span class="input-group-btn">
@@ -53,7 +43,7 @@
 					</div>
 				</div>
 				
-				<div class="col-xs-12 col-md-3 busca">
+				<div class="col-xs-12 col-md-4 busca">
 					<div class="input-group">
 						<input type="text" name="busca" class="form-control" placeholder="Pesquisar por histórico"/> 
 						<span class="input-group-btn">
@@ -113,8 +103,8 @@
 							<a class="btn btn-link btn-xs" 
 								data-toggle="tooltip" 
 								data-placement="top" 
-								title="Alterar" 
-								th:href="@{/pagamento/cadastro/{id}(id=${parcela.idParcela})}" > 
+								title="Baixar" 
+								th:href="@{/pagamento/baixa/parcela/{id}(id=1)}" > 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a> 
 							
@@ -140,11 +130,6 @@
 
 
 		<footer class="row">
-			<div class="col-sm-6">
-				<a class="btn btn-primary" th:href="@{/pagamento/lancamento}">Novo Lançamento</a>
-			</div>
-
-			
 			<th:block th:replace="layout/fragments/Paginacao :: pageComponent (${pagina})"></th:block>
 		</footer>
 		
