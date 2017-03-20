@@ -34,7 +34,7 @@
 				<th:block th:include="layout/fragments/mensagemErro"></th:block>
 
 				<div class="row">
-					<div class="col-sm-4  form-group">
+					<div class="col-sm-5  form-group">
 						<label for="setor" class="label-control">Setor</label>
 						<select class="form-control" id="setor">
 							<option>Selecione....</option>
@@ -43,18 +43,18 @@
 						</select> 
 					</div>
 										
-					<div class="col-md-6">
-						<label for="conta" class="control-label">Conta</label>
-						<div class="input-group">
-							<input type="text" name="conta" id="conta" class="form-control"/> 
-							<span class="input-group-btn">
-								<button class="btn btn-default">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
-							</span>
-						</div>
+					<div class="col-sm-5  form-group">
+						<label for="setor" class="label-control">Conta</label>
+						<select class="form-control" id="setor">
+							<option>Selecione....</option>
+							<option>ÁGUA/LUZ/TELEFONE</option>
+							<option>ABASTECIMENTO VEÍCULOS</option>
+							<option>VESTUÁRIO</option>
+							<option>EDUCAÇÃO</option>
+							<option>ALIMENTAÇÃO</option>
+						</select> 
 					</div>
-					
+										
 					<div class="col-sm-2  form-group">
 						<label for="emissao" class="label-control">Emissão</label> 
 						<input id="emissao" type="date" class="form-control"/>
@@ -63,16 +63,17 @@
 				
 	
 				<div class="row">
-					<div class="col-md-10">
+					<div class="form-group col-md-10">
 						<label for="fornecedor" class="control-label">Fornecedor</label>
 						<div class="input-group">
-							<input type="text" id="fornecedor" class="form-control"/> 
+							<input type="text" id="fornecedor" readonly="readonly" class="form-control" placeholder="Clique na lupa para pesquisar o fonecedor"/> 
 							<span class="input-group-btn">
-								<button class="btn btn-default">
+								<button class="btn btn-default" type="button" data-toggle="modal" data-target="#pesquisaFornecedorModal">
 									<span class="glyphicon glyphicon-search"></span>
 								</button>
 							</span>
 						</div>
+						<th:block th:replace="fornecedor/PesquisaFornecedorModal :: pesquisaModal"></th:block>
 					</div>
 					
 					<div class="col-sm-2  form-group">
@@ -170,8 +171,7 @@
 			</form>
 				
 		</div>
-
-				
+						
 	</div>
 
 	
