@@ -37,21 +37,20 @@
 					<div class="col-sm-5  form-group">
 						<label for="setor" class="label-control">Setor</label>
 						<select class="form-control" id="setor">
-							<option>Selecione....</option>
-							<option>Particular</option>
-							<option>Empresa</option>
+							<option th:value="${-1}">Selecione....</option>
+							<th:block th:each="setor : ${setores}">
+								<option th:text="${setor.descricao}" th:value="${setor.idSetor}">Particular</option>
+							</th:block>
 						</select> 
 					</div>
 										
 					<div class="col-sm-5  form-group">
 						<label for="setor" class="label-control">Conta</label>
-						<select class="form-control" id="setor">
+						<select class="form-control" id="conta">
 							<option>Selecione....</option>
-							<option>ÁGUA/LUZ/TELEFONE</option>
-							<option>ABASTECIMENTO VEÍCULOS</option>
-							<option>VESTUÁRIO</option>
-							<option>EDUCAÇÃO</option>
-							<option>ALIMENTAÇÃO</option>
+							<th:block th:each="conta : ${contas}">
+								<option th:text="${conta.descricao}" th:value="${conta.idConta}">ALIMENTAÇÃO</option>
+							</th:block>
 						</select> 
 					</div>
 										

@@ -18,13 +18,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import agendafinanceira.controllers.page.Paginacao;
 import agendafinanceira.models.PagamentoModel;
 import agendafinanceira.models.PagamentoParcelaModel;
+import agendafinanceira.repositories.ContaRepository;
 import agendafinanceira.repositories.PagamentoParcelaRepository;
+import agendafinanceira.repositories.SetorRepository;
 import agendafinanceira.repositories.filters.PagamentoFilter;
 import agendafinanceira.services.PagamentoService;
 
 @Controller
 @RequestMapping("/pagamento")
 public class PagamentoController {
+	
+	@Autowired
+	private SetorRepository setorRepository;
+	
+	@Autowired
+	private ContaRepository contaRepository;
 	
 	@Autowired
 	private PagamentoParcelaRepository pagamentoParcelaRepository;
@@ -36,6 +44,8 @@ public class PagamentoController {
 	@GetMapping("/lancamento")
 	public ModelAndView cadastroPagamento(PagamentoModel pagamentoModel){
 		ModelAndView mv = new ModelAndView("pagamento/LancamentoPagamento");
+		mv.addObject("setores", setorRepository.findAll().toArray());
+		mv.addObject("contas", contaRepository.findAll());
 		return mv;
 	}
 	
