@@ -16,11 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import agendafinanceira.controllers.page.Paginacao;
-import agendafinanceira.models.PagamentoModel;
 import agendafinanceira.models.PagamentoParcelaModel;
 import agendafinanceira.repositories.PagamentoParcelaRepository;
 import agendafinanceira.repositories.filters.PagamentoFilter;
-import agendafinanceira.services.PagamentoService;
 
 
 @Controller
@@ -30,8 +28,8 @@ public class BaixaController {
 	@Autowired
 	private PagamentoParcelaRepository pagamentoParcelaRepository;
 	
-	@Autowired
-	private PagamentoService pagamentoService;
+//	@Autowired
+//	private PagamentoService pagamentoService;
 	
 
 	@GetMapping("/parcela/{pagamento}")
