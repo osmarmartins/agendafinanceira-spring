@@ -60,7 +60,10 @@
 						<td th:text="${fornecedor.nomeFantasia}"></td>
 
 						<td class="text-center">
-							<a class="btn btn-link btn-xs js-btn-ativar-desativar" data-toggle="tooltip" data-placement="top" title="Ativar/Desativar" id="ativar-desativar"
+							<a class="btn btn-link btn-xs js-btn-ativar-desativar" 
+								data-toggle="tooltip" 
+								data-placement="top" 
+								title="Ativar/Desativar"
 							 	data:url="@{/fornecedor/{id}(id=${fornecedor.idFornecedor})}" 
 							 	data:descricao="${fornecedor.nomeFantasia}" 
 							 	data:status="${fornecedor.ativo}"> 

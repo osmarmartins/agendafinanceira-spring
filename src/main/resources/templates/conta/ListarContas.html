@@ -60,7 +60,9 @@
 						<td th:text="${conta.descricao}"></td>
 
 						<td class="text-center">
-							<a class="btn btn-link btn-xs js-btn-ativar-desativar" data-toggle="tooltip" data-placement="top" title="Ativar/Desativar" id="ativar-desativar"
+							<a class="btn btn-link btn-xs js-btn-ativar-desativar" 
+								data-toggle="tooltip" 
+								data-placement="top" title="Ativar/Desativar" 
 							 	data:url="@{/conta/{id}(id=${conta.idConta})}" 
 							 	data:descricao="${conta.descricao}" 
 							 	data:status="${conta.ativo}"> 
