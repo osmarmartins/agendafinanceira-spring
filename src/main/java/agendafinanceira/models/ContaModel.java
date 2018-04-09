@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import agendafinanceira.models.enums.Ativo;
 
 @Entity
-@Table(name="contas")
+@Table(name="conta")
 public class ContaModel implements Serializable {
 	
 

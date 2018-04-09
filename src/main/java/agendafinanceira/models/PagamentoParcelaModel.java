@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 import agendafinanceira.models.enums.SituacaoParcela;
 
 @Entity
-@Table(name="pgtos_parcela")
+@Table(name="pgto_parcela")
 public class PagamentoParcelaModel implements Serializable {
 	
 

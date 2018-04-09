@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name="contatos")
+@Table(name="contato")
 public class ContatoModel implements Serializable {
 	
 

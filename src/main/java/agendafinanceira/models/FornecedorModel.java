@@ -19,7 +19,7 @@ import agendafinanceira.models.enums.Ativo;
 import agendafinanceira.models.enums.TipoPessoa;
 
 @Entity
-@Table(name="fornecedores")
+@Table(name="fornecedor")
 public class FornecedorModel implements Serializable {
 	
 

@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 import agendafinanceira.models.enums.FormaPagamento;
 
 @Entity
-@Table(name="pgtos_quitacao")
+@Table(name="pgto_quitacao")
 public class PagamentoQuitacaoModel implements Serializable {
 	
 

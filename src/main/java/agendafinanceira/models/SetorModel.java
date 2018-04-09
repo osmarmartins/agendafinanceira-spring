@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import agendafinanceira.models.enums.Ativo;
 
 @Entity
-@Table(name="setores")
+@Table(name="setor")
 public class SetorModel implements Serializable {
 	
 
